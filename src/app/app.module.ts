@@ -45,7 +45,6 @@ const services=[
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
