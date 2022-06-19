@@ -1,0 +1,131 @@
+<div class="landing pt-5">
+  <swal >
+  </swal>
+  <div class="container-fluid landing p-0 m-0">
+    <section class=" text-light">
+      <div class="container section-features">
+        <div class="row px-2">
+          <div class="col-12 col-sm-12">
+            <h3>كابتن - المطعم الذكي </h3>
+            <p class="lead lh-lg">منصة إلكترونية وتطبيق تقوم بأتمتة أعمال مطعمك وتقديم تجربة مختلفة لزبائنك من خلال </p>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6">
+            <ul>
+              <span class="color-orange fw-bold my-2 d-block">الخدمات من خارج المطعم</span>
+              <li class="lh-base"
+                  *ngFor="let item of featuresListOutRestaurant">{{item}}</li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6">
+            <ul>
+              <span class="color-orange fw-bold my-2 d-block">الخدمات من داخل المطعم</span>
+              <li class="lh-base list-dotted-orange"
+                  *ngFor="let item of featuresListInRestaurant">{{item}}</li>
+            </ul>
+          </div>
+
+          <!-- featuresListInRestaurant -->
+
+        </div>
+        <div class="row px-2 my-2">
+          <h2 class="text-center">وظائف التطبيق</h2>
+          <!-- slider -->
+        </div>
+
+
+        <div class="row  px-2 my-2 d-flex  justify-content-center">
+          <div class="row text-center">
+            <h3 class="fw-bold my-2">تقديم طلب اشتراك</h3>
+            <span class="my-2">بعد تقديم طلبك سوف نتواصل معك لتقديم المعلومات الازمة والمساعدة في تدريب العاملين على
+              التطبيق والمنصة </span>
+          </div>
+
+          <div class="row d-flex  justify-content-center  ">
+            <form action="" [formGroup]="subscribedUsers" (ngSubmit)="onSubmitSubscribed()">
+              <div class="row my-2 d-flex  justify-content-center">
+                <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
+                  <input type="text"
+                  formControlName="restaurantName"
+                         placeholder="أدخل أسم معطعمك"
+                         class="w-100 form-control">
+                </div>
+                <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
+                  <input type="text"
+                  formControlName="restaurantPhoneNumber"
+                         placeholder="أدخل رقم الهاتف"
+                         class="w-100 form-control"
+                         autocomplete="tel">
+                </div>
+
+
+              </div>
+              <div class="row my-2 d-flex  justify-content-center">
+                <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
+                  <input type="email"
+                  formControlName="restaurantEmail"
+                         placeholder="أدخل ايميل المطعم"
+                         class="w-100 form-control"
+                         autocomplete="email">
+                </div>
+                <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
+                  <input type="text"
+                  formControlName="restaurantAddress"
+                         placeholder="أدخل عنوانك "
+                         class="w-100 form-control"
+                         autocomplete="address-level1">
+                </div>
+              </div>
+              <div class="row my-2 d-flex  justify-content-center">
+                <div class="col-sm-12 col-md-8 col-12 my-2 my-sm-2 my-md-1">
+                  <textarea class="form-control"
+                  formControlName="restaurantNote"
+                            rows="3"
+                            placeholder="هنا تستطيع كتابة أي ملاحظات ترغب بها "></textarea>
+                </div>
+
+              </div>
+              <div class="row my-3  d-flex  justify-content-center">
+                <button type="submit" [disabled]="!subscribedUsers.valid"
+                        class="w-sm-50 w-25 w-md-25 w-lg-25 w-lxx-25 main-btn-secondary text-center  btn  button-animation btn-2">
+                  <span>أشتراك</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </section>
+  </div>
+  <div class="container-fluid bg-orange p-0 m-0">
+    <section class="p-0 m-0">
+      <div class="container">
+        <div class="row my-0 bg-orange">
+          <h2 class="text-center my-4 text-light">المطاعم المشتركة معنا</h2>
+          <div class="row mb-4 d-flex flex-row justify-content-center align-items-center">
+            <div class="col-sm-12 col-md-4 col-lg-3 py-2 d-flex flex-row justify-content-center align-items-center"
+                 *ngFor="let item of RestaurantSubscription">
+              <mat-card class="card-parent">
+                <img [src]="item.restImgPath"
+                     alt="restaurant-img"
+                     class="img-resto rounded">
+                <div class="overlay">
+                  <span class="resturant-name text-light">{{item.restName}}</span>
+                  <button type="button"
+                          class="btn-view-restourant">أستعراض المطعم</button>
+
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+

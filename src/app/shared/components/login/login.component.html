@@ -1,0 +1,37 @@
+<div class="container-fluid login-board">
+  <div class="container d-flex justify-content-center align-items-center ">
+    <!-- d-flex justify-content-center align-items-center w-100 -->
+    <div class="row d-flex justify-content-center align-items-center w-100">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4  card bg-orange my-5 pb-2">
+        <div class="">
+          <p class="lead text-center fw-bold text-light mt-2">تسجيل الدخول</p>
+        </div>
+        <div class="my-2">
+          <input type="text" class=" form-control d-block" placeholder="أدخل اسم المستخدم">
+        </div>
+        <div class="my-2">
+          <input type="password" class=" form-control d-block"
+           placeholder="أدخل كلمة المرور">
+        </div>
+
+        <div class="my-2 d-flex justify-content-center">
+          <section>
+
+            <mat-button-toggle-group [formControl]="fontStyleControl" aria-label="Font Style">
+
+              <mat-button-toggle sysRestaurant="sysAdmin">مدير النظام</mat-button-toggle>
+              <mat-button-toggle sysRestaurant="sysRestaurant">مدير معطم</mat-button-toggle>
+            </mat-button-toggle-group>
+            <!-- <p>Chosen value is {{fontStyleControl.value}}</p> -->
+          </section>
+        </div>
+        <div class="my-2 d-flex justify-content-center">
+          <button class="btn bg-dark text-light fw-bold py-2 px-3" type="submit" mat-stroked-button>تسجيل الدخول </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

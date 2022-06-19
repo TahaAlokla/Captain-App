@@ -34,11 +34,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "./src/assets/icons/css/all.min.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./src/assets/icons/css/all.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/styles.scss"
             ],
             "scripts": [
-              "./src/assets/icons/js/all.min.js"
+              "./src/assets/icons/js/all.min.js",
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -105,6 +110,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []

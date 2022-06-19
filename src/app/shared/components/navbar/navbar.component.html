@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg sticky-top p-0 m-0 fiexed-navbar-top">
+  <div class="container d-flex   flex-row flex-md-row  justify-content-between">
+    <div class="">
+      <a class="brand-name" >كابتن</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    data-bs-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
+  <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+
+
+    <div class="collapse navbar-collapse " id="main">
+      <div class="d-flex flex-sm-column flex-md-row align-items-center justify-content-md-between justify-content-sm-start justify-content-start">
+        <div class="">
+          <ul class="navbar-nav  mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active p-2 p-lg-3" aria-current="page" href="#">{{'homeSection.features'|translate}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link p-2 p-lg-3" href="#">خدماتنا</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link p-2 p-lg-3" href="#">عملائنا</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link p-2 p-lg-3" href="#">التواصل معنا</a>
+            </li>
+          </ul>
+        </div>
+        <div class="search ps-3 pe-3 d-none d-lg-block">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" name="" id="" [hidden]="true">
+      </div>
+      <div class="">
+        <a href="" class="btn main-btn rounded-pill" mat-button [routerLink]="'login'" routerLinkActive="activeLink">تسجيل الدخول </a>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</nav>

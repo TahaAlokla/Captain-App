@@ -1,0 +1,203 @@
+$orange-color:#FF7700 ;
+  $dark-color:#19283f;
+  $nav-link-color:#fff;
+  $green-color:#33d1cc;
+  $red-color:#ff3150;
+  $yellow-color:#ffc400;
+
+
+ .landing{
+  background-color: $dark-color;
+  min-height: calc(100vh - 72px);
+}
+.main-btn-secondary{
+  padding: 5px 30px !important;
+  background-color: $orange-color;
+  color: $dark-color;
+  font-weight: bold;
+  border: 2px solid $dark-color;
+
+  padding: 0.5rem 1rem;
+
+}
+.main-btn{
+  padding: 5px 30px !important;
+  background-color: $dark-color;
+  color: #FF7700;
+  border: 2px solid $dark-color;
+
+  padding: 0.5rem 1rem;
+}
+.main-btn:hover{
+  color:$dark-color;
+  background-color: $orange-color;
+}
+// /* ********************************* */
+.main-title::after{
+  content: "";
+  background-color: $green-color;
+  position: absolute;
+  width: 120px;
+  height: 2px;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.section-features{
+  padding-top: 70px;
+}
+.img-resto{
+  transition: 0.3s ease-in-out all;
+}
+
+.card-parent{
+  position: relative;
+  width: 250px;
+  background-color: #19283f;
+  height:200px;
+  .overlay{
+    // cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($color:#19283f,$alpha: 0.2);
+    .resturant-name{
+      position: absolute;
+    top: 15%;
+    left: 30%;
+    width: 100%;
+    transform: translateX(-50%);
+
+    }
+    .btn-view-restourant{
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      font-size: 16px;
+      width: 80%;
+      padding: 8px 12px ;
+      font-weight: bold;
+      transform: translate(-50% , -50%);
+      // background-color: #FF7700;
+      background-color: rgba($color:#19283f , $alpha: 0.5) !important;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+    }
+  }
+  .img-resto{
+    width:100%;
+    height:100%;
+    // width: 250px;
+    // height: 200px;
+    transition: 0.3s ease-in-out all;
+  }
+}
+.card-parent:hover{
+  overflow: hidden;
+  .img-resto{
+    overflow: hidden;
+    //
+    -webkit-transform : rotate(10deg) scale(1.2); /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform     : rotate(10deg) scale(1.2); /* IE 9 */
+    transform         : rotate(10deg) scale(1.2); /* Firefox 16+, IE 10+, Opera */
+    //
+  }
+  }
+
+.list-dotted-orange{
+  // list-style;
+}
+ul {
+  // list-style: none; /* Remove default bullets */
+}
+
+// ul li::before {
+//   content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+//   color: red; /* Change the color */
+//   font-weight: bold; /* If you want it to be bold */
+//   display: inline-block; /* Needed to add space between the bullet and the text */
+//   width: 1em; /* Also needed for space (tweak if needed) */
+//   margin-left: 0.1em; /* Also needed for space (tweak if needed) */
+// }
+
+input[type=text] , input[type=email],textarea{
+  color: #19283f;
+  font-weight: bold;
+
+}
+
+// ***********************************
+.button-animation{
+  display: inline-block;
+  position: relative;
+  background: none;
+  border: none;
+  color: #19283f;
+
+  cursor: pointer;
+
+  background: #FF7700;
+}
+span{
+  display: block;
+  padding: 5px 40px;
+}
+.button-animation::before, .button-animation::after{
+  content:"";
+  width: 0;
+  height: 3px;
+  position: absolute;
+  transition: all 0.3s linear;
+  background: #fff;
+}
+
+span::before, span::after{
+  content:"";
+  width:3px;
+  height:0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #fff;
+}
+.button-animation:hover::before,.button-animation:hover::after{
+  width: 100%;
+}
+.button-animation:hover span::before, .button-animation:hover span::after{
+  height: 100%;
+}
+.btn-2::before, .btn-2::after{
+  transition-delay: 0s;
+}
+.btn-2 span::before, .btn-2 span::after{
+  transition-delay: 0.2s;
+}
+.btn-2::before{
+  right: 0;
+  top: 0;
+}
+.btn-2::after{
+  left: 0;
+  bottom: 0;
+}
+.btn-2 span::before{
+  left: 0;
+  top: 0;
+}
+.btn-2 span::after{
+  right: 0;
+  bottom: 0;
+}
+.btn-2:hover::before, .btn-2:hover::after{
+  transition-delay: 0.2s;
+}
+.btn-2:hover span::before, .btn-2:hover span::after{
+  transition-delay: 0s;
+}
+
+
+
+

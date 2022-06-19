@@ -1,0 +1,20 @@
+.footer-home{
+  background-color: #000;
+}
+
+.list-style{
+  text-decoration: none;
+  color: #fff;
+  &:hover{
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+.scroll-to-up{
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  border: 2px solid #19283f;
+  // background-color: ;
+}

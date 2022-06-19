@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl:'https://resturantg-96.herokuapp.com'
 };
