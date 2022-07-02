@@ -1,0 +1,11 @@
+.container-section{
+display:flex;
+flex-direction: column;
+min-height: 100vh;
+}
+.header-section,.footer-section{
+  flex-shrink: 0;
+}
+.main-section{
+  flex-grow: 1;
+}

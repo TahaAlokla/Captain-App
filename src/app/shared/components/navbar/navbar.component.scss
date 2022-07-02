@@ -1,19 +1,18 @@
+$orange-color:#FF7700;
+$dark-color:#19283f;
+$nav-link-color:#fff;
+$green-color:#33d1cc;
+$red-color:#ff3150;
+$yellow-color:#ffc400;
 
-
-  $orange-color:#FF7700 ;
-  $dark-color:#19283f;
-  $nav-link-color:#fff;
-  $green-color:#33d1cc;
-  $red-color:#ff3150;
-  $yellow-color:#ffc400;
-.fiexed-navbar-top{
+.fiexed-navbar-top {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
 }
 
-.navbar{
+.navbar {
   background-color: $orange-color;
   color: $dark-color;
 
@@ -21,48 +20,54 @@
   font-weight: 500;
 }
 
-.brand-name{
+.brand-name {
   color: #19283f;
   font-weight: bolder;
   font-size: 130%;
 }
 
-.navbar .navbar-nav .nav-link{
+.navbar .navbar-nav .nav-link {
   color: $nav-link-color !important;
 }
+
 .navbar .navbar-nav .nav-link.active,
 .navbar .navbar-nav .nav-link:hover,
-.navbar .navbar-nav .nav-link:focus{
+.navbar .navbar-nav .nav-link:focus {
   color: $dark-color;
 }
 
-.navbar .search{
- border-right: 1px solid $dark-color;
- cursor: pointer;
+.navbar .search {
+  border-right: 1px solid $dark-color;
+  cursor: pointer;
 }
-.navbar .search svg{
+
+.navbar .search svg {
   color: $dark-color;
 }
-.navbar  .navbar-toggler{
+
+.navbar .navbar-toggler {
   color: $dark-color;
   font-size: 25px;
-  border:2px solid $dark-color;
+  border: 2px solid $dark-color;
 
   transition: all 0.3s ease-in-out;
 }
-.navbar  .navbar-toggler:focus{
+
+.navbar .navbar-toggler:focus {
   box-shadow: none;
 }
-.navbar  .navbar-toggler[aria-expanded="true"]{
- border-color: $dark-color;
+
+.navbar .navbar-toggler[aria-expanded="true"] {
+  border-color: $dark-color;
 }
+
 /* ****************************** */
-.landing{
+.landing {
   background-color: var(--dark-color);
   min-height: calc(100vh - 72px);
 }
 
-.main-btn{
+.main-btn {
   padding: 5px 30px !important;
   background-color: $dark-color;
   color: #FF7700;
@@ -70,12 +75,14 @@
 
   padding: 0.5rem 1rem;
 }
-.main-btn:hover{
-  color:$dark-color;
+
+.main-btn:hover {
+  color: $dark-color;
   background-color: $orange-color;
 }
+
 /* ********************************* */
-.main-title::after{
+.main-title::after {
   content: "";
   background-color: $dark-color !important;
   position: absolute;
@@ -86,3 +93,20 @@
   transform: translateX(-50%);
 }
 
+
+
+.activeLink {
+  color: #ff3150;
+  transform: scale(1.1);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    color: #33d1cc;
+    height: 5px;
+    bottom: 0;
+    left: 0;
+  }
+}

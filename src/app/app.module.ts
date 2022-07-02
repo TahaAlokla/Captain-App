@@ -1,6 +1,5 @@
 
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,10 +14,25 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { FooterHomeComponent } from './shared/components/footer-home/footer-home.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { ReactiveFormsModule } from '@angular/forms';
+// import { ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LoginComponent } from './shared/components/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { SwiperModule } from 'swiper/angular';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
+import { HomeResturantComponent } from './core/components/home-resturant/home-resturant.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -26,7 +40,18 @@ export function createTranslateLoader(http: HttpClient) {
 const materialComponent=[
   MatButtonModule,
   MatCardModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  // MAT_DATE_LOCALE
+]
+const timePicker=[
+  NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule
 ]
 
 const services=[
@@ -40,14 +65,21 @@ const services=[
     NavbarComponent,
     FooterHomeComponent,
     LoginComponent,
+    HomeResturantComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot(),
+    FormsModule,
+   ReactiveFormsModule,
+   RxReactiveFormsModule,
+   SwiperModule,
+   ...timePicker,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-left',
+    }),
     SweetAlert2Module.forRoot(),
     ...materialComponent,
 
@@ -62,7 +94,7 @@ const services=[
 
   BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ar' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

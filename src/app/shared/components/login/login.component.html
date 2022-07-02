@@ -1,33 +1,42 @@
-<div class="container-fluid login-board">
+<div class="container-fluid- login-board mx-0 my-0">
   <div class="container d-flex justify-content-center align-items-center ">
     <!-- d-flex justify-content-center align-items-center w-100 -->
     <div class="row d-flex justify-content-center align-items-center w-100">
-      <div class="col-12 col-sm-12 col-md-6 col-lg-4  card bg-orange my-5 pb-2">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4  card bg-orange mb-4 mt-0 pb-2">
         <div class="">
-          <p class="lead text-center fw-bold text-light mt-2">تسجيل الدخول</p>
+          <p class="lead text-center fw-bold primary-color mt-3 fs-4">تسجيل الدخول</p>
+          <hr>
         </div>
-        <div class="my-2">
-          <input type="text" class=" form-control d-block" placeholder="أدخل اسم المستخدم">
+        <form  [formGroup]="loginUser" (ngSubmit)="loginUserSubmit()">
+        <div class="my-2 py-2">
+          <input type="text" formControlName="username" class=" form-control d-block" placeholder="أدخل اسم المستخدم" [class.is-invalid]="loginUser.get('username')?.invalid&&loginUser.get('username')?.touched">
+          <mat-error *ngIf="loginUser.get('username')?.invalid&&loginUser.get('username')?.touched">هذا الحقل مطلوب </mat-error>
+
         </div>
-        <div class="my-2">
+        <div class="my-2 py-2">
           <input type="password" class=" form-control d-block"
-           placeholder="أدخل كلمة المرور">
+           placeholder="أدخل كلمة المرور" formControlName="password">
+           <!--  -->
+           <mat-error class="error-msg" *ngIf="loginUser.get('password')?.invalid&&loginUser.get('password')?.touched">هذا الحقل مطلوب </mat-error>
+
         </div>
 
-        <div class="my-2 d-flex justify-content-center">
-          <section>
+        <div class="my-2 d-flex justify-content-center mt-4">
+          <section class="d-block">
 
-            <mat-button-toggle-group [formControl]="fontStyleControl" aria-label="Font Style">
-
-              <mat-button-toggle sysRestaurant="sysAdmin">مدير النظام</mat-button-toggle>
-              <mat-button-toggle sysRestaurant="sysRestaurant">مدير معطم</mat-button-toggle>
+            <mat-button-toggle-group formControlName="choiceType" >
+              <mat-button-toggle value="sysAdmin">مدير النظام</mat-button-toggle>
+              <mat-button-toggle value="sysRestaurant">مدير مطعم</mat-button-toggle>
             </mat-button-toggle-group>
             <!-- <p>Chosen value is {{fontStyleControl.value}}</p> -->
+            <!-- <mat-error class="error-msg d-block" *ngIf="loginUser.invalid">هذا الحقل مطلوب </mat-error> -->
           </section>
         </div>
-        <div class="my-2 d-flex justify-content-center">
-          <button class="btn bg-dark text-light fw-bold py-2 px-3" type="submit" mat-stroked-button>تسجيل الدخول </button>
+        <div class="my-2 d-flex justify-content-center mt-4">
+          <button class="btn bg-dark text-light fw-bold py-2 px-3" type="submit" mat-stroked-button [disabled]="loginUser.invalid">تسجيل الدخول </button>
         </div>
+      </form>
+      <p class="lead" *ngIf="msgErrorLogin">{{msgErrorLogin}}</p>
       </div>
 
     </div>

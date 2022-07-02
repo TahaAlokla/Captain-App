@@ -1,0 +1,11 @@
+.add-restaurant-section, mat-card{
+  font-family: 'Tajawal', sans-serif !important;
+}
+.password-filed{
+  position: relative;
+  .eye{
+    position: absolute;
+    top: 10% !important;
+    left: 5% !important;
+  }
+}

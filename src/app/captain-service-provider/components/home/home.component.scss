@@ -1,0 +1,32 @@
+$orange-color:#FF7700 ;
+  $dark-color:#19283f;
+  $nav-link-color:#fff;
+  $green-color:#33d1cc;
+  $red-color:#ff3150;
+  $yellow-color:#ffc400;
+.home-service-section, .content-sidenav{
+  // min-height: 100vh;
+  // color: #fff;
+  // padding-top: 300px;
+  background-color: #19283f;
+}
+.sidenav-menu{
+  color: #19283f !important;
+  font-weight: 600;
+}
+.content-sidenav{
+  padding-top: 500px;
+}
+.linkActiveDashBoard{
+  background-color: #19283f;
+  color: #FF7700;
+  border: 2px solid #FF7700;
+  width: 100%;
+}
+.divder-list{
+  padding: 0;
+  border-bottom: 2px solid #19283f;
+  a{
+    margin: 0;
+  }
+}

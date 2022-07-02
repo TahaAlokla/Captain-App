@@ -1,0 +1,89 @@
+<div class="container py-5 mt-5 text-light">
+  <div class="row">
+    <div class="col-12">
+      <p class="lead">طلبات الأِشتراك التي تقدم بها الأشخاص عن طريق الصفحة العامة للمنصة</p>
+    </div>
+    <div class="col-12">
+      <mat-card>
+        <mat-form-field >
+          <mat-label>بحث</mat-label>
+          <input class=" form-control w-100" matInput (keyup)="applyFilter($event)" placeholder="ابحث" #input>
+        </mat-form-field>
+        <div class="mat-elevation-z8 table-box-conatiner">
+          <table mat-table
+          matSort
+          [dataSource]="dataSource"
+          class=" w-100 text-center ">
+
+     <ng-container matColumnDef="id">
+       <th mat-header-cell class="color-orange text-center fw-normal fs-6"
+           *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> No. </th>
+       <td mat-cell
+           *matCellDef="let element let i = index">
+           {{this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}}
+           </td>
+     </ng-container>
+
+     <!-- Name Column -->
+     <ng-container matColumnDef="name">
+       <th mat-header-cell
+       class="color-orange text-center fw-normal fs-6"
+           *matHeaderCellDef> الأسم </th>
+       <td mat-cell
+           *matCellDef="let element"> {{element.name}} </td>
+     </ng-container>
+     <ng-container matColumnDef="phone">
+       <th mat-header-cell
+       mat-sort-header sortActionDescription="Sort by number"
+       class="color-orange text-center fw-normal fs-6"
+           *matHeaderCellDef> رقم الهاتف </th>
+       <td mat-cell
+
+           *matCellDef="let element"> {{element.phone}} </td>
+     </ng-container>
+     <ng-container matColumnDef="address">
+       <th mat-header-cell
+       class="color-orange text-center fw-normal fs-6"
+           *matHeaderCellDef> العنوان </th>
+       <td mat-cell
+           *matCellDef="let element"> {{element.address}} </td>
+     </ng-container>
+     <ng-container matColumnDef="createdAt">
+       <th mat-header-cell
+       class="color-orange text-center fw-normal fs-6"
+           *matHeaderCellDef> تاريخ الطلب </th>
+       <td mat-cell
+           *matCellDef="let element"> {{element.createdAt |date:'short'}} </td>
+     </ng-container>
+     <ng-container matColumnDef="status">
+       <th mat-header-cell class="color-orange text-center fw-normal fs-6"
+           *matHeaderCellDef> حالة الطلب </th>
+       <td mat-cell
+           *matCellDef="let element">
+           <span *ngIf="element.status==='pending'">معلق</span>
+            <!-- {{element.status}} -->
+            <button *ngIf="element.status==='pending'" mat-icon-button class="float-start- " (click)="addSubscToRestaurant(element._id)"><mat-icon aria-hidden="false" >add_box</mat-icon> </button>
+           </td>
+     </ng-container>
+     <!--  -->
+     <tr class="bg-primary-color"
+      mat-header-row
+         *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+     <tr mat-row
+     class=""
+         *matRowDef="let row; columns: displayedColumns;"></tr>
+         <!-- ************** -->
+         <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">لا يوجد بيانات لعرضها  "{{input.value}}"</td>
+        </tr>
+
+   </table>
+   <mat-paginator class="mat-paginator-sticky d-flex" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+
+      </mat-card>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="home-reasturant-container">
+  <div class="container ">
+    <!--  TODO : I think  customize header and footer here / whet-bg color herder and primary color for fonts-->
+    <div class="header row"></div>
+    <div class="main row mx-auto mt-5">
+      <div class="row py-5 mx-auto">
+        <mat-card class="row p-3 mx-auto py-5 h-100">
+          <mat-card class="shadow-lg rounded row mx-auto h-100">
+            <div class="col-12">
+              <p class="lead fw-normal primary-color registerReservation-title pt-2 pb-0">يمكنك الحجز لدينا
+                <br>
+                <span class=" small py-0"> نظام الحجوزات الألكرتروني</span>
+              </p>
+
+            </div>
+            <div class="col-12 mx-sm-auto ">
+              <form action=""
+                    [formGroup]="registerReservation"
+                    class="row">
+                <div class="row test- mx-auto">
+                  <div class="col-12 col-md-6 col-lg-4 mx-sm-auto my-sm-2 my-2  mx-auto ">
+                    <input type="text"
+                           class=" form-control mx-auto w-100"
+                           formControlName="name"
+                           [class.is-invalid]="getError('name')"
+                           placeholder="اسم مقدم الحجز">
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4 mx-sm-auto my-sm-2 my-2  mx-auto">
+                    <input type="text"
+                           formControlName="phone"
+                           class=" form-control mx-auto w-100"
+                           [class.is-invalid]="getError('phone')"
+                           placeholder="رقم الهاتف للتواصل معك">
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4 mx-sm-auto my-sm-2 my-2  mx-auto">
+                    <input type="text"
+                           formControlName="numberTable"
+                           class=" form-control mx-auto w-100"
+                           [class.is-invalid]="getError('numberTable')"
+                           placeholder="عدد الطاولات التي تريد حجزها">
+                  </div>
+                </div>
+                <div class="row mt-3 mt-sm-1 mt-md-2 mx-auto">
+                  <div class="col-12 col-md-6 col-lg-4 ">
+
+                    <mat-form-field appearance="outline"
+                                    class="w-100 my-0 my-lg-2">
+                      <input matInput
+                      formControlName="dateOfReservation"
+                      [class.is-invalid]="getError('dateOfReservation')"
+                             class="w-100"
+                             [min]="minDate"
+                             [max]=" maxDate"
+                             [ngxMatDatetimePicker]="picker"
+                             placeholder="تاريخ ووقت الذي تريد الحجز به">
+                      <mat-datepicker-toggle matSuffix
+                                             [for]="$any(picker)"></mat-datepicker-toggle>
+                      <ngx-mat-datetime-picker #picker
+                                               [color]="'primary'"
+                                               [showSpinners]="true"
+                                               [showSeconds]="false"
+                                               [stepHour]="1"
+                                               [stepMinute]="15"
+                                               [touchUi]="true"
+                                               [enableMeridian]="true"
+                                               [disableMinute]="false"
+                                               [hideTime]="false">
+                        <ng-template>
+                          <span>OK</span>
+                        </ng-template>
+                      </ngx-mat-datetime-picker>
+                    </mat-form-field>
+
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-8 mt-4 mt-sm-1 mt-md-2 mx-auto">
+                    <textarea type="text"
+                    formControlName="note"
+                              class=" form-control "
+                              placeholder=" اي  ملاحظات تريد ارفاقها مع الحجز مثل تخصيص طلبات خاصة بك او عدد الافراد  مثلاً"></textarea>
+                  </div>
+                </div>
+                <div class="row mt-4 mt-sm-1 mt-md-2 mx-auto">
+                  <div class="col-12 col-md-4 col-lg-3 mx-auto">
+                    <button type="submit "
+                    [disabled]="registerReservation.invalid"
+                    class="btn px-4 btn-success btn-reservations py-1 text-light mx-auto w-100"
+                            mat-button
+                            mat-stroked-button> تثبيت الحجز</button>
+                  </div>
+                </div>
+
+
+
+
+              </form>
+            </div>
+
+          </mat-card>
+
+        </mat-card>
+      </div>
+    </div>
+    <div class="footer row">
+
+    </div>
+
+  </div>
+</div>

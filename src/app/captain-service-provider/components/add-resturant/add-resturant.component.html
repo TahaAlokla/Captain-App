@@ -1,0 +1,115 @@
+<div class="container py-5 mt-5">
+  <div class="row add-restaurant-section">
+    <mat-card>
+      <mat-card-title class="text-center primary-color fw-bolder fs-3">تسجيل مطعم جديد</mat-card-title>
+      <form [formGroup]="registerRestaurant"
+            (ngSubmit)="registerSubmitRestaurant()">
+        <div class="row">
+
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+            <input type="text"
+                   placeholder="اسم المطعم"
+                   class=" form-control "
+                   formControlName="name"
+                   [class.is-invalid]="getError('name')">
+            <p class="py-0 my-0 small "
+               *ngIf="getError('name')">هذا الحقل مطلوب</p>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+            <input type="text"
+                   placeholder="اسم المستخدم"
+                   class=" form-control"
+                   formControlName="username"
+                   [class.is-invalid]="getError('username')">
+            <p class="py-0 my-0 small "
+               *ngIf="getError('username')">هذا الحقل مطلوب</p>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+            <input type="text"
+                   placeholder="العنوان"
+                   class=" form-control"
+                   formControlName="address"
+                   [class.is-invalid]="getError('address')">
+            <p class="py-0 my-0 small "
+               *ngIf="getError('address')">هذا الحقل مطلوب</p>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+            <input type="email"
+                   placeholder="البريد الألكتروني"
+                   class=" form-control"
+                   formControlName="email"
+                   [class.is-invalid]="getError('email')">
+            <p class="py-0 my-0 small "
+               *ngIf="getError('email')">
+              <span *ngIf="email?.errors?.['required']">هذا الحقل مطلوب</span>
+              <span *ngIf="email?.errors?.['email']">
+                صيغة الايميل غير صالحة</span>
+            </p>
+
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+            <input type="tel"
+                   placeholder="رقم الهاتف"
+                   class=" form-control"
+                   formControlName="phone"
+                   [class.is-invalid]="getError('phone')">
+            <p class="py-0 my-0 small "
+               *ngIf="getError('phone')">
+              <span *ngIf="phone?.errors?.['required']">هذا الحقل مطلوب</span>
+              <span *ngIf="phone?.errors?.['pattern']">
+                صيغة رقم الهاتف غير صالحة</span>
+            </p>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3 password-filed">
+
+            <input [type]="hide ? 'password' : 'text'"
+                   placeholder="كلمة المرور"
+                   class=" form-control w-100 -"
+                   formControlName="password"
+                   [class.is-invalid]="getError('password')">
+            <p class="py-0 my-0 small "
+               *ngIf="getError('password')">هذا الحقل مطلوب</p>
+            <button class="eye"
+                    mat-icon-button
+                    matSuffix
+                    (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+
+
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3 password-filed">
+
+            <input class=" form-control"
+                   [min]="minDate"
+                   [max]="maxDate"
+                   formControlName="expiration_date"
+                   [matDatepicker]="picker"
+                   placeholder="تاريخ الصلاحية"
+                   [class.is-invalid]="getError('expiration_date')">
+                   <p class="py-0 my-0 small "
+               *ngIf="getError('expiration_date')">هذا الحقل مطلوب</p>
+            <mat-datepicker-toggle matSuffix
+                                   [for]="picker"
+                                   class="eye"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-10 col-md-6 col-lg-6 align-middle mt-3">
+
+            <button type="submit"
+                    [disabled]="registerRestaurant.invalid"
+                    class="btn fw-bold bg-primary-color color-orange px-3 d-block">تسجيل</button>
+            <mat-hint class=" small">يتم تفعيل الزر عند أدخال كل الحقول بشكل صحيح</mat-hint>
+          </div>
+        </div>
+      </form>
+
+    </mat-card>
+  </div>
+
+</div>

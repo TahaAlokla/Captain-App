@@ -1,0 +1,57 @@
+$orange-color:#FF7700 ;
+  $dark-color:#19283f;
+  $nav-link-color:#fff;
+  $green-color:#33d1cc;
+  $red-color:#ff3150;
+  $yellow-color:#ffc400;
+.home-reasturant-container{
+  background-color: #19283f;
+
+}
+.container{
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+  }
+  .header,.footer{
+    flex-shrink: 0;
+  }
+  .btn-reservations{
+    font-family: 'Tajawal', sans-serif !important;
+  }
+  .main{
+    flex-grow: 1;
+  }
+  input[type=text],
+input[type=email],
+textarea,
+input,
+input[type=password],
+input[type=tel] {
+  color: #19283f;
+  font-weight: normal !important;
+}
+.registerReservation-title{
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  width: 100%;
+
+//  margin-bottom: 30px;
+ span{
+   font-size: 16px;
+ }
+}
+.registerReservation-title::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #FF7700;
+}
+.test{
+  display: flex !important;
+  justify-content: space-around !important;
+}

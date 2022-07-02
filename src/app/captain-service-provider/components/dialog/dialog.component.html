@@ -1,0 +1,50 @@
+
+  <h4 *ngIf="data.statusAccount"  class="text-center">الغاء تفعيل الحساب</h4>
+  <h4 *ngIf="!data.statusAccount"  class="text-center">أعادة تفعيل الحساب</h4>
+  <mat-divider></mat-divider>
+
+<!-- {{data.name}} -->
+<div mat-dialog-content>
+  <div class="text-end" *ngIf="data.statusAccount">
+    <p class="lead my-0">هل انت متاكد من ألغاء تفعيل الحساب ؟</p>
+    <small>الحساب الذي يلغى تفعيله سوف يفقد وصوله الى المنصة والتطبيق  ولن تعرض الصفحة العامة للمطعم بعد الأن</small>
+  </div>
+  <div class="text-end" *ngIf="!data.statusAccount">
+    <div class="row">
+      <div class="col-12">اختر تاريخ الصلاحية الجديد</div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-3 password-filed- mb-2">
+        <mat-form-field  >
+          <input class="form-control- w-100"
+          [min]="minDate"
+          [max]="maxDate"
+          matInput
+          [formControl]="expiration_date"
+          [matDatepicker]="picker"
+          placeholder="تاريخ الصلاحية"
+          [class.is-invalid]="getError()">
+          <div class="py-0 my-0 small "
+      *ngIf="getError()">
+     <mat-error *ngIf="expiration_date?.errors?.['required']"> هذا الحقل مطلوب </mat-error>
+      <!-- <mat-error *ngIf="expiration_date?.errors?.['minDate']">
+       تاريخ غير صالح</mat-error> -->
+      </div>
+   <mat-datepicker-toggle matSuffix
+                          [for]="picker"
+                          class="eye-"></mat-datepicker-toggle>
+   <mat-datepicker #picker touchUi="true"></mat-datepicker>
+        </mat-form-field>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button class=" btn-danger" (click)="onNoClick()">اغلاق</button>
+  <button mat-button  cdkFocusInitial (click)="sendActiveAccount(data.statusAccount,data.id)" class="btn-success">موافق</button>
+</div>
+

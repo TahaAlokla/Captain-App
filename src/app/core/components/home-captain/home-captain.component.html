@@ -1,5 +1,5 @@
 <div class="landing pt-5">
-  <swal >
+  <swal>
   </swal>
   <div class="container-fluid landing p-0 m-0">
     <section class=" text-light">
@@ -41,17 +41,19 @@
           </div>
 
           <div class="row d-flex  justify-content-center  ">
-            <form action="" [formGroup]="subscribedUsers" (ngSubmit)="onSubmitSubscribed()">
+            <form action=""
+                  [formGroup]="subscribedUsers"
+                  (ngSubmit)="onSubmitSubscribed()">
               <div class="row my-2 d-flex  justify-content-center">
                 <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
                   <input type="text"
-                  formControlName="restaurantName"
+                         formControlName="restaurantName"
                          placeholder="أدخل أسم معطعمك"
                          class="w-100 form-control">
                 </div>
                 <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
                   <input type="text"
-                  formControlName="restaurantPhoneNumber"
+                         formControlName="restaurantPhoneNumber"
                          placeholder="أدخل رقم الهاتف"
                          class="w-100 form-control"
                          autocomplete="tel">
@@ -62,14 +64,14 @@
               <div class="row my-2 d-flex  justify-content-center">
                 <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
                   <input type="email"
-                  formControlName="restaurantEmail"
+                         formControlName="restaurantEmail"
                          placeholder="أدخل ايميل المطعم"
                          class="w-100 form-control"
                          autocomplete="email">
                 </div>
                 <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
                   <input type="text"
-                  formControlName="restaurantAddress"
+                         formControlName="restaurantAddress"
                          placeholder="أدخل عنوانك "
                          class="w-100 form-control"
                          autocomplete="address-level1">
@@ -78,14 +80,15 @@
               <div class="row my-2 d-flex  justify-content-center">
                 <div class="col-sm-12 col-md-8 col-12 my-2 my-sm-2 my-md-1">
                   <textarea class="form-control"
-                  formControlName="restaurantNote"
+                            formControlName="restaurantNote"
                             rows="3"
                             placeholder="هنا تستطيع كتابة أي ملاحظات ترغب بها "></textarea>
                 </div>
 
               </div>
               <div class="row my-3  d-flex  justify-content-center">
-                <button type="submit" [disabled]="!subscribedUsers.valid"
+                <button type="submit"
+                        [disabled]="!subscribedUsers.valid"
                         class="w-sm-50 w-25 w-md-25 w-lg-25 w-lxx-25 main-btn-secondary text-center  btn  button-animation btn-2">
                   <span>أشتراك</span>
                 </button>
@@ -106,19 +109,45 @@
         <div class="row my-0 bg-orange">
           <h2 class="text-center my-4 text-light">المطاعم المشتركة معنا</h2>
           <div class="row mb-4 d-flex flex-row justify-content-center align-items-center">
-            <div class="col-sm-12 col-md-4 col-lg-3 py-2 d-flex flex-row justify-content-center align-items-center"
-                 *ngFor="let item of RestaurantSubscription">
-              <mat-card class="card-parent">
-                <img [src]="item.restImgPath"
-                     alt="restaurant-img"
-                     class="img-resto rounded">
-                <div class="overlay">
-                  <span class="resturant-name text-light">{{item.restName}}</span>
-                  <button type="button"
-                          class="btn-view-restourant">أستعراض المطعم</button>
+            <!-- col-sm-12 col-md-4 col-lg-3 py-2 d-flex flex-row justify-content-center align-items-center -->
+            <div class=""
+                 >
+              <swiper [config]="config" class="swiper-container px-4 py-3">
+                <ng-template swiperSlide *ngFor="let item of RestaurantSubscription;index as i">
+                  <mat-card class="card-parent mx-auto">
+                    <div class=""
+                         *ngIf="!item.avatar then staticImage;else loadImage">
 
-                </div>
-              </mat-card>
+                    </div>
+                    <ng-template #staticImage>
+                      <img [src]="'../../../../assets/imgs/oriental-restaurant.jpg'"
+                           alt="restaurant-img"
+                           class="img-resto rounded">
+                      <div class="overlay">
+                        <span class="resturant-name text-light">{{item.name}}</span>
+                        <button type="button"
+                                class="btn-view-restourant"
+                                (click)="viewHomeRestaurant(item._id,item.name)">أستعراض المطعم</button>
+
+                      </div>
+                    </ng-template>
+                    <ng-template #loadImage>
+                      <img [src]="'../../../../assets/imgs/oriental-restaurant.jpg'"
+                           alt="restaurant-img"
+                           class="img-resto rounded">
+                      <div class="overlay">
+                        <span class="resturant-name text-light">{{item.name}}</span>
+                        <button type="button"
+                                class="btn-view-restourant"
+                                (click)="viewHomeRestaurant(item._id, item.name)">أستعراض المطعم</button>
+
+                      </div>
+                    </ng-template>
+                  </mat-card>
+                </ng-template>
+
+              </swiper>
+
             </div>
           </div>
         </div>
@@ -127,5 +156,3 @@
   </div>
 
 </div>
-
-

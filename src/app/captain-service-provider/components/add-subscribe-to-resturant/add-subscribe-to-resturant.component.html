@@ -1,0 +1,66 @@
+<h4 class="text-center">اضافة طلب الأشتراك الى المطاعم المشتركة</h4>
+<mat-divider></mat-divider>
+<div class=" my-3"
+     mat-dialog-content>
+  <form [formGroup]="registerSubscribe"
+        (ngSubmit)="subscribeForm(data.id)"
+        id="ngForm"
+        #documentEditForm="ngForm">
+    <div class="row text-end">
+      <div class="col-12  mt-3">
+        <input type="text"
+               placeholder="اسم المستخدم"
+               class=" form-control text-end"
+               formControlName="username"
+               [class.is-invalid]="getError('username')">
+        <p class="py-0 my-0 small "
+           *ngIf="getError('username')">هذا الحقل مطلوب</p>
+      </div>
+      <div class="col-12  mt-3 password-filed">
+        <input [type]="hide ? 'password' : 'text'"
+               placeholder="كلمة المرور"
+               class=" form-control w-100 text-end"
+               formControlName="password"
+               [class.is-invalid]="getError('password')">
+        <p class="py-0 my-0 small "
+           *ngIf="getError('password')">هذا الحقل مطلوب</p>
+        <button class="eye"
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </div>
+      <div class="col-12  mt-3 password-filed">
+
+        <input class=" form-control text-end"
+               [min]="minDate"
+               [max]="maxDate"
+               formControlName="expiration_date"
+               [matDatepicker]="picker"
+               placeholder="تاريخ الصلاحية"
+               [class.is-invalid]="getError('expiration_date')">
+        <p class="py-0 my-0 small "
+           *ngIf="getError('expiration_date')">هذا الحقل مطلوب</p>
+        <mat-datepicker-toggle matSuffix
+                               [for]="picker"
+                               class="eye"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+    </div>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions class="my-2">
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class=" btn-danger text-light fw-bold px-2 fs-6 py-1 text-center"
+          (click)="onNoClick()">اغلاق</button>
+  <button type="submit"
+          mat-button
+          cdkFocusInitial
+          form="ngForm" [disabled]="!documentEditForm.form.valid"
+          class="btn-success text-light fw-bold px-2 fs-6 py-1 text-center">أرسال المعلومات</button>
+</div>

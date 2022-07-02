@@ -11,7 +11,18 @@ export class HomePageProviderService {
   constructor(private HttpClient:HttpClient) { }
 
  private readonly postApiSubscribedUser:string='/add-subscripe'
+//  /api/restaurants/getAll
+private readonly getPublicRestaurantsUrl:string=`${baseUrl}/api/restaurants/getAll`
+
+
+
+ private get postApiSubscribedUserUrl(){
+   return `${baseUrl}${this.postApiSubscribedUser}`
+ }
+ getPublicRestaurants():Observable<any>{
+   return this.HttpClient.get(this.getPublicRestaurantsUrl)
+ }
  postSubscribedUser(post:any):Observable<any>{
-   return  this.HttpClient.post(this.postApiSubscribedUser,post)
+   return  this.HttpClient.post(this.postApiSubscribedUserUrl,post)
  }
 }
