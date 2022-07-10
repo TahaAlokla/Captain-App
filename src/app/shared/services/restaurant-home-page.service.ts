@@ -13,7 +13,13 @@ export class RestaurantHomePageService {
   // /api/restaurants/62bcecc3aa5f2d5599b2532d/reservations/create
 private readonly idRestaurant:string=''
 // private readonly reservations_restaurants_url:string=`${baseUrl}/api/restaurants/${this.idRestaurant}/reservations/create`
+private readonly restaurantInfo:string=`${baseUrl}/api/restaurants/getrestaurant`
   constructor(private http:HttpClient) { }
+
+
+  getRestaurantInfo(id:string):Observable<any>{
+    return this.http.get(this.restaurantInfo)
+  }
 
   postReservations_restaurants(data:ReservationsRestaurant ,id_rest:string):Observable<any>{
   let  reservations_restaurants_url=`${baseUrl}/api/restaurants/${id_rest}/reservations/create`

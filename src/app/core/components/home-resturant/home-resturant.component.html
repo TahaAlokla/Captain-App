@@ -1,64 +1,114 @@
 <div class="home-reasturant-container">
-  <div class="container-fluid ">
-    <!--  TODO : I think  customize header and footer here / whet-bg color herder and primary color for fonts-->
-    <div class="header row">
-      <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid p-0 m-0 ">
+    
+    <div class="header  ">
+      <nav class="navbar w-75 mx-auto navbar-expand-lg   bg-white rounded border-stone-900">
         <div class="container-fluid">
-          <a class="navbar-brand"
-             href="#">Navbar</a>
-          <button class="navbar-toggler"
+          <p class="navbar-brand text-orange-400 antialiased hover:subpixel-antialiased font-semibold "
+            >{{name_rest}}</p>
+          <button class="navbar-toggler ring-orange-400 hover:bg-sky-700 fouce:outline-none"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent"
                   aria-controls="navbarSupportedContent"
                   aria-expanded="false"
                   aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                  <i class="fa-solid fa-bars border-orange-400 outline-none text-orange-400 ring-orange-400"
+           aria-hidden="true"></i>
+            <!-- <span class="navbar-toggler-icon ring-orange-400"></span> -->
           </button>
-          <div class="collapse navbar-collapse"
+          <div class="collapse navbar-collapse "
                id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active"
-                   aria-current="page"
-                   href="#">Home</a>
+              <li class="mx-2 my-sm-1 my-lg-0 my-1">
+                <a class="nav-link text-orange-400 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 px-3"
+                fragment="registerReservation"
+                (click)="navigateToSection('registerReservation')">حجز</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="#">Link</a>
+              <li class="mx-2 my-sm-1 my-lg-0 my-1">
+                <a class="nav-link text-orange-400 text-center rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 px-3"
+                fragment="registerReservation"
+                (click)="navigateToSection('registerReservation')">تواصل معنا</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle"
-                   href="#"
-                   id="navbarDropdown"
-                   role="button"
-                   data-bs-toggle="dropdown"
-                   aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu"
-                    aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item"
-                       href="#">Action</a></li>
-                  <li><a class="dropdown-item"
-                       href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li><a class="dropdown-item"
-                       href="#">Something else here</a></li>
-                </ul>
+              <li class="mx-2 my-sm-1 my-lg-0 my-1">
+                <a class="nav-link text-orange-400 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 px-3"
+                fragment="registerReservation"
+                (click)="navigateToSection('registerReservation')">المنيو</a>
               </li>
-
+             
             </ul>
-
           </div>
         </div>
       </nav>
+      <div class="section-about ">
+        <div class="relative group w-4/5 mx-auto shadow-xl bg-white space-x-2 space-y-2 py-4 px-4 rounded-xl transform transition duration-500 hover:scale-105 border-2 border-gray-600 ">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-md-6">
+              <p class="lead primary-color font-medium">أوقات عمل المطعم
+                <span class="color-orange">5am </span>
+                <span class="color-orange">10pm</span>
+              </p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-md-6">
+              <p class="lead  rounded-2xl primary-color  font-medium ">العنوان
+                <span class="color-orange">دمشق المرجة</span>
+               
+              </p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-md-6">
+            <div class="row bg-gray-200 rounded-2xl primary-color py-1">
+          <div class="col-12 ">معلومات التواصل </div>
+          <div class="col-12-col-sm-12 col-md-4">
+            <div class="row ">
+              <div class="col-12 col-sm-12 col-md-6">رقم الهاتف</div>
+              <div class="col-12 col-sm-12 col-md-6">0968825014</div>
+            </div>
+            <div class="row">
+              
+            </div>
+          </div>
+          <div class="col-12-col-sm-12 col-md-4">
+            <div class="row ">
+              <div class="col-12 col-sm-12 col-md-6">رقم الهاتف</div>
+              <div class="col-12 col-sm-12 col-md-6">0968825014</div>
+            </div>
+            <div class="row">
+              
+            </div>
+          </div>
+          <div class="col-12-col-sm-12 col-md-12">
+            <div class="row">
+              <div class="col-12">مواقع التواصل </div>
+              <div class="col-12">
+                <div class="row ">
+                  <div class="col-12 col-sm-12 col-md-6">
+                    <p>facebook : <span>link</span></p>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-6">
+                    <p>instagram : <span>link</span></p>
+                  </div>
+                  
+                </div>
+                
+              </div>
+              
+
+            </div>
+          </div>
+            
+           
+          </div>
+            </div>
+          </div>
+         
+         
+      </div>
+      </div>
+     
     </div>
     <div class="main container row mx-auto mt-5">
       <div class="row py-5 mx-auto">
-        <mat-card class="row p-3 mx-auto py-5 h-100">
+        <mat-card class="row p-3 mx-auto py-5 h-100" id="registerReservation">
           <mat-card class="shadow-lg rounded row mx-auto h-100">
             <div class="col-12">
               <p class="lead fw-normal primary-color registerReservation-title pt-2 pb-0">يمكنك الحجز لدينا
@@ -66,9 +116,7 @@
                 <span class=" small py-0"> نظام الحجوزات الألكرتروني</span>
 
               </p>
-              <h1 class="text-3xl font-bold underline">
-                Hello world!
-              </h1>
+
 
             </div>
             <div class="col-12 mx-sm-auto ">

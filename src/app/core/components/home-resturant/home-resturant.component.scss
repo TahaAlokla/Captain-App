@@ -60,3 +60,32 @@ input[type=tel] {
   display: flex !important;
   justify-content: space-around !important;
 }
+
+.navbar .navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar .navbar-toggler[aria-expanded="true"] {
+  border-color: $dark-color;
+}
+.header{
+  width: 100%;
+  // min-width: 100vw;
+  min-height: 70vh;
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  margin-bottom: 200px;
+  .section-about{
+    position: absolute;
+    top:80%;left: 50%;
+    width: 100%;
+    margin: auto;
+    transform: translateX(-50%);
+    margin-bottom: 50px !important;
+    // transform: translateY(- 50%);
+  }
+  
+ background-image: url(../../../../assets/imgs/oriental-restaurant.jpg);
+}

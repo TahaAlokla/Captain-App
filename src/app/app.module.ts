@@ -1,3 +1,4 @@
+import { MatIconModule } from '@angular/material/icon';
 
 import { NgModule } from '@angular/core';
 
@@ -44,6 +45,7 @@ const materialComponent=[
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
+  MatIconModule
   // MAT_DATE_LOCALE
 ]
 const timePicker=[
@@ -51,7 +53,8 @@ const timePicker=[
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
     MatDatepickerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    
 ]
 
 const services=[

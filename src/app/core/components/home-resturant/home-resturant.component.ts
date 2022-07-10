@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeResturantComponent implements OnInit {
   rest_id:string=''
+  name_rest:string=''
 
   minDate = new Date(new Date().setDate(new Date().getDate()));
   // max date after 4 month
@@ -40,12 +41,14 @@ export class HomeResturantComponent implements OnInit {
     return this.registerReservation.get('phone');
   }
   ngOnInit(): void {
-    // const id = uuidv4();
+    window.location.hash = '';
+
     //  TODO when refresh browser change value | so be should save that local storage and check if existing dot need return value restaurant
     // todo : i think generation uuid when using postSend data not ngonit
     // console.log(" uuid.get()", id);
     this.activeRouter.paramMap.subscribe(param => {
       this.rest_id = param.get('id');
+      this.name_rest = param.get('Restaurant_name')
       // console.log("this.rest_id", this.rest_id);
        });
   }
@@ -109,7 +112,13 @@ export class HomeResturantComponent implements OnInit {
       }
     })
 
+    
+
   }
+  public navigateToSection(section: string) {
+    window.location.hash = '';
+    window.location.hash = section;
+}
 
 
 }
