@@ -1,8 +1,62 @@
 <div class="home-reasturant-container">
-  <div class="container ">
+  <div class="container-fluid ">
     <!--  TODO : I think  customize header and footer here / whet-bg color herder and primary color for fonts-->
-    <div class="header row"></div>
-    <div class="main row mx-auto mt-5">
+    <div class="header row">
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand"
+             href="#">Navbar</a>
+          <button class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse"
+               id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active"
+                   aria-current="page"
+                   href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"
+                   href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   href="#"
+                   id="navbarDropdown"
+                   role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu"
+                    aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item"
+                       href="#">Action</a></li>
+                  <li><a class="dropdown-item"
+                       href="#">Another action</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item"
+                       href="#">Something else here</a></li>
+                </ul>
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="main container row mx-auto mt-5">
       <div class="row py-5 mx-auto">
         <mat-card class="row p-3 mx-auto py-5 h-100">
           <mat-card class="shadow-lg rounded row mx-auto h-100">
@@ -10,27 +64,41 @@
               <p class="lead fw-normal primary-color registerReservation-title pt-2 pb-0">يمكنك الحجز لدينا
                 <br>
                 <span class=" small py-0"> نظام الحجوزات الألكرتروني</span>
+
               </p>
+              <h1 class="text-3xl font-bold underline">
+                Hello world!
+              </h1>
 
             </div>
             <div class="col-12 mx-sm-auto ">
               <form action=""
                     [formGroup]="registerReservation"
-                    class="row">
+                    class="row" (ngSubmit)="registerReservationSubmit()">
                 <div class="row test- mx-auto">
-                  <div class="col-12 col-md-6 col-lg-4 mx-sm-auto my-sm-2 my-2  mx-auto ">
+                  <div class="col-12 col-md-6 col-lg-4 mx-sm-auto py-sm-2 py-2  mx-auto ">
                     <input type="text"
                            class=" form-control mx-auto w-100"
                            formControlName="name"
                            [class.is-invalid]="getError('name')"
                            placeholder="اسم مقدم الحجز">
+                    <p class="py-0 my-0    error-masg "
+                       *ngIf="getError('name')">هذا الحقل مطلوب</p>
                   </div>
+
+
                   <div class="col-12 col-md-6 col-lg-4 mx-sm-auto my-sm-2 my-2  mx-auto">
                     <input type="text"
                            formControlName="phone"
                            class=" form-control mx-auto w-100"
                            [class.is-invalid]="getError('phone')"
                            placeholder="رقم الهاتف للتواصل معك">
+                    <p class="py-0 my-0 error-masg "
+                       *ngIf="getError('phone')">
+                      <span *ngIf="phone?.errors?.['required']">هذا الحقل مطلوب</span>
+                      <span *ngIf="phone?.errors?.['pattern']">
+                        صيغة رقم الهاتف غير صالحة</span>
+                    </p>
                   </div>
                   <div class="col-12 col-md-6 col-lg-4 mx-sm-auto my-sm-2 my-2  mx-auto">
                     <input type="text"
@@ -38,6 +106,12 @@
                            class=" form-control mx-auto w-100"
                            [class.is-invalid]="getError('numberTable')"
                            placeholder="عدد الطاولات التي تريد حجزها">
+                           <p class="py-0 my-0 error-masg "
+                           *ngIf="getError('numberTable')">
+                          <span *ngIf="numberTable?.errors?.['required']">هذا الحقل مطلوب</span>
+                          <span *ngIf="numberTable?.errors?.['numeric']">
+                            يرجى إدخال عدد صحيح</span>
+                        </p>
                   </div>
                 </div>
                 <div class="row mt-3 mt-sm-1 mt-md-2 mx-auto">
@@ -46,8 +120,8 @@
                     <mat-form-field appearance="outline"
                                     class="w-100 my-0 my-lg-2">
                       <input matInput
-                      formControlName="dateOfReservation"
-                      [class.is-invalid]="getError('dateOfReservation')"
+                             formControlName="dateOfReservation"
+                             [class.is-invalid]="getError('dateOfReservation')"
                              class="w-100"
                              [min]="minDate"
                              [max]=" maxDate"
@@ -69,21 +143,25 @@
                           <span>OK</span>
                         </ng-template>
                       </ngx-mat-datetime-picker>
+                      <mat-error class="py-0 my-0    error-masg "
+                      *ngIf="getError('dateOfReservation')">هذا الحقل مطلوب</mat-error>
+
                     </mat-form-field>
+
 
                   </div>
                   <div class="col-12 col-md-6 col-lg-8 mt-4 mt-sm-1 mt-md-2 mx-auto">
                     <textarea type="text"
-                    formControlName="note"
-                              class=" form-control "
+                              formControlName="note"
+                              class=" form-control mt-1"
                               placeholder=" اي  ملاحظات تريد ارفاقها مع الحجز مثل تخصيص طلبات خاصة بك او عدد الافراد  مثلاً"></textarea>
                   </div>
                 </div>
                 <div class="row mt-4 mt-sm-1 mt-md-2 mx-auto">
                   <div class="col-12 col-md-4 col-lg-3 mx-auto">
                     <button type="submit "
-                    [disabled]="registerReservation.invalid"
-                    class="btn px-4 btn-success btn-reservations py-1 text-light mx-auto w-100"
+                            [disabled]="registerReservation.invalid"
+                            class="btn px-4 btn-success btn-reservations py-1 text-light mx-auto w-100"
                             mat-button
                             mat-stroked-button> تثبيت الحجز</button>
                   </div>
@@ -106,3 +184,6 @@
 
   </div>
 </div>
+
+<swal>
+</swal>
