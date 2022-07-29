@@ -1,11 +1,13 @@
 <div class="home-reasturant-container">
   <div class="container-fluid p-0 m-0 ">
-    
-    <div class="header  ">
+
+    <div class="header  "
+         [ngStyle]="{'background-image': (!infoRestaurant$?.avatar||infoRestaurant$?.avatar==='no-avatar' )? 'url(../../../../assets/imgs/oriental-restaurant.jpg)' : 'infoRestaurant$?.avatar'}">
+
       <nav class="navbar w-75 mx-auto navbar-expand-lg   bg-white rounded border-stone-900">
         <div class="container-fluid">
-          <p class="navbar-brand text-orange-400 antialiased hover:subpixel-antialiased font-semibold "
-            >{{name_rest}}</p>
+          <p class="navbar-brand text-orange-400 antialiased hover:subpixel-antialiased font-semibold ">{{name_rest}}
+          </p>
           <button class="navbar-toggler ring-orange-400 hover:bg-sky-700 fouce:outline-none"
                   type="button"
                   data-bs-toggle="collapse"
@@ -13,8 +15,8 @@
                   aria-controls="navbarSupportedContent"
                   aria-expanded="false"
                   aria-label="Toggle navigation">
-                  <i class="fa-solid fa-bars border-orange-400 outline-none text-orange-400 ring-orange-400"
-           aria-hidden="true"></i>
+            <i class="fa-solid fa-bars border-orange-400 outline-none text-orange-400 ring-orange-400"
+               aria-hidden="true"></i>
             <!-- <span class="navbar-toggler-icon ring-orange-400"></span> -->
           </button>
           <div class="collapse navbar-collapse "
@@ -22,94 +24,81 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="mx-2 my-sm-1 my-lg-0 my-1">
                 <a class="nav-link text-orange-400 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 px-3"
-                fragment="registerReservation"
-                (click)="navigateToSection('registerReservation')">حجز</a>
+                   fragment="registerReservation"
+                   (click)="navigateToSection('registerReservation')">حجز</a>
               </li>
               <li class="mx-2 my-sm-1 my-lg-0 my-1">
                 <a class="nav-link text-orange-400 text-center rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 px-3"
-                fragment="registerReservation"
-                (click)="navigateToSection('registerReservation')">تواصل معنا</a>
+                   fragment="registerReservation"
+                   (click)="navigateToSection('registerReservation')">تواصل معنا</a>
               </li>
               <li class="mx-2 my-sm-1 my-lg-0 my-1">
                 <a class="nav-link text-orange-400 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 px-3"
-                fragment="registerReservation"
-                (click)="navigateToSection('registerReservation')">المنيو</a>
+                   fragment="registerReservation"
+                   (click)="navigateToSection('registerReservation')">المنيو</a>
               </li>
-             
+
             </ul>
           </div>
         </div>
       </nav>
       <div class="section-about ">
-        <div class="relative group w-4/5 mx-auto shadow-xl bg-white space-x-2 space-y-2 py-4 px-4 rounded-xl transform transition duration-500 hover:scale-105 border-2 border-gray-600 ">
+        <div
+             class="relative group w-4/5 mx-auto shadow-xl bg-white space-x-2 space-y-2 py-4 px-4 rounded-xl transform transition duration-500 hover:scale-105 border-2 border-gray-600 ">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-md-6">
               <p class="lead primary-color font-medium">أوقات عمل المطعم
-                <span class="color-orange">5am </span>
-                <span class="color-orange">10pm</span>
+                <span class="color-orange">{{infoRestaurant$?.workingStart}} </span>
+                <span>حتى </span>
+                <span class="color-orange">{{infoRestaurant$?.workingEnd}}</span>
               </p>
             </div>
             <div class="col-12 col-sm-12 col-md-md-6">
               <p class="lead  rounded-2xl primary-color  font-medium ">العنوان
-                <span class="color-orange">دمشق المرجة</span>
-               
+                <span class="color-orange">{{infoRestaurant$?.address}}</span>
+
               </p>
             </div>
             <div class="col-12 col-sm-12 col-md-md-6">
-            <div class="row bg-gray-200 rounded-2xl primary-color py-1">
-          <div class="col-12 ">معلومات التواصل </div>
-          <div class="col-12-col-sm-12 col-md-4">
-            <div class="row ">
-              <div class="col-12 col-sm-12 col-md-6">رقم الهاتف</div>
-              <div class="col-12 col-sm-12 col-md-6">0968825014</div>
-            </div>
-            <div class="row">
-              
-            </div>
-          </div>
-          <div class="col-12-col-sm-12 col-md-4">
-            <div class="row ">
-              <div class="col-12 col-sm-12 col-md-6">رقم الهاتف</div>
-              <div class="col-12 col-sm-12 col-md-6">0968825014</div>
-            </div>
-            <div class="row">
-              
-            </div>
-          </div>
-          <div class="col-12-col-sm-12 col-md-12">
-            <div class="row">
-              <div class="col-12">مواقع التواصل </div>
-              <div class="col-12">
-                <div class="row ">
-                  <div class="col-12 col-sm-12 col-md-6">
-                    <p>facebook : <span>link</span></p>
+              <div class="row bg-gray-200 rounded-2xl primary-color py-1">
+                <div class="col-12 ">معلومات التواصل </div>
+                <div class="col-12  col-sm-12 ">
+                  <div class="row "
+                       *ngFor="let item of infoRestaurant$?.phone_contact">
+                    <!-- name -->
+                    <!-- <div class="col-12 col-sm-12 col-md-6">{{item.name}}</div>
+              <div class="col-12 col-sm-12 col-md-6">{{item.number}}</div> -->
+                    <div class="col-12 col-sm-12 col-md-6">رقم الهاتف</div>
+                    <div class="col-12 col-sm-12 col-md-6">0968825014</div>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-6">
-                    <p>instagram : <span>link</span></p>
-                  </div>
-                  
-                </div>
-                
-              </div>
-              
 
+                </div>
+
+                <div class="col-12-col-sm-12 col-md-12">
+                  <div class="row">
+                    <div class="col-12">مواقع التواصل </div>
+                    <div class="col-12">
+                      <div class="row ">
+                        <div class="col-12 col-sm-12 col-md-6"
+                             *ngFor="let item of infoRestaurant$?.web_links">
+                          <p>{{item.name}} : <a [href]="item.link"
+                               class="no-underline hover:underline">link</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-            
-           
-          </div>
-            </div>
-          </div>
-         
-         
+        </div>
       </div>
-      </div>
-     
     </div>
     <div class="main container row mx-auto mt-5">
       <div class="row py-5 mx-auto">
-        <mat-card class="row p-3 mx-auto py-5 h-100" id="registerReservation">
-          <mat-card class="shadow-lg rounded row mx-auto h-100">
+        <mat-card class="row p-3 mx-auto py-5 h-100"
+                  id="registerReservation">
+          <mat-card class="shadow-lg rounded row mx-auto h-100 w-90">
             <div class="col-12">
               <p class="lead fw-normal primary-color registerReservation-title pt-2 pb-0">يمكنك الحجز لدينا
                 <br>
@@ -122,7 +111,8 @@
             <div class="col-12 mx-sm-auto ">
               <form action=""
                     [formGroup]="registerReservation"
-                    class="row" (ngSubmit)="registerReservationSubmit()">
+                    class="row"
+                    (ngSubmit)="registerReservationSubmit()">
                 <div class="row test- mx-auto">
                   <div class="col-12 col-md-6 col-lg-4 mx-sm-auto py-sm-2 py-2  mx-auto ">
                     <input type="text"
@@ -154,12 +144,12 @@
                            class=" form-control mx-auto w-100"
                            [class.is-invalid]="getError('numberTable')"
                            placeholder="عدد الطاولات التي تريد حجزها">
-                           <p class="py-0 my-0 error-masg "
-                           *ngIf="getError('numberTable')">
-                          <span *ngIf="numberTable?.errors?.['required']">هذا الحقل مطلوب</span>
-                          <span *ngIf="numberTable?.errors?.['numeric']">
-                            يرجى إدخال عدد صحيح</span>
-                        </p>
+                    <p class="py-0 my-0 error-masg "
+                       *ngIf="getError('numberTable')">
+                      <span *ngIf="numberTable?.errors?.['required']">هذا الحقل مطلوب</span>
+                      <span *ngIf="numberTable?.errors?.['numeric']">
+                        يرجى إدخال عدد صحيح</span>
+                    </p>
                   </div>
                 </div>
                 <div class="row mt-3 mt-sm-1 mt-md-2 mx-auto">
@@ -192,7 +182,7 @@
                         </ng-template>
                       </ngx-mat-datetime-picker>
                       <mat-error class="py-0 my-0    error-masg "
-                      *ngIf="getError('dateOfReservation')">هذا الحقل مطلوب</mat-error>
+                                 *ngIf="getError('dateOfReservation')">هذا الحقل مطلوب</mat-error>
 
                     </mat-form-field>
 

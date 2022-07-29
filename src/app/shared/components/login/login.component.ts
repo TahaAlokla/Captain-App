@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 // for test token
-const staticToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjg4ZTI3MDlkNTMxYzA2YTNkY2QzNWUiLCJ1c2VybmFtZSI6ImtyZWVtIHNlaWYgdWxkZWVuIiwicm9sZSI6ImFkbWluIiwiYWRtaW5UeXBlIjoib3duZXIiLCJpYXQiOjE2NTYxODg2NDgsImV4cCI6MTY1NjE5NTg0OH0.xGi_OLvlDwKgy_acEIvNqnxbY9XiQO5VQM73OW4yyxE"
+// const staticToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjg4ZTI3MDlkNTMxYzA2YTNkY2QzNWUiLCJ1c2VybmFtZSI6ImtyZWVtIHNlaWYgdWxkZWVuIiwicm9sZSI6ImFkbWluIiwiYWRtaW5UeXBlIjoib3duZXIiLCJpYXQiOjE2NTYxODg2NDgsImV4cCI6MTY1NjE5NTg0OH0.xGi_OLvlDwKgy_acEIvNqnxbY9XiQO5VQM73OW4yyxE"
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

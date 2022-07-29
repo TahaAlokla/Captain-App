@@ -1,0 +1,89 @@
+<div class="container p-0 m-0">
+  <div class="row">
+    <div class="col-12">
+      <mat-card class="w-100">
+        <div class="row my-2">
+          <p class="lead fw-bold primary-color">معلومات المطعم</p>
+          <small class="py-2 color-orange"
+            >أذا كان هناك معلومات لم تكملها نوصيك بأتمامها
+          </small>
+          <mat-divider></mat-divider>
+        </div>
+        <div class="row my-2">
+          <div class="col col-sm-12 col-md-6 col-lg-6">
+            <p class="primary-color">
+              اسم المطعم :
+              <span class="fw-bold"> {{ restaurantInfoData.name }}</span>
+            </p>
+          </div>
+          <div class="col col-sm-12 col-md-6 col-lg-6">
+            <p>
+              تاريخ انتهاء صلاحية اشتراكك :
+              <span class="fw-bold">
+                {{ restaurantInfoData.expiration_date | date: "short" }}</span
+              >
+            </p>
+          </div>
+          <!-- phone -->
+          <div class="col col-sm-12 col-md-6 col-lg-6">
+            <p>
+                رقم التواصل معنا :
+              <span class="fw-bold">
+                {{ restaurantInfoData.phone}}</span
+              >
+            </p>
+          </div>
+          <mat-divider class="my-2"></mat-divider>
+        </div>
+        <div class="row">
+          <div class="col-12 my-2 color-orange">المعلومات القابلة للتعديل والتي تظهر ايضاً في صفحتك العامة
+
+            <button class="btn btn-outline-primary d-block my-2">تعديل المعلومات</button></div>
+
+          <form action="" [formGroup]="EditRestaurant" (ngSubmit)="EditSubmitRestaurant()">
+            <div class="row">
+              <div class="col col-sm-12 col-md-12">
+                <label for="" class="my-1">عنوان المطعم</label>
+                <small>ننصح بتعديله وكتابة عنوان تفصلي يساعد بالعثور عليك</small>
+                <textarea type="text"
+                formControlName="address"
+                [class.is-invalid]="getError('address')"
+                class=" form-control" ></textarea>
+              </div>
+              <!-- workingStart -->
+              <div class="col col-sm-12 col-md-4 my-2">
+                <label for="" class="my-1">وقت بداء الدوام</label>
+
+
+                <small class=" color-orange d-block" *ngIf="!restaurantInfoData.workingStart">لم تحدد وقت بدء الدوام  بعد</small>
+                <input type="time"
+                formControlName="workingStart"
+                [class.is-invalid]="getError('workingStart')"
+                class=" form-control" >
+              </div>
+              <div class="col col-sm-12 col-md-4 my-2">
+                <label for="" class="my-1">وقت نهاية الدوام</label>
+                <small class=" color-orange d-block" *ngIf="!restaurantInfoData.workingEnd">لم تحدد وقت نهاية الدوام  بعد</small>
+                <input type="time"
+                formControlName="workingEnd"
+                [class.is-invalid]="getError('workingEnd')"
+                class=" form-control" >
+              </div>
+
+            </div>
+            <mat-divider class="my-2"></mat-divider>
+            <div class="row">
+              <div class="col-12">
+                <p class="">صورة المطعم , بالطبع هذه الصورة تظهر في صفحتك العامة </p>
+                <small class=" color-orange d-block" *ngIf="!restaurantInfoData.avatar">لا توجد صورة رفوعة لمطعمك منشورة حتى الان </small>
+
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

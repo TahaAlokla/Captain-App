@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { RestaurantHomePageService } from './../../../shared/services/restaurant-home-page.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -12,8 +13,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home-resturant.component.scss']
 })
 export class HomeResturantComponent implements OnInit {
-  rest_id:string=''
-  name_rest:string=''
+  rest_id: string = ''
+  name_rest: string = ''
+  infoRestaurant: Subscription
+  infoRestaurant$:any
+
 
   minDate = new Date(new Date().setDate(new Date().getDate()));
   // max date after 4 month
@@ -41,6 +45,7 @@ export class HomeResturantComponent implements OnInit {
     return this.registerReservation.get('phone');
   }
   ngOnInit(): void {
+
     window.location.hash = '';
 
     //  TODO when refresh browser change value | so be should save that local storage and check if existing dot need return value restaurant
@@ -50,7 +55,17 @@ export class HomeResturantComponent implements OnInit {
       this.rest_id = param.get('id');
       this.name_rest = param.get('Restaurant_name')
       // console.log("this.rest_id", this.rest_id);
-       });
+      this.infoRestaurant = this.RestaurantHomePageService.getRestaurantInfo(this.rest_id).subscribe({
+        next: (data) => {
+          console.log(data.restaurant);
+          this.infoRestaurant$ = data.restaurant
+
+        }, error: (err) => {
+          console.log(err);
+
+        }
+      })
+    });
   }
   registerReservationSubmit() {
     let checkSpam: string = ''
@@ -75,50 +90,50 @@ export class HomeResturantComponent implements OnInit {
     }
     // console.log(registerReservationData);
 
-    this.RestaurantHomePageService.postReservations_restaurants(registerReservationData,this.rest_id ).subscribe({
+    this.RestaurantHomePageService.postReservations_restaurants(registerReservationData, this.rest_id).subscribe({
       next: (data) => {
         // console.log(data);
         this.registerReservation.reset()
         Swal.fire(
-         {
-          title:'تم تثبيت الحجز',
-          icon: 'success',
-          showCloseButton: false,
-          showConfirmButton: true,
-          showCancelButton:false,
-          focusConfirm: true,
-          confirmButtonText:'إغلاق',
-          timer: 4500,
-          confirmButtonColor:'#d33'
-         }
+          {
+            title: 'تم تثبيت الحجز',
+            icon: 'success',
+            showCloseButton: false,
+            showConfirmButton: true,
+            showCancelButton: false,
+            focusConfirm: true,
+            confirmButtonText: 'إغلاق',
+            timer: 4500,
+            confirmButtonColor: '#d33'
+          }
         )
       }, error: (err) => {
         // console.log(err);
         this.registerReservation.reset()
         Swal.fire(
           {
-           title:'هناك حجز مسبق قمت به',
-           icon: 'error',
-           showCloseButton: false,
-          showConfirmButton: true,
-          showCancelButton:false,
-          focusConfirm: true,
-          confirmButtonText:'إغلاق',
-          timer: 4500,
-          confirmButtonColor:'#d33'
+            title: 'هناك حجز مسبق قمت به',
+            icon: 'error',
+            showCloseButton: false,
+            showConfirmButton: true,
+            showCancelButton: false,
+            focusConfirm: true,
+            confirmButtonText: 'إغلاق',
+            timer: 4500,
+            confirmButtonColor: '#d33'
           }
-         )
+        )
 
       }
     })
 
-    
+
 
   }
   public navigateToSection(section: string) {
     window.location.hash = '';
     window.location.hash = section;
-}
+  }
 
 
 }

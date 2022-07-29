@@ -18,7 +18,7 @@ private readonly restaurantInfo:string=`${baseUrl}/api/restaurants/getrestaurant
 
 
   getRestaurantInfo(id:string):Observable<any>{
-    return this.http.get(this.restaurantInfo)
+    return this.http.post(this.restaurantInfo,{id:id})
   }
 
   postReservations_restaurants(data:ReservationsRestaurant ,id_rest:string):Observable<any>{

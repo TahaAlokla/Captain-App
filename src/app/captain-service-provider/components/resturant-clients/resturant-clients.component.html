@@ -76,6 +76,7 @@
           *matCellDef="let element"> {{element.expiration_date |date: 'dd/MM/yyyy'}}
           <br>
           <!-- element.createdAt -->
+          <span>{{element.createdAt}}</span>
           <span class=" day-label">{{moment.duration(moment(element.expiration_date, "YYYY-MM-DD").diff(moment(element.createdAt, "YYYY-MM-DD"))).asDays()}}
             <span class=" day-label"> يوم متبقي</span>
           </span>
