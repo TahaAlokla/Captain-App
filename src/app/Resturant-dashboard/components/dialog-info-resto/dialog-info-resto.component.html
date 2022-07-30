@@ -2,51 +2,192 @@
 <mat-divider></mat-divider>
 
 <div mat-dialog-content>
+  <div class="text-start">
+    <!-- {{EditRestaurant.value|json}} -->
+  </div>
 
   <div class="text-end">
     <div class="row">
-      <form action=""
-            [formGroup]="EditRestaurant"
-            (ngSubmit)="EditSubmitRestaurant()">
+      <form
+      #documentEditForm="ngForm"
+        action=""
+        enctype="multipart/form-data"
+        [formGroup]="EditRestaurant"
+        id="EditRestaurantForm"
+        (ngSubmit)="EditSubmitRestaurant()"
+      >
         <div class="row my-3 mx-2">
           <div class="col-12">
-            <label for=""
-                   class="form-label">عنوان المطعم</label>
-            <input type="text"
-                   class=" form-control"
-                   formControlName="address"
-                   placeholder="عنوان المطعم بالتفصيل"
-                   [class.is-invalid]="getError('address')">
+            <label for="" class="form-label">عنوان المطعم</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              placeholder="عنوان المطعم بالتفصيل"
+              [class.is-invalid]="getError('address')"
+            />
           </div>
           <div class="col-12 col-sm-12 col-md-6 my-2">
-            <label for=""
-                   class="form-label">وقت بدء الدوام</label>
-            <input type="time"
-                   class=" form-control"
-                   formControlName="workingStart"
-                   placeholder="وقت بدء الدوام"
-                   [class.is-invalid]="getError('workingStart')">
+            <label for="" class="form-label">وقت بدء الدوام</label>
+            <input
+              type="time"
+              class="form-control"
+              formControlName="workingStart"
+              placeholder="وقت بدء الدوام"
+              [class.is-invalid]="getError('workingStart')"
+            />
           </div>
           <div class="col-12 col-sm-12 col-md-6 my-2">
-            <label for=""
-                   class="form-label">وقت نهاية الدوام</label>
-            <input type="time"
-                   class=" form-control"
-                   formControlName="workingEnd"
-                   [class.is-invalid]="getError('workingEnd')">
+            <label for="" class="form-label">وقت نهاية الدوام</label>
+            <input
+              type="time"
+              class="form-control"
+              formControlName="workingEnd"
+              [class.is-invalid]="getError('workingEnd')"
+            />
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="row my-2">
+                <div class="col">
+                  <p class="fw-bold">ارقام التواصل</p>
+                </div>
+                <div class="col">
+                  <button
+                    class="btn btn-success d-block fw-light text-xs"
+                    (click)="addPhone_contact()"
+                  >
+                    اضافة حقول جديدة
+                  </button>
+                </div>
+              </div>
+              <!-- -->
+            </div>
+            <div class="col-12">
+              <ul formArrayName="phone_contact">
+                <li
+                  *ngFor="let item of phone_contact.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                      <input
+                        type="text"
+                        class="form-control mx-2 my-2"
+                        placeholder="موبايل/ هاتف "
+                        formControlName="name"
+                      />
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6">
+                      <input
+                        type="text"
+                        class="form-control mx-2 my-2"
+                        placeholder="رقم الهاتف"
+                        formControlName="number"
+                      />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="row my-2">
+                <div class="col">
+                  <p class="fw-bold">روابط مواقع التواصل الخاصة بك</p>
+                </div>
+                <div class="col">
+                  <button
+                    class="btn btn-success fw-light text-xs"
+                    (click)="addWeb_links()"
+                  >
+                    اضافة حقول جديدة
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <ul formArrayName="web_links">
+                <li
+                  *ngFor="let item of web_links.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                      <input
+                        type="text"
+                        class="form-control mx-2 my-2"
+                        placeholder="فيسبوك / انستنا / اسم المنصة"
+                        formControlName="name"
+                      />
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6">
+                      <input
+                        type="text"
+                        class="form-control mx-2 my-2"
+                        placeholder="الرابط"
+                        formControlName="link"
+                      />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p>صورة المطعم</p>
+              <div class="">
+                <div class="">
+                  <button
+                    mat-stroked-button
+                    type="button"
+                    (click)="filePicker.click()"
+                  >
+                    حمل صورة
+                  </button>
+                  <input
+                    type="file"
+                    (change)="OnImagePicked($event)"
+                    [hidden]="true"
+                    #filePicker
+                  />
+                </div>
+                <div
+                  class="image-preview"
+                  *ngIf="
+                    imagePreview !== '' &&
+                    imagePreview &&
+                    EditRestaurant.get('image').valid
+                  "
+                >
+                  <img
+                    [src]="imagePreview"
+                    width="200px"
+                    height="200px"
+                    alt="img-upload"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
       </form>
     </div>
-
   </div>
-
-
 </div>
 <div mat-dialog-actions>
   <!-- [mat-dialog-close]="true" -->
-  <button mat-button
-          class=" btn-danger"
-          (click)="onNoClick()">اغلاق</button>
-  <!-- <button mat-button  cdkFocusInitial (click)="sendActiveAccount(data.statusAccount,data.id)" class="btn-success">موافق</button> -->
+  <button mat-button class="btn-danger" (click)="onNoClick()">اغلاق</button>
+  <button
+(click)="EditSubmitRestaurant()"
+    mat-button
+    class="btn-success px-2"
+    form="EditRestaurantForm"
+  >
+    موافق
+  </button>
+  <!-- [disabled]="!documentEditForm.form.valid" -->
 </div>

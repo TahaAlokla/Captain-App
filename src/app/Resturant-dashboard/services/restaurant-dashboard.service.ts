@@ -7,18 +7,18 @@ const { baseUrl } = environment;
 
 @Injectable()
 export class RestaurantDashboardService {
-private readonly restaurantsDetail=`${baseUrl}/api/restaurants/detail`
-private readonly restaurantsEdit=`${baseUrl}/api/restaurants/edit`
-  constructor(private http:HttpClient) {
-   }
+  private readonly restaurantsDetail = `${baseUrl}/api/restaurants/detail`
+  private readonly restaurantsEdit = `${baseUrl}/api/restaurants/edit`
+  constructor(private http: HttpClient) {
+  }
 
-   postRestaurantsEdit(formData:any):Observable<any>{
-    return this.http.post(this.restaurantsEdit,formData)
-   }
+  postRestaurantsEdit(formData: FormData): Observable<any> {
+    return this.http.put(this.restaurantsEdit, formData)
+  }
 
-   postRestaurantsDetail(id:string):Observable<any>{
-    return this.http.post(this.restaurantsDetail,{id:id})
-   }
+  postRestaurantsDetail(id: string): Observable<any> {
+    return this.http.post(this.restaurantsDetail, { id: id })
+  }
 
 
 }
