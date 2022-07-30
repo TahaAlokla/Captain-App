@@ -1,0 +1,80 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { RestaurantDashboardService } from '../../services/restaurant-dashboard.service';
+
+@Component({
+  selector: 'app-dialog-info-resto',
+  templateUrl: './dialog-info-resto.component.html',
+  styleUrls: ['./dialog-info-resto.component.scss'],
+})
+export class DialogInfoRestoComponent implements OnInit {
+  restaurantInfoData: any;
+  constructor(
+    private RestaurantService: RestaurantDashboardService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    public dialogRef: MatDialogRef<any>,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+  ) {}
+
+  loadRestInfo() {
+    this.EditRestaurant.patchValue({
+      address:this.restaurantInfoData.address,
+      workingStart:this.restaurantInfoData.workingStart,
+      workingEnd:this.restaurantInfoData.workingEnd
+     })
+  }
+  EditSubmitRestaurant() {}
+  ngOnInit(): void {
+    this.RestaurantService.postRestaurantsDetail(this.data.id).subscribe({
+      next: (data) => {
+        this.restaurantInfoData = data.restaurant;
+        //  console.log(this.restaurantInfoData.address);
+        this.loadRestInfo()
+        console.log(this.restaurantInfoData);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  EditRestaurant = this.fb.group({
+    address: ['', Validators.required],
+    workingStart: [''],
+    workingEnd: [''],
+    phone_contact: this.fb.array([{
+      name:[''],
+      number:['', [Validators.required, Validators.pattern(/^[+]*[0-9]{7,15}[-\s\./0-9]*$/)]]
+    }]),
+    image: [],
+    web_links: this.fb.array([]),
+
+  });
+
+  get phone_contact(){
+    return this.EditRestaurant.get('phone_contact') as FormArray
+
+  }
+
+  addPhone_contact(){
+    this.phone_contact.push({
+      name:[''],
+      number:['', [Validators.required, Validators.pattern(/^[+]*[0-9]{7,15}[-\s\./0-9]*$/)]]
+    })
+  }
+
+  getError(controlName: string) {
+    return (
+      this.EditRestaurant.get(controlName)?.invalid &&
+      (this.EditRestaurant.get(controlName)?.touched ||
+        this.EditRestaurant.get(controlName)?.dirty)
+    );
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}

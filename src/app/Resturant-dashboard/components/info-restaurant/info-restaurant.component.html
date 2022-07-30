@@ -4,8 +4,7 @@
       <mat-card class="w-100">
         <div class="row my-2">
           <p class="lead fw-bold primary-color">معلومات المطعم</p>
-          <small class="py-2 color-orange"
-            >أذا كان هناك معلومات لم تكملها نوصيك بأتمامها
+          <small class="py-2 color-orange">أذا كان هناك معلومات لم تكملها نوصيك بأتمامها
           </small>
           <mat-divider></mat-divider>
         </div>
@@ -20,67 +19,104 @@
             <p>
               تاريخ انتهاء صلاحية اشتراكك :
               <span class="fw-bold">
-                {{ restaurantInfoData.expiration_date | date: "short" }}</span
-              >
+                {{ restaurantInfoData.expiration_date | date: "short" }}</span>
             </p>
           </div>
           <!-- phone -->
           <div class="col col-sm-12 col-md-6 col-lg-6">
             <p>
-                رقم التواصل معنا :
+              رقم التواصل معنا :
               <span class="fw-bold">
-                {{ restaurantInfoData.phone}}</span
-              >
+                {{ restaurantInfoData.phone}}</span>
             </p>
           </div>
           <mat-divider class="my-2"></mat-divider>
         </div>
         <div class="row">
-          <div class="col-12 my-2 color-orange">المعلومات القابلة للتعديل والتي تظهر ايضاً في صفحتك العامة
+          <div class="col-12 my-2 color-orange  fw-bold">المعلومات القابلة للتعديل والتي تظهر ايضاً في صفحتك العامة
 
-            <button class="btn btn-outline-primary d-block my-2">تعديل المعلومات</button></div>
+            <button class="btn btn-outline-primary d-block my-2" (click)="editRestaurantInfo(this.restaurantInfoData._id)">تعديل المعلومات</button>
+          </div>
 
-          <form action="" [formGroup]="EditRestaurant" (ngSubmit)="EditSubmitRestaurant()">
+
             <div class="row">
               <div class="col col-sm-12 col-md-12">
-                <label for="" class="my-1">عنوان المطعم</label>
+                <label for=""
+                       class="my-1">عنوان المطعم : {{this.restaurantInfoData.address}}</label>
+                       <br>
+
                 <small>ننصح بتعديله وكتابة عنوان تفصلي يساعد بالعثور عليك</small>
-                <textarea type="text"
+                <!-- <textarea type="text"
                 formControlName="address"
                 [class.is-invalid]="getError('address')"
-                class=" form-control" ></textarea>
+                class=" form-control" ></textarea> -->
               </div>
               <!-- workingStart -->
               <div class="col col-sm-12 col-md-4 my-2">
-                <label for="" class="my-1">وقت بداء الدوام</label>
+                <p for=""
+                   class="my-1">وقت بداء الدوام</p>
+                <div *ngIf="!restaurantInfoData.workingStart;else other_content">
+                  <small class=" color-orange d-block">لم تحدد وقت بدء الدوام بعد</small>
+                </div>
+                <ng-template #other_content>{{restaurantInfoData.workingStart}}</ng-template>
 
-
-                <small class=" color-orange d-block" *ngIf="!restaurantInfoData.workingStart">لم تحدد وقت بدء الدوام  بعد</small>
-                <input type="time"
-                formControlName="workingStart"
-                [class.is-invalid]="getError('workingStart')"
-                class=" form-control" >
+                <!-- <input type="time"
+                       formControlName="workingStart"
+                       [class.is-invalid]="getError('workingStart')"
+                       class=" form-control"> -->
               </div>
               <div class="col col-sm-12 col-md-4 my-2">
-                <label for="" class="my-1">وقت نهاية الدوام</label>
-                <small class=" color-orange d-block" *ngIf="!restaurantInfoData.workingEnd">لم تحدد وقت نهاية الدوام  بعد</small>
-                <input type="time"
-                formControlName="workingEnd"
-                [class.is-invalid]="getError('workingEnd')"
-                class=" form-control" >
+                <p for=""
+                       class="my-1">وقت نهاية الدوام</p>
+                       <div *ngIf="!restaurantInfoData.workingEnd;else other_end_time">
+                        <small class=" color-orange d-block"
+                        >لم تحدد وقت نهاية الدوام بعد</small>
+
+                       </div>
+                       <ng-template #other_end_time>{{restaurantInfoData.workingStart}}</ng-template>
+
+                <!-- <input type="time"
+                       formControlName="workingEnd"
+                       [class.is-invalid]="getError('workingEnd')"
+                       class=" form-control"> -->
               </div>
+              <!--  -->
+
 
             </div>
             <mat-divider class="my-2"></mat-divider>
             <div class="row">
               <div class="col-12">
                 <p class="">صورة المطعم , بالطبع هذه الصورة تظهر في صفحتك العامة </p>
-                <small class=" color-orange d-block" *ngIf="!restaurantInfoData.avatar">لا توجد صورة رفوعة لمطعمك منشورة حتى الان </small>
+                <small class=" color-orange d-block"
+                       *ngIf="!restaurantInfoData.avatar">لا توجد صورة رفوعة لمطعمك منشورة حتى الان </small>
 
+              </div>
+              <div class="col col-sm-12 col-md-6 my-2">
+                <p for=""
+                       class="my-1">أرقام التواصل المتاحة للزبائن</p>
+                       <div *ngIf="restaurantInfoData.phone_contact.length<1;else other_end_time">
+                        <small class=" color-orange d-block"
+                        >لم تقوم بعد بوضع أي ارقام تواصل خاصة بك</small>
+
+                       </div>
+                       <ng-template #other_end_time>{{restaurantInfoData.phone_contact|json}}</ng-template>
+
+
+              </div>
+              <div class="col col-sm-12 col-md-6 my-2">
+                <p for=""
+                       class="my-1">صفحات التواصل الخاصة بك مثل فيبسوك وانسغرام وغيرها </p>
+                       <div *ngIf="restaurantInfoData.web_links.length<1;else other_end_links">
+                        <small class=" color-orange d-block"
+                        >لم تقوم بعد بوضع أي ارقام تواصل خاصة بك</small>
+
+                       </div>
+                       <ng-template #other_end_links>{{restaurantInfoData.web_links|json}}</ng-template>
               </div>
             </div>
 
-          </form>
+
 
         </div>
       </mat-card>

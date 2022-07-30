@@ -8,6 +8,7 @@ import { RestaurantDashboardService } from './services/restaurant-dashboard.serv
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
+import { DialogInfoRestoComponent } from './components/dialog-info-resto/dialog-info-resto.component';
 
 const service=[
   RestaurantDashboardService
@@ -15,7 +16,8 @@ const service=[
 @NgModule({
   declarations: [
     BoardAdminComponent,
-    InfoRestaurantComponent
+    InfoRestaurantComponent,
+    DialogInfoRestoComponent
   ],
   imports: [
     CommonModule,

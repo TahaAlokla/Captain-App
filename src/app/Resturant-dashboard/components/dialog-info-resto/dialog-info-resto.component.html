@@ -1,0 +1,52 @@
+<h1 class="fw-bold text-center primary-color my-3">تعديل معلومات المطعم</h1>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+
+  <div class="text-end">
+    <div class="row">
+      <form action=""
+            [formGroup]="EditRestaurant"
+            (ngSubmit)="EditSubmitRestaurant()">
+        <div class="row my-3 mx-2">
+          <div class="col-12">
+            <label for=""
+                   class="form-label">عنوان المطعم</label>
+            <input type="text"
+                   class=" form-control"
+                   formControlName="address"
+                   placeholder="عنوان المطعم بالتفصيل"
+                   [class.is-invalid]="getError('address')">
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label">وقت بدء الدوام</label>
+            <input type="time"
+                   class=" form-control"
+                   formControlName="workingStart"
+                   placeholder="وقت بدء الدوام"
+                   [class.is-invalid]="getError('workingStart')">
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label">وقت نهاية الدوام</label>
+            <input type="time"
+                   class=" form-control"
+                   formControlName="workingEnd"
+                   [class.is-invalid]="getError('workingEnd')">
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class=" btn-danger"
+          (click)="onNoClick()">اغلاق</button>
+  <!-- <button mat-button  cdkFocusInitial (click)="sendActiveAccount(data.statusAccount,data.id)" class="btn-success">موافق</button> -->
+</div>
