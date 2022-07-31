@@ -1,5 +1,5 @@
 <div class="mx-0 my-0 py-0 px-0 container-section">
-  <!-- <app-navbar class="header-section"></app-navbar> -->
+  <app-navbar class="header-section" *ngIf="!hidingNavbarVisitHomeRest"></app-navbar>
   <router-outlet class="mx-0 px-0 main-section"></router-outlet>
   <app-footer-home class=" mx-0 px-0 footer-section"></app-footer-home>
 </div>

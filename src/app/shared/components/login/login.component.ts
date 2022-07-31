@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
           this.TokenStorageService.saveToken(data.token)
           this.TokenStorageService.saveAdmin(data.admin)
           this.RegistrationUsers.isAdmin$.next(true)
+          this.RegistrationUsers.isLogin$.next(true)
           this.loginUser.reset()
           this.router.navigate(['captain-service'])
         },
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
         this.TokenStorageService.saveToken(data.token)
         this.TokenStorageService.saveUser(data.restaurant)
         this.RegistrationUsers.isRestaurantAdmin$.next(true)
+        this.RegistrationUsers.isLogin$.next(true)
         this.loginUser.reset()
         this.router.navigate(['restaurant-dashboard'])
         },

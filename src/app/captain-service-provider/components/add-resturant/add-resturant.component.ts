@@ -65,7 +65,7 @@ export class AddResturantComponent implements OnInit {
           console.log(data);
         }, error: (err) => {
           console.log(err);
-          this.toastr.error(err.error, "هناك خطاء ما في التسجل", {
+          this.toastr.error(err.error.msg, "هناك خطاء ما في التسجل", {
             timeOut: 3000,
           })
           console.log(err);

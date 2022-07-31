@@ -1,5 +1,6 @@
+import { map } from 'rxjs';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { RestaurantDashboardService } from '../../services/restaurant-dashboard.service';
@@ -18,13 +19,21 @@ export class DialogInfoRestoComponent implements OnInit {
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: { id: string }
-  ) {}
+  ) { }
 
   loadRestInfo() {
     this.EditRestaurant.patchValue({
       address: this.restaurantInfoData.address,
       workingStart: this.restaurantInfoData.workingStart,
       workingEnd: this.restaurantInfoData.workingEnd,
+      phone_contact: this.restaurantInfoData.phone_contact.map((obj, index) => {
+        this.addPhone_contact(obj.name, obj.number, index)
+        console.log("map index ", index);
+      }),
+      web_links: this.restaurantInfoData.web_links.map((obj, index) => {
+        this.addWeb_links(obj.name, obj.link, index)
+      }),
+
     });
   }
 
@@ -48,7 +57,7 @@ export class DialogInfoRestoComponent implements OnInit {
     workingEnd: [''],
     phone_contact: this.fb.array([
       this.fb.group({
-        name: [''],
+        name: ['', [Validators.required,]],
         number: [
           '',
           [
@@ -61,8 +70,8 @@ export class DialogInfoRestoComponent implements OnInit {
     image: [],
     web_links: this.fb.array([
       this.fb.group({
-        name: [''],
-        link: [''],
+        name: ['',[ Validators.required,]],
+        link: ['',[ Validators.required,]],
       }),
     ]),
   });
@@ -73,13 +82,27 @@ export class DialogInfoRestoComponent implements OnInit {
   get web_links() {
     return this.EditRestaurant.get('web_links') as FormArray;
   }
-  addWeb_links() {
-    this.web_links.push(
-      this.fb.group({
-        name: [''],
-        link: [''],
-      })
-    );
+  addWeb_links(name?: string, link?: string, index?: number) {
+    if (name && link && index === 0) {
+      this.web_links.setValue([{ name: name, link: link }])
+      // this.addWeb_links.
+    } else if (name && link && index !== 0) {
+      // this.web_links
+      this.web_links.push(
+        this.fb.group({
+          name: [name],
+          link: [link],
+        })
+      );
+    } else {
+      this.web_links.push(
+        this.fb.group({
+          name: [''],
+          link: [''],
+        })
+      );
+    }
+
   }
 
   OnImagePicked(event: Event) {
@@ -93,21 +116,39 @@ export class DialogInfoRestoComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  addPhone_contact() {
+  addPhone_contact(name?: string, number?: string, index?: number) {
     console.log('add group ');
-
-    this.phone_contact.push(
-      this.fb.group({
-        name: [''],
-        number: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^[+]*[0-9]{7,15}[-\s\./0-9]*$/),
+    if (name && number && index === 0) {
+      this.phone_contact.patchValue([{ name: name, number: number }])
+    } else if (name && number && index !== 0) {
+      this.phone_contact.push(
+        this.fb.group({
+          name: [name],
+          number: [
+            number,
+            [
+              Validators.required,
+              Validators.pattern(/^[+]*[0-9]{7,15}[-\s\./0-9]*$/),
+            ],
           ],
-        ],
-      })
-    );
+        })
+      );
+    }
+    else {
+      this.phone_contact.push(
+        this.fb.group({
+          name: [''],
+          number: [
+            '',
+            [
+              Validators.required,
+              Validators.pattern(/^[+]*[0-9]{7,15}[-\s\./0-9]*$/),
+            ],
+          ],
+        })
+      );
+    }
+
     console.log(this.phone_contact.length);
   }
 
@@ -118,10 +159,24 @@ export class DialogInfoRestoComponent implements OnInit {
         this.EditRestaurant.get(controlName)?.dirty)
     );
   }
+  getErrorNestingControlPhone_contact(controlName: string, i: number) {
+    let group = this.phone_contact.at(i) as FormGroup
+    return (
+      group.get(controlName)?.invalid && (group.get(controlName)?.touched ||
+        group.get(controlName)?.dirty)
+    )
+  }
+  getErrorNestingControlWeb_links(controlName: string, i: number) {
+    let group = this.web_links.at(i) as FormGroup
+    return (
+      group.get(controlName)?.invalid && (group.get(controlName)?.touched ||
+        group.get(controlName)?.dirty)
+    )
+  }
 
   EditSubmitRestaurant() {
     let RestaurantData = new FormData();
-    RestaurantData.append('id', this.data.id) ;
+    RestaurantData.append('id', this.data.id);
     RestaurantData.append('address', this.EditRestaurant.value.address);
     RestaurantData.append(
       'workingStart',
@@ -131,19 +186,19 @@ export class DialogInfoRestoComponent implements OnInit {
 
     RestaurantData.append('image', this.EditRestaurant.value.image);
     for (let i = 0; i < this.EditRestaurant.value.web_links.length; i++) {
-      console.log(this.EditRestaurant.value.web_links[i].link);
+      console.log(this.EditRestaurant.value.web_links[i]?.link);
       RestaurantData.append(
         `web_links[${i}][name]`,
-        this.EditRestaurant.value.web_links[i].name
+        this.EditRestaurant.value.web_links[i]?.name
       );
       RestaurantData.append(
         `web_links[${i}][link]`,
-        this.EditRestaurant.value.web_links[i].link
+        this.EditRestaurant.value.web_links[i]?.link
       );
     }
     for (let i = 0; i < this.EditRestaurant.value.phone_contact.length; i++) {
-      console.log(this.EditRestaurant.value.phone_contact[i].name);
-      console.log(this.EditRestaurant.value.phone_contact[i].number);
+      console.log(this.EditRestaurant.value.phone_contact[i]?.name);
+      console.log(this.EditRestaurant.value.phone_contact[i]?.number);
       RestaurantData.append(
         `phone_contact[${i}][name]`,
         this.EditRestaurant.value.phone_contact[i].name
@@ -154,10 +209,13 @@ export class DialogInfoRestoComponent implements OnInit {
       );
     }
     this.RestaurantService.postRestaurantsEdit(RestaurantData).subscribe({
-      next:(data)=>{
+      next: (data) => {
         console.log(data);
-      },error:(err)=>{
+        this.toastr.success("تم التعدل بنجاح")
+        this.dialogRef.close();
+      }, error: (err) => {
         console.log(err);
+        this.toastr.error("هناك خطاء ما ")
       }
     })
   }

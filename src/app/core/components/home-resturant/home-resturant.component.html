@@ -48,9 +48,9 @@
           <div class="row">
             <div class="col-12 col-sm-12 col-md-md-6">
               <p class="lead primary-color font-medium">أوقات عمل المطعم
-                <span class="color-orange">{{infoRestaurant$?.workingStart}} </span>
+                <span class="color-orange">{{infoRestaurant$?.workingStart|convertTime12Hours}} </span>
                 <span>حتى </span>
-                <span class="color-orange">{{infoRestaurant$?.workingEnd}}</span>
+                <span class="color-orange">{{infoRestaurant$?.workingEnd|convertTime12Hours}}</span>
               </p>
             </div>
             <div class="col-12 col-sm-12 col-md-md-6">

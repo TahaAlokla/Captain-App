@@ -10,6 +10,11 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 export class RegistrationUsersService {
   public isAdmin$ = new BehaviorSubject(false)
   public isRestaurantAdmin$ =new BehaviorSubject(false)
+  public VisitRestHome =new BehaviorSubject(false)
+  public isLogin$ =new BehaviorSubject(false)
+  /* 31/7/2022 -9 pm
+  Taha Alokla
+  */
 
   private readonly loginAdmin:string='/api/admins/login'
   private readonly loginRestaurant:string=`${baseUrl}/api/restaurants/login`

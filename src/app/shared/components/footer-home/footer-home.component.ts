@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
@@ -8,8 +9,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class FooterHomeComponent implements OnInit {
   visibilityBtn:boolean = false
 
-  constructor() { }
-
+  constructor(private router:Router) { }
+  goToHome(){
+    this.router.navigate(['/'])
+  }
   ngOnInit(): void {
   }
 

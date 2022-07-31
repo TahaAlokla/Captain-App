@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { DialogInfoRestoComponent } from './components/dialog-info-resto/dialog-info-resto.component';
+import { Time12hoursPipe } from './pipes/time12hours.pipe';
 
 const service=[
   RestaurantDashboardService
@@ -17,7 +18,8 @@ const service=[
   declarations: [
     BoardAdminComponent,
     InfoRestaurantComponent,
-    DialogInfoRestoComponent
+    DialogInfoRestoComponent,
+    Time12hoursPipe
   ],
   imports: [
     CommonModule,

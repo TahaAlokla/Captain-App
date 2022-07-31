@@ -64,7 +64,7 @@
            <!--  -->
        <td mat-cell
            *matCellDef="let element">
-           {{element.createdAt |date: 'dd/MM/yyyy'}}
+           {{element.updatedAt |date: 'dd/MM/yyyy'}}
           </td>
      </ng-container>
      <!-- expiration_date -->
@@ -76,8 +76,8 @@
           *matCellDef="let element"> {{element.expiration_date |date: 'dd/MM/yyyy'}}
           <br>
           <!-- element.createdAt -->
-          <span>{{element.createdAt}}</span>
-          <span class=" day-label">{{moment.duration(moment(element.expiration_date, "YYYY-MM-DD").diff(moment(element.createdAt, "YYYY-MM-DD"))).asDays()}}
+
+          <span class=" day-label">{{moment.duration(moment(element.expiration_date, "YYYY-MM-DD").diff(moment(element.updatedAt, "YYYY-MM-DD"))).asDays()}}
             <span class=" day-label"> يوم متبقي</span>
           </span>
          </td>

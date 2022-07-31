@@ -14,7 +14,6 @@
         enctype="multipart/form-data"
         [formGroup]="EditRestaurant"
         id="EditRestaurantForm"
-        (ngSubmit)="EditSubmitRestaurant()"
       >
         <div class="row my-3 mx-2">
           <div class="col-12">
@@ -76,7 +75,9 @@
                         class="form-control mx-2 my-2"
                         placeholder="موبايل/ هاتف "
                         formControlName="name"
+                        [class.is-invalid]="getErrorNestingControlPhone_contact('name',i)"
                       />
+                      <mat-error class=" text-xs" *ngIf="getErrorNestingControlPhone_contact('name',i)">هذا الحقل مطلوب</mat-error>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6">
                       <input
@@ -84,7 +85,9 @@
                         class="form-control mx-2 my-2"
                         placeholder="رقم الهاتف"
                         formControlName="number"
+                        [class.is-invalid]="getErrorNestingControlPhone_contact('number',i)"
                       />
+                      <mat-error class=" text-xs" *ngIf="getErrorNestingControlPhone_contact('number',i)">هذا الحقل مطلوب</mat-error>
                     </div>
                   </div>
                 </li>
@@ -120,7 +123,9 @@
                         class="form-control mx-2 my-2"
                         placeholder="فيسبوك / انستنا / اسم المنصة"
                         formControlName="name"
+                        [class.is-invalid]="getErrorNestingControlWeb_links('name',i)"
                       />
+                      <mat-error class=" text-xs" *ngIf="getErrorNestingControlWeb_links('name',i)">هذا الحقل مطلوب</mat-error>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6">
                       <input
@@ -128,7 +133,9 @@
                         class="form-control mx-2 my-2"
                         placeholder="الرابط"
                         formControlName="link"
+                        [class.is-invalid]="getErrorNestingControlWeb_links('link',i)"
                       />
+                      <mat-error class=" text-xs" *ngIf="getErrorNestingControlWeb_links('link',i)">هذا الحقل مطلوب</mat-error>
                     </div>
                   </div>
                 </li>

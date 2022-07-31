@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '', component: HomeComponent
     , children: [
       {
-        path: 'add-Rest', component: AddResturantComponent
+        path: '', component: AddResturantComponent
       },
       {
         path:'subscribe-rest',component:SubscribeResturantComponent

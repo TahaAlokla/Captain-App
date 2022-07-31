@@ -33,6 +33,7 @@ import { HomeResturantComponent } from './core/components/home-resturant/home-re
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ConvertTime12HoursPipe } from './shared/pipes/convert-time12-hours.pipe';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,6 +70,7 @@ const services=[
     FooterHomeComponent,
     LoginComponent,
     HomeResturantComponent,
+    ConvertTime12HoursPipe,
 
   ],
   imports: [

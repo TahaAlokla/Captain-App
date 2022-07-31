@@ -1,3 +1,4 @@
+import { RegistrationUsersService } from './../../../shared/services/registration-users.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private RegistrationUsersService:RegistrationUsersService) { }
 
   ngOnInit(): void {
+    this.RegistrationUsersService.VisitRestHome.next(true)
+  }
+  ngOnDestroy(): void {
+    this.RegistrationUsersService.VisitRestHome.next(false)
   }
 
 }

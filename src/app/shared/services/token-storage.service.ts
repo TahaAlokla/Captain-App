@@ -1,3 +1,4 @@
+import { Route } from '@angular/router';
 import { Injectable } from '@angular/core';
 const TOKEN_KEY = 'X-Access-Token';
 const Admin_KEY="auth-admin"
@@ -37,8 +38,6 @@ export class TokenStorageService {
   }
 
   public saveAdmin(Admin: any): void {
-
-
     window.localStorage.removeItem(Admin_KEY);
     window.localStorage.setItem(Admin_KEY, JSON.stringify(Admin));
   }

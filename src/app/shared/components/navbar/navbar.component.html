@@ -1,6 +1,6 @@
 <ng-container *ngIf="true">
-  <nav class="navbar navbar-expand-lg sticky-top p-0 m-0 fiexed-navbar-top mx-0">
-    <div class="container d-flex   flex-row flex-md-row  justify-content-between">
+  <nav class="navbar navbar-expand-lg sticky-top p-0 px-4 m-0 fiexed-navbar-top mx-0">
+    <div class="container d-flex  mx-4 flex-row flex-md-row  justify-content-between">
       <div class="">
         <a class="brand-name"
            routerLink="/home"
@@ -40,12 +40,21 @@
             </ul>
           </div>
 
-          <div class="">
-            <a href=""
+          <div class="" *ngIf="!isLogin">
+            <a
                class="btn main-btn rounded-pill"
                mat-button
                [routerLink]="'login'"
                routerLinkActive="activeLink">تسجيل الدخول </a>
+
+          </div>
+          <div class="" *ngIf="isLogin">
+            <a
+               class="btn main-btn rounded-pill"
+               mat-button
+               (click)="logout()"
+               >تسجيل خروج </a>
+
           </div>
         </div>
       </div>
