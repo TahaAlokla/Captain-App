@@ -1,0 +1,144 @@
+<h1 class="fw-bold text-center primary-color my-3 fs-4">إضافة ويتر جديد</h1>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+  <div class="text-start">
+    <!-- {{EditRestaurant.value|json}} -->
+  </div>
+
+  <div class="text-end">
+    <div class="row">
+      <form #documentEditForm="ngForm"
+            action=""
+            [formGroup]="registerWaiter"
+            id="EditRestaurantForm">
+        <div class="row my-3 mx-2">
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">اسم الموظف
+                   <span
+                   class="px-1 text-xs text-danger fw-lighter"
+                   *ngIf="getError('name')">
+               <span class="text-xs"
+                     *ngIf="registerWaiter.get('name')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+             </span>
+                  </label>
+            <input type="text"
+                   class="form-control text-sm"
+                   formControlName="name"
+                   placeholder="اسم الموظف بالعربية"
+                   [class.is-invalid]="getError('name')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">اسم الموظف بالحساب
+                   <span
+                   class="px-1 text-xs text-danger fw-lighter"
+                   *ngIf="getError('username')">
+               <span class="text-xs"
+                     *ngIf="registerWaiter.get('username')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+             </span>
+            </label>
+            <input type="text"
+                   class="form-control text-sm"
+                   formControlName="username"
+                   placeholder="هذا الاسم يقوم الموظف باستخدامة لتسجيل الدخول لحسابه"
+                   [class.is-invalid]="getError('username')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">ايميل الموظف
+                   <span
+                    class="px-1 text-xs text-danger fw-lighter"
+                    *ngIf="getError('email')">
+                <span class="text-xs"
+                      *ngIf="registerWaiter.get('email')?.errors?.['required']">هذا الحقل مطلوب</span>
+                <span class="text-xs"
+                      *ngIf="registerWaiter.get('email')?.errors?.['email']">صيغة ايميل غير صالحة</span>
+              </span>
+            </label>
+            <input type="email"
+                   class="form-control text-sm"
+                   formControlName="email"
+                   placeholder="ايميل الموظف"
+                   [class.is-invalid]="getError('email')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">عنوان الموظف
+              <span class="px-1 text-xs text-danger fw-lighter"
+                    *ngIf="getError('address')">
+                <span class="text-xs"
+                      *ngIf="registerWaiter.get('address')?.errors?.['required']">هذا الحقل مطلوب</span>
+              </span></label>
+            <input type="text"
+                   class="form-control text-sm"
+                   formControlName="address"
+                   placeholder="عنوان الموظف"
+                   [class.is-invalid]="getError('address')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">رقم هاتف الموظف
+              <span class="px-1 text-xs text-danger fw-lighter"
+                    *ngIf="getError('phone')">
+                <span class="text-xs"
+                      *ngIf="registerWaiter.get('phone')?.errors?.['required']">هذا الحقل مطلوب</span>
+                <span class="text-xs"
+                      *ngIf="registerWaiter.get('phone')?.errors?.['pattern']">
+                  صيغة رقم الهاتف غير صالحة</span>
+              </span></label>
+
+            <input type="text"
+                   class="form-control text-sm"
+                   formControlName="phone"
+                   placeholder="رقم هاتف الموظف"
+                   [class.is-invalid]="getError('phone')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 my-2 password-filed">
+            <label for=""
+                   class="form-label fw-bold primary-color">باسوورد الموظف
+                   <span
+                   class="px-1 text-xs text-danger fw-lighter"
+                   *ngIf="getError('password')">
+               <span class="text-xs"
+                     *ngIf="registerWaiter.get('password')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+             </span>
+                  </label>
+
+            <input [type]="hide ? 'password' : 'text'"
+                   placeholder="كلمة المرور"
+                   class="form-control w-100 text-sm"
+                   formControlName="password"
+                   [class.is-invalid]="getError('password')" />
+            <button class="eye"
+                    mat-icon-button
+                    matSuffix
+                    (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class="btn-danger"
+          (click)="onNoClick()">اغلاق</button>
+  <button (click)="registerWaiterSubmit()"
+          mat-button
+          class="btn-success px-4 text-white"
+          form="EditRestaurantForm"
+          [disabled]="!documentEditForm.form.valid">
+    موافق
+  </button>
+  <!-- [disabled]="!documentEditForm.form.valid" -->
+</div>
