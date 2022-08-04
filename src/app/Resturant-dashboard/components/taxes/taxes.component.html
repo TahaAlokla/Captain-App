@@ -1,1 +1,155 @@
-<p>taxes works!</p>
+<div class="container-fluid px-4 py-4">
+  <div class="row">
+    <div class="col-12">
+      <p class=" fw-bold primary-color lead">إدارة الضرائب</p>
+    </div>
+    <div class="col-6 my-2">
+      <button class="btn text-white bg-blue-800 py-1 px-3 btn-style" mat-button
+              (click)="addTaxes('addTax')">
+              <span>إضافة ضريبة</span>
+      </button>
+    </div>
+
+  </div>
+  <mat-divider class="my-1"></mat-divider>
+
+</div>
+<div class="container py-2 mt-0">
+  <div class="row">
+    <mat-card class="shadow">
+      <div class="col-12">
+        <p class="primary-color fw-bold lead my-4 mx-2">قائمة الضرائب الموجودة</p>
+      </div>
+
+      <div class="col-12">
+
+        <input
+          type="text"
+          class="form-control w-75 my-2 mx-auto"
+          (keyup)="applyFilter($event)"
+          placeholder="ابحث"
+          #input
+        />
+        <!--mat-elevation-z8  -->
+        <div class="table-box-conatiner w-75 mx-auto">
+          <table
+            mat-table
+            matSort
+            [dataSource]="dataSource"
+            class="w-100 text-center"
+          >
+            <ng-container matColumnDef="_id">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+                mat-sort-header
+                sortActionDescription="Sort by number"
+              >
+                No.
+              </th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{
+                  this.paginator.pageIndex == 0
+                    ? i + 1
+                    : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+                }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                اسم الضريبة
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                <span>نوع الضريبة</span>
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element?.type }}</td>
+            </ng-container>
+            <ng-container matColumnDef="value">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                <span>قيمة الضريبة</span>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element?.type==='متغيرة';else otherType">
+                  {{ element?.value *100}}%
+                </span>
+                <ng-template #otherType>
+                  {{ element?.value }}
+                </ng-template>
+
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                <span>تعديل</span>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <button  (click)="addTaxes('editTax',element)"
+                class="btn bg-teal-900 text-white text-xs m-1" mat-icon-button>
+                  <mat-icon>
+                    <span class="material-symbols-outlined">
+                      edit_document
+                      </span>
+                  </mat-icon>
+                 
+                </button>
+                <button class="btn btn-sm m-1 bg-red-900 text-white" mat-icon-button (click)="deleteTax(element._id)">
+                  <mat-icon  class=" ">
+                    <span class="material-symbols-outlined  ">
+                      delete
+                      </span>
+                  </mat-icon>
+                 
+                </button>
+              </td>
+
+            </ng-container>
+
+            <tr
+              class="bg-primary-color"
+              mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"
+            ></tr>
+            <tr
+              mat-row
+              class=""
+              *matRowDef="let row; columns: displayedColumns"
+            ></tr>
+            <!-- ************** -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                لا يوجد بيانات لعرضها "{{ input.value }}"
+              </td>
+            </tr>
+          </table>
+          <mat-paginator
+            class="mat-paginator-sticky d-flex"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page of users"
+          ></mat-paginator>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

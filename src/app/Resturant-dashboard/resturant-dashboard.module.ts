@@ -19,6 +19,8 @@ import { RestaurantBillsComponent } from './components/restaurant-bills/restaura
 import { AddKitchenComponent } from './components/add-kitchen/add-kitchen.component';
 import { TableInputAddComponent } from './components/table-input-add/table-input-add.component';
 import { TaxesComponent } from './components/taxes/taxes.component';
+import { AddTaxComponent } from './components/add-tax/add-tax.component';
+import { AddMealComponent } from './components/add-meal/add-meal.component';
 
 const service=[
   RestaurantDashboardService
@@ -37,7 +39,9 @@ const service=[
     RestaurantBillsComponent,
     AddKitchenComponent,
     TableInputAddComponent,
-    TaxesComponent
+    TaxesComponent,
+    AddTaxComponent,
+    AddMealComponent
   ],
   imports: [
     CommonModule,

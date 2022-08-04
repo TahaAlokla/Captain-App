@@ -22,7 +22,7 @@ export class RestaurantDashboardService {
   }
 
 
-// * done
+  // * done
   postRestaurantsEdit(formData: FormData): Observable<any> {
     return this.http.put(this.restaurantsEdit, formData)
   }
@@ -34,37 +34,37 @@ export class RestaurantDashboardService {
     let apiEditCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/${idCategory}/edit`
     return this.http.put(apiEditCategory, { name: nameCategory })
   }
-// * done
-  postAddKitchen(kitchenData:any,restId:string):Observable<any>{
-    let ApiAddKitchen=`${baseUrl}/api/restaurants/${restId}/kitchen/edit`
-    return this.http.put(ApiAddKitchen,kitchenData)
+  // * done
+  postAddKitchen(kitchenData: any, restId: string): Observable<any> {
+    let ApiAddKitchen = `${baseUrl}/api/restaurants/${restId}/kitchen/edit`
+    return this.http.put(ApiAddKitchen, kitchenData)
   }
 
   getListCategory(): Observable<any> {
     return this.http.get(this.listCategory)
   }
 
-// * done
+  // * done
   postCreateWaiter(WaiterRegisterData: any, idRest: string): Observable<any> {
     console.log("idRest", idRest);
-    console.log("this.IdRest",this.IdRest);
+    console.log("this.IdRest", this.IdRest);
     let createWaiterApi = `${baseUrl}/api/restaurants/${idRest}/staff/create`
-    return this.http.post(createWaiterApi,  WaiterRegisterData )
+    return this.http.post(createWaiterApi, WaiterRegisterData)
 
   }
   // * done
-  getListAllEmployers():Observable<any>{
+  getListAllEmployers(): Observable<any> {
 
-  let apiListEmployees=`${baseUrl}/api/restaurants/${this.IdRest}/staff/allEmployers`
-  return this.http.get(apiListEmployees)
+    let apiListEmployees = `${baseUrl}/api/restaurants/${this.IdRest}/staff/allEmployers`
+    return this.http.get(apiListEmployees)
   }
   //* done
-  staffDelete(idStaff:string):Observable<any>{
-    let apiStaffDelete=`${baseUrl}/api/restaurants/${this.IdRest}/staff/delete`
-    return this.http.delete(apiStaffDelete, {body:{id:idStaff}})
+  staffDelete(idStaff: string): Observable<any> {
+    let apiStaffDelete = `${baseUrl}/api/restaurants/${this.IdRest}/staff/delete`
+    return this.http.delete(apiStaffDelete, { body: { id: idStaff } })
 
   }
-// * done
+  // * done
   postRestaurantsDetail(id: string): Observable<any> {
     return this.http.post(this.restaurantsDetail, { id: id })
   }
@@ -77,7 +77,7 @@ export class RestaurantDashboardService {
 
   // TODo : fixed this fun !
   creteNewTable(number: string): Observable<any> {
-    console.log(number," create tables number service ");
+    console.log(number, " create tables number service ");
 
     let apiNewTable = `${baseUrl}/api/restaurants/${this.IdRest}/tables/edit`
     return this.http.put(apiNewTable, { number: number })
@@ -97,6 +97,31 @@ export class RestaurantDashboardService {
   rejectReservation(idReservation: string): Observable<any> {
     let apiRejectReservation = `${baseUrl}/api/restaurants/${this.IdRest}/reservations/reject`
     return this.http.put(apiRejectReservation, { id: idReservation })
+  }
+
+  // /api/restaurants/:id/taxes/list
+  getAllTaxes(): Observable<any> {
+    let apiAllTaxes = `${baseUrl}/api/restaurants/${this.IdRest}/taxes/list`
+    return this.http.get(apiAllTaxes)
+  }
+  editTax(data: any, idTax: string): Observable<any> {
+    // * Tax id included data
+    let obj = { ...data, id: idTax }
+    let apiEditTax = `${baseUrl}/api/restaurants/${this.IdRest}/taxes/edit`
+    return this.http.put(apiEditTax, obj)
+  }
+  deleteTax(idTax: string): Observable<any> {
+    let apiDeleteTax = `${baseUrl}/api/restaurants/${this.IdRest}/taxes/delete`
+    return this.http.delete(apiDeleteTax, { body: { id: idTax } })
+  }
+  createTax(data: any): Observable<any> {
+    /*
+    "name":"مشروع",
+    "type" : "متغيرة",
+    "value" : "0.02"
+    */
+    let apiCreateTax = `${baseUrl}/api/restaurants/${this.IdRest}/taxes/create`
+    return this.http.post(apiCreateTax, data)
   }
 
 

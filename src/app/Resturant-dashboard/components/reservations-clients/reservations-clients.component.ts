@@ -65,9 +65,7 @@ export class ReservationsClientsComponent implements OnInit {
     });
   }
   acceptReservation(ReservationId: string ,status:string) {
-    if(status==='pending'){
 
-    }
     this.rejectReservation = this.RestaurantService.acceptReservation(
       ReservationId
     ).subscribe({

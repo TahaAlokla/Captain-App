@@ -1,0 +1,105 @@
+<h1 class="fw-bold text-center text-blue-900 my-3 fs-4">
+  <span *ngIf="data?.status===''||data?.status==='addTax'">أضافة ضريبة</span>
+  <!-- editTax -->
+  <span *ngIf="data?.status==='editTax'">تعديل الضريبة</span>
+</h1>
+<p class="text-xs text-gray-900 my-2"> في حال تم اختيار الضريبة كنسبئة مئوية , تدخل النسبة كرقم بلا رموز على سبيل المثال 30 تعني 30%</p>
+<p class="text-xs text-gray-800 my-2"> أما في حالة اختيار القيمة الثابتة فالرقم الدخل , سوف يكون نفسه القيمة المضافة للفاتورة</p>
+
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+
+
+  <div class="text-end">
+    <div class="row">
+      <form #documentEditForm="ngForm"
+            action=""
+            [formGroup]="AddTax"
+            id="EditRestaurantForm">
+        <div class="row my-1 mx-1 py-2 ">
+
+          <div class="col-12 col-sm-12 col-md-4 py-2">
+            <label for=""
+                   class="form-label fw-bold text-gray-900">
+              اسم الضريبة
+
+            </label>
+            <input type="text"
+                   class="form-control 
+                   border border-gray-900 text-gray-900  rounded-lg
+                   text-sm dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900 w-full p-2.5"
+                   formControlName="name"
+                   placeholder="اسم الضريبة"
+                   [class.is-invalid]="getError('name')" />
+            <span class="px-1 text-xs text-red-700 fw-lighter"
+                  *ngIf="getError('name')">
+              <span class="text-xs text-red-700"
+                    *ngIf="AddTax.get('name')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+            </span>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 py-2">
+            <label for="taxes"
+                   class="block  form-label fw-bold text-gray-900 ">أختر نوع الضريبة
+
+            </label>
+            <select id="taxes"
+            (change)="changeTax($event)"
+                    [class.is-invalid]="getError('type')"
+                    formControlName="type"
+                    class="bg-gray-50 
+                    select-style
+                     border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-700 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900">
+                     <!-- [selected]="true" -->
+              <option  [selected]="data?.status===''||data?.status==='addTax'"
+               [disabled]="true">أختر نوع الضريبة</option>
+              <option value="ثابتة">ثابتة</option>
+              <option value="متغيرة">متغيرة / نسبة مئوية</option>
+
+            </select>
+            <span class="px-1 text-xs text-red-700 fw-lighter"
+                  *ngIf="getError('type')">
+              <span class="text-xs text-red-700"
+                    *ngIf="AddTax.get('type')?.errors?.['type']">هذا الحقل مطلوب</span>
+
+            </span>
+
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 py-2 box- ">
+            <label for=""
+                   class="form-label fw-bold text-gray-900">
+              قيمة الضريبة
+            </label>
+            <input type="number"
+                   class="form-control d-inline-block border border-gray-900 text-gray-900  rounded-lg
+                   text-sm dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900 w-full p-2.5"
+                   formControlName="value"
+                   [placeholder]="percentage ? 'نسبة مئوية %' : 'قيمة ثابتة'"
+                   [class.is-invalid]="getError('value')" />
+                   <span class="px-1 text-xs text-red-700 fw-lighter"
+                   *ngIf="getError('value')">
+                  
+               <span class="text-xs text-red-700"
+                     *ngIf="AddTax.get('value')?.errors?.['required']">هذا الحقل مطلوب</span>
+                    </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class="btn-danger"
+          (click)="onNoClick()">اغلاق</button>
+  <button (click)="taxSubmit()"
+          mat-button
+          class="btn-success px-4 text-white"
+          form="EditRestaurantForm"
+          [disabled]="!documentEditForm.form.valid">
+    موافق
+  </button>
+  <!-- [disabled]="!documentEditForm.form.valid" -->
+</div>
