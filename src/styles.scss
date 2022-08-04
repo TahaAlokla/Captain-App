@@ -33,7 +33,7 @@ html {
 
 // /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #19283f;
+  background: #eee;
   width: 5px;
   border-radius: 5px;
 }
@@ -167,7 +167,7 @@ input,
 input[type=password],
 input[type=tel] {
   color: #19283f;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 

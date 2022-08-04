@@ -45,6 +45,8 @@ export class WaiterDialogComponent implements OnInit {
       // * الله يوفقك , وحنا الله يوفقنا !
       // * 1/8/2022 - 11pm
     }
+    console.log(registerWaiterData, idRest );
+
     this.RestaurantService.postCreateWaiter(registerWaiterData, idRest).subscribe({
       next:(data)=>{
         console.log(data);
@@ -53,7 +55,7 @@ export class WaiterDialogComponent implements OnInit {
         this.dialogRef.close();
       },error:(err)=>{
         console.log(err);
-        this.toastr.error('هناك خطاء في اضافة بيانات الموظف')
+        this.toastr.error('هناك خطاء في اضافة بيانات الموظف',err.error)
       }
     })
 

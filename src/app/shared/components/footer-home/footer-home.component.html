@@ -1,30 +1,33 @@
 <div class="container-fluid footer-home">
   <div class="container pt-sm-4 pt-0">
     <!-- * أن الله ييسر قلوباً تحن على قلوبٍ تئن -->
-    <div class="row pt-4 ">
-      <div class="col-12 col-sm-12 col-md-4  text-light">
-        <p class="lead py-0 my-1 fw-bold">معلومات التواصل</p>
-        <a class="list-style d-block " href="tel:00963968825014">00963968825014</a>
-        <a class=" list-style  d-block ">taha.aloklaa1996@gmail.com</a>
+    <div class="row pt-4  d-flex justify-content-center ">
+      <div class="col-12 col-sm-12 col-md-4  text-light text-center">
+        <p class="lead py-0 my-2 fw-bold color-orange">معلومات التواصل</p>
+        <a class="list-style d-block text-sm" href="tel:00963968825014">00963968825014</a>
+        <a class=" list-style  d-block text-sm">taha.aloklaa1996@gmail.com</a>
       </div>
-      <div class="col-12 col-sm-12 col-md-4  text-light">
-        <p class="lead py-0 my-1 fw-bold">فريق العمل</p>
-        <a class="list-style d-block fs-6" href="tel:00963968825014">Taha Alokla : FrontEnd Developer</a>
-        <a class="list-style d-block fs-6" >Abdulkreem SeefAldeen  : BackEnd Developer & AI </a>
-        <!--  -->
-        <a class="list-style d-block fs-6" >Mohammad Mazen Al-Olaby  : BackEnd Developer</a>
-        <a class="list-style d-block fs-6" >Nour Ghazi   : flutter Developer</a>
-        <a class="list-style d-block fs-6" >Yazan Fino    : Tester</a>
+      <div class="col-12 col-sm-12 col-md-4  text-light text-center">
+        <p class="lead py-0 my-2 fw-bold color-orange">فريق العمل</p>
+        <div class="d-flex flex-col justify-content-start text-left  w-100">
+          <a class="list-style d-block text-sm w-100 " href="tel:00963968825014">Taha Alokla : FrontEnd Developer</a>
+          <a class="list-style d-block text-sm w-100" >Abdulkreem SeefAldeen  : BackEnd Developer & AI </a>
+          <!--  -->
+          <a class="list-style d-block text-sm w-100" >Mohammad Mazen Al-Olaby  : BackEnd Developer</a>
+          <a class="list-style d-block text-sm" >Nour Ghazi   : flutter Developer</a>
+          <a class="list-style d-block text-sm w-100" >Yazan Fino    : Tester</a>
+        </div>
+        
       </div>
-      <div class="col-12 col-sm-12 col-md-4  text-light">
+      <div class="col-12 col-sm-12 col-md-4  text-light text-center">
 
-      <a class=" py-0 my-1 fw-bold color-orange pointer-mouse"  (click)="goToHome()">كابتن المطعم الذكي</a>
+      <a class=" py-0 my-2 fw-bold color-orange pointer-mouse"  (click)="goToHome()">كابتن المطعم الذكي</a>
     <p>ice-tea-team  <i class="fa fa-cube" aria-hidden="true"></i></p>
       </div>
     </div>
     <div class="row">
       <hr class=" text-light mt-4 ">
-      <p class="lead text-center text-capitalize color-orange fw-bold fs-6 my-2"> developed frontEnd section  with love <i class="fa fa-heart text-danger " aria-hidden="true"></i> By Taha Alokla</p>
+      <p class="lead text-center text-capitalize color-orange fw-bold fs-6 my-2 text-sm"> developed frontEnd section  with love <i class="fa fa-heart text-danger " aria-hidden="true"></i> By Taha Alokla</p>
     </div>
     <button [hidden]="!visibilityBtn"
      mat-flat-button (click)="scrollToElement()" class="scroll-to-up  bg-orange ">up <i class="fa fa-arrow-up" aria-hidden="true"></i></button>

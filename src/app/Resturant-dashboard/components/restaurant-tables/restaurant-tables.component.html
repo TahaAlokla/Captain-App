@@ -1,1 +1,44 @@
-<p>restaurant-tables works!</p>
+<div class="container-fluid px-4 py-4">
+  <div class="row">
+    <div class="col-12">
+      <p class=" fw-bold primary-color lead">إدارة الطاولات</p>
+    </div>
+    <div class="col-6 my-2">
+      <button class="btn text-white"
+              [ngClass]="{'bg-blue-800': AllTables?.length<1 , 'bg-green-800' : AllTables?.length>0 }"
+              (click)="addTables()">
+        <span *ngIf="AllTables?.length<1"> إدخال عدد الطاولات</span>
+        <span *ngIf="AllTables?.length>0"> تعديل عدد الطاولات</span>
+
+
+      </button>
+    </div>
+
+  </div>
+  <mat-divider class="my-3"></mat-divider>
+  <!-- *ngFor="let item of AllTables; let i=index" -->
+  <div class="row "
+       >
+       <!-- col-12 col-sm-12 col-md-3 col-lg-2 -->
+       <div class=" d-flex flex-row w-100 flex-wrap">
+          <mat-card *ngFor="let item of AllTables; let i=index"
+          class="shadow-slate-400 text-center h-30 w-40 m-2" [ngClass]="{'bg-gray-100':item?.status==='available'}">
+            <p class="text-blue-800 fw-bold text-xl">{{item?.serialNo}}</p>
+            <p class="">
+              <span *ngIf="item?.status==='available'"
+              [ngClass]="{'text-green-800': item?.status==='available'}"
+              >الطاولة متاحة</span>
+              <!-- busy -->
+              <span *ngIf="item?.status==='busy'"
+              [ngClass]="{'text-red-800': item?.status==='busy'}"
+              >الطاولة مشغولة</span>
+            </p>
+          </mat-card>
+
+       </div>
+
+  </div>
+</div>
+
+
+

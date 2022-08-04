@@ -10,6 +10,15 @@ import { SharedModule } from '../shared/modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { DialogInfoRestoComponent } from './components/dialog-info-resto/dialog-info-resto.component';
 import { Time12hoursPipe } from './pipes/time12hours.pipe';
+import { EmployeesComponent } from './components/employees/employees.component';
+import { WaiterDialogComponent } from './components/waiter-dialog/waiter-dialog.component';
+import { ReservationsClientsComponent } from './components/reservations-clients/reservations-clients.component';
+import { RestaurantTablesComponent } from './components/restaurant-tables/restaurant-tables.component';
+import { RestaurantMenuComponent } from './components/restaurant-menu/restaurant-menu.component';
+import { RestaurantBillsComponent } from './components/restaurant-bills/restaurant-bills.component';
+import { AddKitchenComponent } from './components/add-kitchen/add-kitchen.component';
+import { TableInputAddComponent } from './components/table-input-add/table-input-add.component';
+import { TaxesComponent } from './components/taxes/taxes.component';
 
 const service=[
   RestaurantDashboardService
@@ -19,7 +28,16 @@ const service=[
     BoardAdminComponent,
     InfoRestaurantComponent,
     DialogInfoRestoComponent,
-    Time12hoursPipe
+    Time12hoursPipe,
+    EmployeesComponent,
+    WaiterDialogComponent,
+    ReservationsClientsComponent,
+    RestaurantTablesComponent,
+    RestaurantMenuComponent,
+    RestaurantBillsComponent,
+    AddKitchenComponent,
+    TableInputAddComponent,
+    TaxesComponent
   ],
   imports: [
     CommonModule,

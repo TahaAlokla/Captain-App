@@ -1,1 +1,183 @@
-<p>reservations-clients works!</p>
+<div class="container py-2 mt-4">
+  <div class="row">
+    <mat-card class="shadow">
+      <div class="col-12">
+        <p class="primary-color fw-bold lead my-2">قائمة طلبات الحجز</p>
+      </div>
+
+      <div class="col-12">
+        <!-- <p class="primary-color fw-bold">قائمة حسابات النوادل </p> -->
+        <input
+          type="text"
+          class="form-control w-50 my-2"
+          (keyup)="applyFilter($event)"
+          placeholder="ابحث"
+          #input
+        />
+        <!--mat-elevation-z8  -->
+        <div class="table-box-conatiner">
+          <table
+            mat-table
+            matSort
+            [dataSource]="dataSource"
+            class="w-100 text-center"
+          >
+            <ng-container matColumnDef="_id">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+                mat-sort-header
+                sortActionDescription="Sort by number"
+              >
+                No.
+              </th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{
+                  this.paginator.pageIndex == 0
+                    ? i + 1
+                    : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+                }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                اسم مقدم الحجز
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                حالة الطلب
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="text-gray-800" *ngIf="element.status === 'pending'"
+                  >طلب معلق</span
+                >
+                <span class="text-cyan-600" *ngIf="element.status === 'accept'"
+                  >حجز مثبت</span
+                >
+                <span class="text-red-600" *ngIf="element.status === 'reject'"
+                  >حجز ملغى</span
+                >
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+              <th
+                mat-header-cell
+                mat-sort-header
+                sortActionDescription="Sort by number"
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                رقم الهاتف
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+            </ng-container>
+            <ng-container matColumnDef="numberTable">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                عدد طاولات الحجز
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.numberTable }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="dateOfReservation">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                تاريخ وتوقيت الحجز
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.dateOfReservation | date: "short" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="note">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                ملاحظات الزبون
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.note }}</td>
+            </ng-container>
+            <!-- action -->
+            <ng-container matColumnDef="action">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                رفض / قبول الحجز
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <button
+                  mat-button
+                  *ngIf="
+                    element.status === 'reject' || element.status === 'pending'
+                  "
+                  (click)="acceptReservation(element._id, element.status)"
+                  class="btn text-xs mx-1 text-white bg-green-600"
+                >
+                  قبول الحجز
+                </button>
+                <button
+                  mat-button
+                  *ngIf="
+                    element.status === 'accept' || element.status === 'pending'
+                  "
+                  (click)="cancelReservation(element._id)"
+                  class="btn text-xs mx-1 text-white bg-red-600"
+                >
+                  رفض الحجز
+                </button>
+              </td>
+            </ng-container>
+
+            <tr
+              class="bg-primary-color"
+              mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"
+            ></tr>
+            <tr
+              mat-row
+              class=""
+              *matRowDef="let row; columns: displayedColumns"
+            ></tr>
+            <!-- ************** -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                لا يوجد بيانات لعرضها "{{ input.value }}"
+              </td>
+            </tr>
+          </table>
+          <mat-paginator
+            class="mat-paginator-sticky d-flex"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page of users"
+          ></mat-paginator>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<!--
+[ngClass]="{'bg-green-600': element.status === 'accept','bg-gray-600': element.status === 'pending', 'bg-red-600': element.status === 'reject' }"
+ -->

@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 const { baseUrl } = environment;
@@ -9,6 +9,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 })
 export class RegistrationUsersService {
   public isAdmin$ = new BehaviorSubject(false)
+  // public isAdmin$ = new ReplaySubject(1)
   public isRestaurantAdmin$ =new BehaviorSubject(false)
   public VisitRestHome =new BehaviorSubject(false)
   public isLogin$ =new BehaviorSubject(false)

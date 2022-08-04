@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         this.TokenStorageService.saveToken(data.token)
         this.TokenStorageService.saveUser(data.restaurant)
+        this.TokenStorageService.saveIdRest(data.restaurant._id)
         this.RegistrationUsers.isRestaurantAdmin$.next(true)
         this.RegistrationUsers.isLogin$.next(true)
         this.loginUser.reset()

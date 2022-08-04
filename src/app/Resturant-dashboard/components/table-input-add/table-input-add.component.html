@@ -1,0 +1,60 @@
+<h1 class="fw-bold text-center primary-color my-3 fs-3">إضافة أو تعديل عدد الطاولات</h1>
+<p class="tex-xs text-sky-900"> هذا الحقل هو مخصص لتعديل عدد الطاولات في مطعمك يمكن حذف جميع الطاولات في حال أردت ذلك <span class="text-red-600">بإضافة العدد الكلي للطاولات مسبوقا باشارة السالب </span>, واي رقم غير ذلك  <span class="text-red-600"> موجب</span> سوف يكون اضافة للعدد الموجود لديك اذا كنت مسبقا قد هيئت عدد الطاولات</p>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+
+
+  <div class="text-end">
+    <div class="row">
+      <form #documentEditForm="ngForm"
+            action=""
+            [formGroup]="addTableNumber"
+            id="EditRestaurantForm">
+        <div class="row my-3 mx-2">
+          <div class="col-12 col-sm-12 col-md-12 my-2">
+            <p class="text-xs text-red-600 my-2" >في حال ظهر رقم في خانة الادخال , تكون هي مجمل عدد الطاولات الحالية, تستطيع من خلال ادخال الرقم الجديد الاضافة عليها في حال كان الرقم موجب او الحذف من العدد الكلي في حال كان الرقم المدخل سالب </p>
+            <label for=""
+                   class="form-label fw-bold primary-color">عدد الطاولات
+                   <span
+                   class="px-1 text-xs text-danger fw-lighter"
+                   *ngIf="getError('tableNumber')">
+               <span class="text-xs"
+                     *ngIf="addTableNumber.get('tableNumber')?.errors?.['required']">هذا الحقل مطلوب</span>
+                     <span class="text-xs"
+                     *ngIf="addTableNumber.get('tableNumber')?.errors?.['numeric']">اعداد صحيحة وموجبة فقط</span>
+                     <!-- errorMessage -->
+
+             </span>
+                  </label>
+            <input type="text"
+                   class="form-control text-sm"
+                   formControlName="tableNumber"
+                   placeholder="عدد الطاولات "
+                   [class.is-invalid]="getError('tableNumber')" />
+          </div>
+
+
+
+
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class="btn-danger"
+          (click)="onNoClick()">اغلاق</button>
+  <button (click)="Submit()"
+          mat-button
+          class="btn-success px-4 text-white"
+          form="EditRestaurantForm"
+          [disabled]="!documentEditForm.form.valid">
+    موافق
+  </button>
+  <!-- [disabled]="!documentEditForm.form.valid" -->
+</div>
+

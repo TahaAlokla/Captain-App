@@ -1,0 +1,81 @@
+<h1 class="fw-bold text-center primary-color my-3 fs-4">إضافة حساب مطبخ </h1>
+<p class="text-xs primary-color my-2">ننوه انه يوجد حساب واحد فقط للمطبخ على عكس حسابات النوادل , يمكن تعديل معلوماته وقت الحاجة</p>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+
+
+  <div class="text-end">
+    <div class="row">
+      <form #documentEditForm="ngForm"
+            action=""
+            [formGroup]="AddKitchen"
+            id="EditRestaurantForm">
+        <div class="row my-3 mx-2">
+
+          <div class="col-12 col-sm-12  my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color"> اسم الحساب الخاص بالمطبخ
+                   <span
+                   class="px-1 text-xs text-danger fw-lighter"
+                   *ngIf="getError('username')">
+               <span class="text-xs"
+                     *ngIf="AddKitchen.get('username')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+             </span>
+            </label>
+            <input type="text"
+                   class="form-control text-sm"
+                   formControlName="username"
+                   placeholder="هذا الاسم يقوم الموظف باستخدامة لتسجيل الدخول لحسابه"
+                   [class.is-invalid]="getError('username')" />
+          </div>
+
+
+
+          <div class="col-12 col-sm-12  my-2 password-filed">
+            <label for=""
+                   class="form-label fw-bold primary-color">كلمة مرور حساب المطبخ
+                   <span
+                   class="px-1 text-xs text-danger fw-lighter"
+                   *ngIf="getError('password')">
+               <span class="text-xs"
+                     *ngIf="AddKitchen.get('password')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+             </span>
+                  </label>
+
+            <input [type]="hide ? 'password' : 'text'"
+                   placeholder="كلمة المرور"
+                   class="form-control w-100 text-sm"
+                   formControlName="password"
+                   [class.is-invalid]="getError('password')" />
+            <button class="eye"
+                    mat-icon-button
+                    matSuffix
+                    (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class="btn-danger"
+          (click)="onNoClick()">اغلاق</button>
+  <button (click)="registerAddKitchenSubmit()"
+          mat-button
+          class="btn-success px-4 text-white"
+          form="EditRestaurantForm"
+          [disabled]="!documentEditForm.form.valid">
+    موافق
+  </button>
+  <!-- [disabled]="!documentEditForm.form.valid" -->
+</div>
+

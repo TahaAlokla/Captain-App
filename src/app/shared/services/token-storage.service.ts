@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 const TOKEN_KEY = 'X-Access-Token';
 const Admin_KEY="auth-admin"
 const USER_KEY = 'auth-user';
-const Id_Rest=''
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +21,12 @@ export class TokenStorageService {
     window.localStorage.setItem(TOKEN_KEY, token);
   }
   public saveIdRest(token: string): void {
-    window.localStorage.removeItem(Id_Rest);
-    window.localStorage.setItem(Id_Rest, token);
+    console.log(token);
+    window.localStorage.removeItem('Id_Rest');
+    window.localStorage.setItem('Id_Rest', token);
   }
-  public getIdRest(): string | null {
-    return window.sessionStorage.getItem(Id_Rest);
+  public getIdRest(): string  {
+    return window.localStorage.getItem('Id_Rest');
   }
   public getToken(): string | null {
     return window.sessionStorage.getItem(TOKEN_KEY);
