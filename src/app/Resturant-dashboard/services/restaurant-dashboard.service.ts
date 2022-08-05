@@ -13,7 +13,7 @@ export class RestaurantDashboardService {
   private readonly restaurantsDetail = `${baseUrl}/api/restaurants/detail`
   private readonly restaurantsEdit = `${baseUrl}/api/restaurants/edit`
   private readonly createWaiter = `${baseUrl}/api/restaurants/${this.IdRest}/staff/create`
-  private readonly listCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/list`
+  // private readonly listCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/list`
   private readonly createCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/create`
   // 62bf08f2a268984cb0235994 :id resturan
   constructor(private http: HttpClient, private TokenStorageService: TokenStorageService) {
@@ -27,6 +27,10 @@ export class RestaurantDashboardService {
     return this.http.put(this.restaurantsEdit, formData)
   }
 
+  getListCategory(): Observable<any> {
+    let apiListCategory=`${baseUrl}/api/restaurants/${this.IdRest}/categories/list` 
+    return this.http.get(apiListCategory)
+  }
   postCreateCategory(nameCategory: string): Observable<any> {
     return this.http.post(this.createCategory, { name: nameCategory })
   }
@@ -40,9 +44,7 @@ export class RestaurantDashboardService {
     return this.http.put(ApiAddKitchen, kitchenData)
   }
 
-  getListCategory(): Observable<any> {
-    return this.http.get(this.listCategory)
-  }
+ 
 
   // * done
   postCreateWaiter(WaiterRegisterData: any, idRest: string): Observable<any> {

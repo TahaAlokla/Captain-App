@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NumericValueType, RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ToastrService } from 'ngx-toastr';
 import { RestaurantDashboardService } from '../../services/restaurant-dashboard.service';
 
@@ -18,5 +19,16 @@ export class AddMealComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  AddMeal=this.fb.group({
+    name:[,[Validators.required]],
+    price:[,[Validators.required, RxwebValidators.numeric({
+      acceptValue: NumericValueType.PositiveNumber,
+      allowDecimal: true,
+    }),]],
+    description:[],
+    image:[,[Validators.required]],
+    categories:[,[Validators.required]]
+  })
 
 }

@@ -21,7 +21,8 @@ import { TableInputAddComponent } from './components/table-input-add/table-input
 import { TaxesComponent } from './components/taxes/taxes.component';
 import { AddTaxComponent } from './components/add-tax/add-tax.component';
 import { AddMealComponent } from './components/add-meal/add-meal.component';
-
+import {MatChipsModule} from '@angular/material/chips';
+import {MatTooltipModule} from '@angular/material/tooltip';
 const service=[
   RestaurantDashboardService
 ]
@@ -48,7 +49,9 @@ const service=[
     ResturantDashboardRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    ToastrModule
+    ToastrModule,
+    MatChipsModule,
+    MatTooltipModule
   ],
   providers:[
     ...service
