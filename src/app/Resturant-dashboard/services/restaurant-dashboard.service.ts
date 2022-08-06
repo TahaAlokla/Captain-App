@@ -14,7 +14,7 @@ export class RestaurantDashboardService {
   private readonly restaurantsEdit = `${baseUrl}/api/restaurants/edit`
   private readonly createWaiter = `${baseUrl}/api/restaurants/${this.IdRest}/staff/create`
   // private readonly listCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/list`
-  private readonly createCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/create`
+  // private readonly createCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/create`
   // 62bf08f2a268984cb0235994 :id resturan
   constructor(private http: HttpClient, private TokenStorageService: TokenStorageService) {
     console.log("id rest service injection", this.TokenStorageService.getIdRest());
@@ -27,14 +27,17 @@ export class RestaurantDashboardService {
     return this.http.put(this.restaurantsEdit, formData)
   }
 
-  getListCategory(): Observable<any> {
+  getListCategory(): Observable<Array<any>> {
     let apiListCategory=`${baseUrl}/api/restaurants/${this.IdRest}/categories/list` 
-    return this.http.get(apiListCategory)
+    return this.http.get<Array<any>>(apiListCategory)
   }
   postCreateCategory(nameCategory: string): Observable<any> {
-    return this.http.post(this.createCategory, { name: nameCategory })
+    let api= `${baseUrl}/api/restaurants/${this.IdRest}/categories/create`
+    return this.http.post(api, { name: nameCategory })
   }
   EditCategory(nameCategory: string, idCategory: string): Observable<any> {
+    console.log("idCategory",idCategory);
+    
     let apiEditCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/${idCategory}/edit`
     return this.http.put(apiEditCategory, { name: nameCategory })
   }
@@ -117,14 +120,25 @@ export class RestaurantDashboardService {
     return this.http.delete(apiDeleteTax, { body: { id: idTax } })
   }
   createTax(data: any): Observable<any> {
-    /*
-    "name":"مشروع",
-    "type" : "متغيرة",
-    "value" : "0.02"
-    */
     let apiCreateTax = `${baseUrl}/api/restaurants/${this.IdRest}/taxes/create`
     return this.http.post(apiCreateTax, data)
   }
+
+  // * Meals Apis
+  getListMeals(idCategory:string):Observable<any>{
+  let apiAllMeals=`${baseUrl}/api/restaurants/${this.IdRest}/meals/${idCategory}/list`
+  return this.http.get(apiAllMeals)
+  }
+  // api/restaurants/:id/meals/create
+  CreateMale(MaleData:FormData):Observable<any>{
+    let apiCreateMale=`${baseUrl}/api/restaurants/${this.IdRest}/meals/create`
+    return this.http.post(apiCreateMale,MaleData)
+  }
+  DeleteMale(idMale:string):Observable<any>{
+    let apiDeleteMae=`${baseUrl}/api/restaurants/${this.IdRest}/meals/${idMale}/delete`
+    return this.http.delete(apiDeleteMae)
+  }
+
 
 
 }

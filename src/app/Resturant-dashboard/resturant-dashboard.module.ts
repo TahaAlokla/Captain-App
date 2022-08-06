@@ -23,6 +23,10 @@ import { AddTaxComponent } from './components/add-tax/add-tax.component';
 import { AddMealComponent } from './components/add-meal/add-meal.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
+import {MatSelectModule} from '@angular/material/select';
+import { CategoryListEditComponent } from './components/category-list-edit/category-list-edit.component';
+// import {MatAutocompleteModule} from '@angular/material/autocomplete';
 const service=[
   RestaurantDashboardService
 ]
@@ -42,7 +46,9 @@ const service=[
     TableInputAddComponent,
     TaxesComponent,
     AddTaxComponent,
-    AddMealComponent
+    AddMealComponent,
+    AddCategoryComponent,
+    CategoryListEditComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +57,8 @@ const service=[
     ReactiveFormsModule,
     ToastrModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
   ],
   providers:[
     ...service

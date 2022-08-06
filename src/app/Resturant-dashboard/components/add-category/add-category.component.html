@@ -1,0 +1,63 @@
+<h1
+  class="fw-bold text-center header-dialog-title text-blue-900 my-3 fs-4"
+  mat-dialog-title
+>
+  <span *ngIf=" data?.status === 'addCategory'"
+    >إضافة تصنيف</span
+  >
+<!-- editCategory -->
+  <span *ngIf="data?.status === 'editCategory'">تعديل التصنيف</span>
+</h1>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+  <div class="text-end">
+    <div class="row">
+      <form
+        #documentEditForm="ngForm"
+        action=""
+        [formGroup]="AddCategory"
+        id="EditRestaurantForm"
+      >
+        <div class="row my-3 mx-2">
+          <div class="col-12 col-sm-12 my-2">
+            <label for="" class="form-label fw-bold primary-color">
+              اسم التصنيف
+              <span
+                class="px-1 text-xs text-danger fw-lighter"
+                *ngIf="getError('name')"
+              >
+                <span
+                  class="text-xs"
+                  *ngIf="AddCategory.get('name')?.errors?.['required']"
+                  >هذا الحقل مطلوب</span
+                >
+              </span>
+            </label>
+            <input
+              type="text"
+              class="form-control text-sm"
+              formControlName="name"
+              placeholder="اسم التصنيف"
+              [class.is-invalid]="getError('name')"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button class="btn-danger" (click)="onNoClick()">اغلاق</button>
+  <button
+    (click)="CategorySubmit()"
+    mat-button
+    class="btn-success px-4 text-white"
+    form="EditRestaurantForm"
+    [disabled]="!documentEditForm.form.valid"
+  >
+    موافق
+  </button>
+  <!-- [disabled]="!documentEditForm.form.valid" -->
+</div>

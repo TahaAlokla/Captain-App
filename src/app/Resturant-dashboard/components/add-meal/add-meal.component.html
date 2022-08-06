@@ -1,5 +1,162 @@
-<h1 class="fw-bold text-center header-dialog-title text-blue-900 my-3 fs-4" mat-dialog-title>
+<h1 class="fw-bold text-center header-dialog-title text-blue-900 my-3 fs-4"
+    mat-dialog-title>
   <span *ngIf="data?.status===''||data?.status==='addMeal'">إضافة وجبة</span>
-  
   <span *ngIf="data?.status==='editMeal'">تعديل الوجبة</span>
 </h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+
+
+  <div class="text-end">
+    <div class="row">
+      <form #documentEditForm="ngForm"
+            enctype="multipart/form-data"
+            [formGroup]="AddMeal"
+            id="EditRestaurantForm">
+        <div class="row my-3 mx-2">
+
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color"> اسم الوجبة
+              <span class="px-1 text-xs text-danger fw-lighter"
+                    *ngIf="getError('name')">
+                <span class="text-xs"
+                      *ngIf="AddMeal.get('name')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+              </span>
+            </label>
+            <input type="text"
+                   class=" text-sm p-2.5 border border-gray-900 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-700 block w-full  dark:bg-gray-50 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900"
+                   formControlName="name"
+                   placeholder="اسم الوجبة"
+                   [class.is-invalid]="getError('name')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">
+              تصنيف الوجبة / نوع الوجبة
+              <span class="px-1 text-xs text-danger fw-lighter"
+                    *ngIf="getError('categories')">
+                <span class="text-xs"
+                      *ngIf="AddMeal.get('categories')?.errors?.['required']">هذا الحقل مطلوب</span>
+              </span>
+            </label>
+            <select id="taxes"
+                    [class.is-invalid]="getError('categories')"
+                    formControlName="categories"
+                    class="bg-gray-50 
+                    select-style
+                     border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-700 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900">
+              <!-- [selected]="true" -->
+              <option [selected]="data?.status===''||data?.status==='addTax'"
+                      [disabled]="true">أختر نوع الوجبة</option>
+              <option *ngFor="let item of listCategory|async;first as isFirst"
+                      [value]="item?._id"
+                      [selected]="isFirst">
+                <div class="">
+                  <span class="text-bue-900 px-3 font-medium">{{item?.name}}</span>
+
+                </div>
+
+              </option>
+
+            </select>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">
+              سعر الوجبة
+              <span class="px-1 text-xs text-danger fw-lighter"
+                    *ngIf="getError('price')">
+                <span class="text-xs"
+                      *ngIf="AddMeal.get('price')?.errors?.['required']">هذا الحقل مطلوب</span>
+
+              </span>
+            </label>
+            <input type="text"
+                   class=" text-sm p-2.5 border border-gray-900 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-700 block w-full  dark:bg-gray-50 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900"
+                   formControlName="price"
+                   placeholder="سعر الوجبة"
+                   [class.is-invalid]="getError('price')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 my-2">
+            <label for=""
+                   class="form-label fw-bold primary-color">
+              وصف أو ملاحظات على الوجبة
+              <span class="px-1 text-xs text-danger fw-lighter"
+                    *ngIf="getError('description')">
+                <span class="text-xs"
+                      *ngIf="AddMeal.get('description')?.errors?.['required']">هذا الحقل مطلوب</span>
+              </span>
+            </label>
+            <input type="text"
+                   class=" text-sm p-2.5 border border-gray-900 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-700 block w-full  dark:bg-gray-50 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900"
+                   formControlName="description"
+                   placeholder="وصف الوجبة او ملاحظات عليها"
+                   [class.is-invalid]="getError('description')" />
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 my-2">
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for=""
+                class="form-label fw-bold primary-color">
+           صورة الوجبة
+           <span class="px-1 text-xs text-danger fw-lighter"
+                 *ngIf="getError('image')">
+             <span class="text-xs"
+                   *ngIf="AddMeal.get('image')?.errors?.['required']">هذا الحقل مطلوب</span>
+           </span>
+         </label>
+         <div class="">
+          <button mat-stroked-button
+          class="bg-gray-300 text-gray-900 style-btn"
+                  type="button"
+                  (click)="filePicker.click()">
+            حمل صورة
+          </button>
+          <input type="file"
+          accept="image/png, image/gif, image/jpeg"
+                 (change)="OnImagePicked($event)"
+                 [hidden]="true"
+                 #filePicker />
+        </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <div class="">
+                  <div class="image-preview"
+                       *ngIf="
+                      imagePreview !== '' &&
+                      imagePreview &&
+                      AddMeal.get('image').valid
+                    ">
+                    <img [src]="imagePreview"
+                         width="200px"
+                         height="200px"
+                         alt="img-upload" />
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+           
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class="btn-danger"
+          (click)="onNoClick()">اغلاق</button>
+  <button (click)="AddMealSubmit()"
+          mat-button
+          class="btn-success px-4 text-white"
+          form="EditRestaurantForm"
+          [disabled]="!documentEditForm.form.valid">
+    موافق
+  </button>
+  <!-- [disabled]="!documentEditForm.form.valid" -->
+</div>

@@ -1,226 +1,402 @@
-<div class="container-fluid px-4 py-4">
-  <div class="row">
-    <div class="col-12">
-      <p class=" fw-bold primary-color lead">إدارة المنيو</p>
+<div class="container-fluid px-4 pt-4 pb-2">
+  <!-- d-flex justify-content-center -->
+  <div class="row  my-2">
+    <div class="col-12  col-sm-12 col-md-4">
+      <p class="fw-bold primary-color fs-4">إدارة المنيو</p>
     </div>
-    <div class="col-6 my-2">
-      <button class="btn text-white bg-blue-800 py-1 px-3 btn-style"
-              mat-button
-              (click)="addMeal('addMeal')">
+    <div class="col-6 col-sm-12 col-md-6 ">
+      <button
+        class="btn text-white bg-blue-800 py-1 px-3 btn-style"
+        mat-button
+        (click)="addMeal('addMeal')"
+      >
         <span>إضافة وجبة</span>
       </button>
     </div>
-
   </div>
-  <mat-divider class="my-1"></mat-divider>
-
+  <mat-divider class="my-0"></mat-divider>
 </div>
 <div class="container py-2 mt-0">
   <div class="row">
     <mat-card class="shadow">
       <div class="row">
         <div class="col-12">
-          <p class="primary-color fw-bold lead my-4 mx-2">
+          <p class="primary-color fw-bold lead my-2 mx-2">
             قائمة الوجبات الموجودة
-            <span class="text-xs px-1 text-gray-900 fw-normal d-block my-1">معروضة حسب التصنيف الخاص بها</span>
+            <span class="text-xs px-1 text-gray-900 fw-normal d-block my-1"
+              >معروضة حسب التصنيف الخاص بها</span
+            >
           </p>
         </div>
 
         <div class="col-12 col-sm-12 co-md-12">
-          <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 my-2">
-              <label for="taxes"
-                     class="d-inline-block    text-gray-900 ">أختيار صنف الوجبات لعرضها
-                     
+          <div
+            class="row d-flex align-items-center justify-content-around mx-4"
+          >
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-2">
+              <label for="taxes" class="d-inline-block text-gray-900"
+                >أختيار صنف الوجبات لعرضها
               </label>
-              <button mat-icon-button 
-              matTooltip="أضافة صنف جديد للقائمة"
-              [matTooltipPosition]="'after'"
-              class="text-blue-900">
-                <mat-icon mat-icon-button>add_circle</mat-icon>
-              </button>
               
-              <span class="text-xs block text-red-900">يمكن من القائمة المنسدلة حذف او تعديل اسم الصنف</span>
-              <select id="taxes"
-                      (change)="changeCategory($event)"
-                      class="bg-gray-50 
-                      select-style
-                     w-75
-                    my-2 
-                       border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-700 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900">
-                <!-- [selected]="true" -->
-                <option [selected]="allCategory.length===0"
-                        [disabled]="true">أختر التصنيف</option>
-                <option [value]="item?._id"
-                        *ngFor="let item of allCategory">{{item?.name}}
-                        <mat-icon ontIcon="edit">edit</mat-icon>
-                        <mat-icon>cancel</mat-icon>
-                      </option>
+
+              <span class="text-xs block text-gray-900 mb-3 mt-2"
+                >يمكن من هنا
+                <a class="text-red-900" (click)="navigateToSection('categoriesSection')">الانتقال للاصناف </a>
+               
+              </span>
+              <select
+                [formControl]="choiceCategory"
+                (change)="changeCategory($event)"
+                class="bg-white select-style w-75 my-2 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-700 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-800 dark:focus:border-blue-900"
+              >
+                <!--  -->
+                <!-- <option [selected]="(listCategory|async)?.length===0||choiceCategory.value===''"
+                        [disabled]="true">أختر التصنيف</option>     -->
+                <option
+                  *ngFor="let item of listCategory | async; first as isFirst"
+                  [value]="item?._id"
+                  [selected]="isFirst"
+                >
+                  <div class="">
+                    <span class="text-bue-900 px-3 font-medium">{{
+                      item?.name
+                    }}</span>
+                    <!-- <button class="btn btn-success">test</button> -->
+                  </div>
+                </option>
               </select>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 my-2">
-              <label for="taxes"
-              class="block    text-gray-900 ">البحث بالجدول عن الوجبات
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-2">
+              <label for="taxes" class="d-inline-block text-gray-900"
+                >البحث بالجدول عن الوجبات
+              </label>
+              <span class="text-xs block mb-3 mt-2 text-gray-900"
+                >البحث بواسطة الأسم أو الوصف أو أي خيار اخر متاح
+              </span>
 
-       </label>
-       <span class="text-xs  text-gray-900">البحث بواسطة الأسم أو الوصف أو أي خيار اخر متاح</span>
-              <input type="text"
-                     class=" w-75 border rounded-lg border-gray-900 my-2 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-900 dark:focus:border-blue-900"
-                     (keyup)="applyFilter($event)"
-                     placeholder="ابحث"
-                     #input />
+              <input
+                type="text"
+                class="w-75 border rounded-lg border-gray-900 dark:border-gray-900 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-blue-900 dark:focus:border-blue-900"
+                (keyup)="applyFilter($event)"
+                placeholder="ابحث"
+                #input
+              />
             </div>
-            <div class="co-12 my-2">
+          </div>
+          <div class="row">
+            <div class="co-12 my-1">
               <div class="table-box-conatiner w-100 mx-auto">
-                <table mat-table
-                       matSort
-                       [dataSource]="dataSource"
-                       class="w-100 text-center">
+                <table
+                  mat-table
+                  matSort
+                  *ngIf="dataSource"
+                  [dataSource]="dataSource"
+                  class="w-100 text-center"
+                >
                   <ng-container matColumnDef="_id">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base text-Tajawal"
-                        *matHeaderCellDef
-                        mat-sort-header
-                        sortActionDescription="Sort by number">
+                    <th
+                      mat-header-cell
+                      class="color-orange text-center fw-normal text-base text-Tajawal"
+                      *matHeaderCellDef
+                      mat-sort-header
+                      sortActionDescription="Sort by number"
+                    >
                       No.
                     </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element; let i = index">
+                    <td
+                      mat-cell
+                      class="text-Tajawal"
+                      *matCellDef="let element; let i = index"
+                    >
                       {{
-                      this.paginator.pageIndex == 0
-                      ? i + 1
-                      : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+                        this.paginator.pageIndex == 0
+                          ? i + 1
+                          : 1 +
+                            i +
+                            this.paginator.pageIndex * this.paginator.pageSize
                       }}
                     </td>
                   </ng-container>
-  
+
                   <!-- Name Column -->
                   <ng-container matColumnDef="name">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base text-Tajawal"
-                        *matHeaderCellDef>
-                اسم الوجبة
+                    <th
+                      mat-header-cell
+                      class="color-orange text-center fw-normal text-base text-Tajawal"
+                      *matHeaderCellDef
+                    >
+                      اسم الوجبة
                     </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element">{{ element?.name }}</td>
+                    <td mat-cell class="text-Tajawal" *matCellDef="let element">
+                      {{ element?.name }}
+                    </td>
                   </ng-container>
                   <!-- price -->
                   <ng-container matColumnDef="price">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base text-Tajawal"
-                        *matHeaderCellDef>
+                    <th
+                      mat-header-cell
+                      class="color-orange text-center fw-normal text-base text-Tajawal"
+                      *matHeaderCellDef
+                    >
                       سعر الوجبة
                     </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element">{{ element?.name }}</td>
+                    <td mat-cell class="text-Tajawal" *matCellDef="let element">
+                      {{ element?.price }}
+                    </td>
                   </ng-container>
                   <!-- updatedAt -->
                   <ng-container matColumnDef="updatedAt">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base text-Tajawal"
-                        *matHeaderCellDef>
+                    <th
+                      mat-header-cell
+                      class="color-orange text-center fw-normal text-base text-Tajawal"
+                      *matHeaderCellDef
+                    >
                       تاريخ الإضافة
                     </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element">{{ element?.name }}</td>
+                    <td mat-cell class="text-Tajawal" *matCellDef="let element">
+                      {{ element?.updatedAt | date: "short" }}
+                    </td>
                   </ng-container>
                   <!-- categories -->
-                  <ng-container matColumnDef="categories">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base text-Tajawal"
-                        *matHeaderCellDef>
-                      الصنف
-                    </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element">{{ element?.name }}</td>
-                  </ng-container>
+
                   <!-- description -->
                   <ng-container matColumnDef="description">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base  text-Tajawal"
-                        *matHeaderCellDef>
-                الوصف
+                    <th
+                      mat-header-cell
+                      class="color-orange text-center fw-normal text-base text-Tajawal"
+                      *matHeaderCellDef
+                    >
+                      الوصف
                     </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element">{{ element?.name }}</td>
+                    <td mat-cell class="text-Tajawal" *matCellDef="let element">
+                      {{ element?.description }}
+                    </td>
                   </ng-container>
                   <!-- imageUrl -->
                   <ng-container matColumnDef="imageUrl">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base  text-Tajawal"
-                        *matHeaderCellDef>
-                الصورة المصغرة
+                    <th
+                      mat-header-cell
+                      class="color-orange text-center fw-normal text-base text-Tajawal"
+                      *matHeaderCellDef
+                    >
+                      الصورة المصغرة
                     </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element">{{ element?.name }}</td>
+                    <td
+                      mat-cell
+                      class="text-Tajawal d-flex justify-content-center"
+                      *matCellDef="let element"
+                    >
+                      <img
+                        [src]="imageBaseUrl + '/' + element?.imageUrl"
+                        alt="img-meal"
+                        srcset=""
+                        width="100px"
+                        height="100px"
+                      />
+                    </td>
                   </ng-container>
                   <ng-container matColumnDef="action">
-                    <th mat-header-cell
-                        class="color-orange text-center fw-normal text-base text-Tajawal"
-                        *matHeaderCellDef>
+                    <th
+                      mat-header-cell
+                      class="color-orange text-center fw-normal text-base text-Tajawal"
+                      *matHeaderCellDef
+                    >
                       <span>تعديل</span>
                     </th>
-                    <td mat-cell
-                    class="text-Tajawal"
-                        *matCellDef="let element">
-                      <button (click)="addMeal('editTax',element)"
-                              class="btn bg-teal-900 text-white text-xs m-1"
-                              mat-icon-button>
+                    <td mat-cell class="text-Tajawal" *matCellDef="let element">
+                      <button
+                        (click)="addMeal('editMeal', element , element?.categories[0])"
+                        class="btn bg-teal-900 text-white text-xs m-1"
+                        mat-icon-button
+                      >
                         <mat-icon>
                           <span class="material-symbols-outlined">
                             edit_document
                           </span>
                         </mat-icon>
-  
                       </button>
-                      <button class="btn btn-sm m-1 bg-red-900 text-white"
-                              mat-icon-button
-                              (click)="deleteMeal(element._id)">
+                      <button
+                        class="btn btn-sm m-1 bg-red-900 text-white"
+                        mat-icon-button
+                        (click)="
+                          deleteMeal(element._id, element?.categories[0])
+                        "
+                      >
                         <mat-icon class=" ">
-                          <span class="material-symbols-outlined  ">
+                          <span class="material-symbols-outlined">
                             delete
                           </span>
                         </mat-icon>
-  
                       </button>
                     </td>
-  
                   </ng-container>
-  
-                  <tr class="bg-primary-color"
-                      mat-header-row
-                      *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                  <tr mat-row
-                      class=""
-                      *matRowDef="let row; columns: displayedColumns"></tr>
+
+                  <tr
+                    class="bg-primary-color"
+                    mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                  ></tr>
+                  <tr
+                    mat-row
+                    class=""
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></tr>
                   <!-- ************** -->
-                  <tr class="mat-row"
-                      *matNoDataRow>
-                    <td class="mat-cell"
-                        colspan="4">
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">
                       لا يوجد بيانات لعرضها "{{ input.value }}"
                     </td>
                   </tr>
                 </table>
-                <mat-paginator class="mat-paginator-sticky d-flex"
-                               [pageSizeOptions]="[5, 10, 25, 100]"
-                               aria-label="Select page of users"></mat-paginator>
+                <mat-paginator
+                  class="mat-paginator-sticky d-flex"
+                  [pageSizeOptions]="[5, 10, 25]"
+                  aria-label="Select page of users"
+                ></mat-paginator>
               </div>
             </div>
           </div>
-        
-          <!--mat-elevation-z8  -->
 
+          <!--mat-elevation-z8  -->
         </div>
       </div>
+    </mat-card>
+  </div>
+</div>
+<div class="container py-2 mt-0">
+  <div class="row">
+    <mat-card class="shadow" id="categoriesSection">
+      <div class="col-12">
+        <p class="primary-color fw-bold lead my-4 mx-2">قائمة الاصناف   
+          <button
+          mat-icon-button
+          (click)="addCategory('addCategory')"
+          matTooltip="أضافة صنف جديد للقائمة"
+          [matTooltipPosition]="'after'"
+          class="text-blue-900"
+        >
+          <mat-icon mat-icon-button>add_circle</mat-icon>
+        </button> 
+        <button
+        mat-icon-button
+        (click)="listEditCategory()"
+        matTooltip="تحديث قائمة الأصناف"
+        [matTooltipPosition]="'after'"
+        class="text-orange-900"
+      >
+        <mat-icon mat-icon-button>refresh</mat-icon>
+      </button>
+      </p>
+      
+      </div>
 
+      <div class="col-12">
+        <input
+          type="text"
+          class="form-control w-75 my-2 mx-auto"
+          (keyup)="applyFilter2($event)"
+          placeholder="ابحث"
+          #input2
+        />
+        <!--mat-elevation-z8  -->
+        <div class="table-box-conatiner w-75 mx-auto">
+         
+          <table
+            mat-table
+            matSort
+            *ngIf="dataSourceCategory"
+            [dataSource]="dataSourceCategory"
+            class="w-100 text-center"
+          >
+            <ng-container matColumnDef="_id">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+                mat-sort-header
+                sortActionDescription="Sort by number"
+              >
+                No.
+              </th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{
+                  this.paginator.pageIndex == 0
+                    ? i + 1
+                    : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+                }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                اسم الصنف
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="updatedAt">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                تاريخ الاضافة
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element?.updatedAt | date: "short" }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th
+                mat-header-cell
+                class="color-orange text-center fw-normal fs-6"
+                *matHeaderCellDef
+              >
+                <span>تعديل</span>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <button
+                  mat-icon-button
+                  (click)="addCategory('editCategory', element)"
+                  matTooltip="تعديل قائمة الأصناف"
+                  [matTooltipPosition]="'after'"
+                  class="text-orange-900"
+                >
+                  <mat-icon mat-icon-button>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr
+              class="bg-primary-color"
+              mat-header-row
+              *matHeaderRowDef="displayedColumnsCategory; sticky: true"
+            ></tr>
+            <tr
+              mat-row
+              class=""
+              *matRowDef="let row; columns: displayedColumnsCategory"
+            ></tr>
+            <!-- ************** -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                لا يوجد بيانات لعرضها "{{ input.value }}"
+              </td>
+            </tr>
+          </table>
+          <mat-paginator
+          #MatPaginator1
+            class="mat-paginator-sticky d-flex"
+            [pageSizeOptions]="[5, 10, 25]"
+            aria-label="Select page of users"
+          ></mat-paginator>
+        </div>
+      </div>
     </mat-card>
   </div>
 </div>
