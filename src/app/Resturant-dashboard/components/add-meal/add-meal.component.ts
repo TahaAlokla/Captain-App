@@ -24,20 +24,26 @@ export class AddMealComponent implements OnInit {
     public dialogRef: MatDialogRef<any>,
     private RestaurantService: RestaurantDashboardService,
     @Inject(MAT_DIALOG_DATA)
-    public data: { mealObj: any; status: string;   }
-  ) {}
+    public data: { mealObj: any; status: string; }
+  ) { }
   // mealObj
   listCategory!: Observable<Array<any>>;
   loadAllCategory() {
     this.listCategory = this.RestaurantService.getListCategory();
   }
   ngOnInit(): void {
-    if(this.data.status==='editMeal'){
-      this.imagePreview=`${baseUrl}/${this.data.mealObj?.imageUrl}`
+    if (this.data.status === 'editMeal') {
+      this.imagePreview = `${baseUrl}/${this.data.mealObj?.imageUrl}`
     }
     this.loadAllCategory();
   }
+  cancelImage() {
+    this.imagePreview = '';
+    if (this.AddMeal.value.image) {
+      this.AddMeal.patchValue({ image: null });
+    }
 
+  }
   AddMeal = this.fb.group({
     name: [this.data.mealObj?.name, [Validators.required]],
     price: [
@@ -50,7 +56,7 @@ export class AddMealComponent implements OnInit {
         }),
       ],
     ],
-    description: [ this.data.mealObj?.description, [Validators.required]],
+    description: [this.data.mealObj?.description, [Validators.required]],
     image: [],
     categories: [this.data.mealObj?.categories[0], [Validators.required]],
   });
@@ -79,18 +85,38 @@ export class AddMealComponent implements OnInit {
     MaleData.append('description', this.AddMeal.value.description);
     MaleData.append('image', this.AddMeal.value.image);
     MaleData.append('categories', this.AddMeal.value.categories);
-    this.RestaurantService.CreateMale(MaleData).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.toastr.success('تم إضافة الوبجة بنجاح', data.msg);
-        this.AddMeal.reset()
-        this.imagePreview=''
-      },
-      error: (err) => {
-        console.log(err);
-        this.toastr.error('هناك خطاء', err.error.msg);
-      },
-    });
+    if (this.data.status === 'addMeal') {
+      this.RestaurantService.CreateMale(MaleData).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.toastr.success('تم إضافة الوبجة بنجاح', data.msg);
+          this.AddMeal.reset()
+          this.imagePreview = ''
+        },
+        error: (err) => {
+          console.log(err);
+          this.toastr.error('هناك خطاء', err.error.msg);
+        },
+      });
+
+    } else {
+      // * يارب القلوب , نسألك اللطف فيها 
+      // * رحمتك يالله بالضعيف منها على الدنيا وما فيها 
+      // * Taha Alokla 6/8/2022 6:30 pm 
+      this.RestaurantService.editMale(MaleData, this.data.mealObj._id).subscribe({
+        next: (data1:any) => {
+          console.log(data1);
+          this.toastr.success("تم تعديل الوجبة بنجاح",data1.msg)
+          this.dialogRef.close()
+
+        }, error: (err) => {
+          console.log(err);
+          this.toastr.error("هناك خطاء في تعديل الوجبة", err.error.msg)
+
+        }
+      })
+    }
+
   }
   onNoClick(): void {
     this.dialogRef.close();

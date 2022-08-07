@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AdminDashboardService } from './../../services/admin-dashboard.service';
 
@@ -17,6 +18,8 @@ import { DatePipe } from '@angular/common';
 })
 export class DialogComponent implements OnInit {
 //  @Inject(MAT_DIALOG_DATA) public data: DialogData,
+restaurantActivate:Subscription
+restaurantDeactivate:Subscription
   constructor(public DatePipe:DatePipe ,private fb:FormBuilder, private toastr: ToastrService,private AdminDashboardService:AdminDashboardService,public dialogRef: MatDialogRef<any>,@Inject(MAT_DIALOG_DATA) public data: { id: string,statusAccount:Boolean}
    ) { }
 
@@ -28,7 +31,14 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.latest_date);
-
+  }
+  ngOnDestroy(): void {
+    if(this.restaurantActivate){
+      this.restaurantActivate.unsubscribe()
+    }
+    if(this.restaurantDeactivate){
+      this.restaurantDeactivate.unsubscribe()
+    }
   }
   onNoClick(): void {
     this.dialogRef.close();

@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.RegistrationUsersService.isAdmin$.subscribe(val => {
       this.isAdmin = val
-
     })
     this.RegistrationUsersService.isLogin$.subscribe(val=>{
       this.isLogin= val
@@ -34,6 +33,7 @@ export class NavbarComponent implements OnInit {
     this.RegistrationUsersService.isRestaurantAdmin$.subscribe(val => {
       this.isRestaurantAdmin = val
     })
+    this.RegistrationUsersService.refreshData()
   }
 
 }

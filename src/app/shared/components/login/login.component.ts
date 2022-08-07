@@ -13,10 +13,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   msgErrorLogin: string = ""
-
+  isLoading = false
   constructor(private fb: FormBuilder, private RegistrationUsers: RegistrationUsersService,
     private TokenStorageService: TokenStorageService,
-    private toastr: ToastrService , private router:Router) { }
+    private toastr: ToastrService, private router: Router) { }
   loginUser = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
@@ -35,19 +35,23 @@ export class LoginComponent implements OnInit {
       // "password" : "abd96abd9611"
       let username: string = this.loginUser.value.username as string;
       let password: string = this.loginUser.value.password as string
-
+      this.isLoading = true
       this.RegistrationUsers.PostLoginAdmin(username, password).subscribe({
         next: (data) => {
           // Content-Type وX-Access-Token
+          this.isLoading = false
           console.log(data.token);
           this.TokenStorageService.saveToken(data.token)
           this.TokenStorageService.saveAdmin(data.admin)
           this.RegistrationUsers.isAdmin$.next(true)
+          this.RegistrationUsers.saveIsAdmin('true')
           this.RegistrationUsers.isLogin$.next(true)
+          this.RegistrationUsers.saveIsLogin('true')
           this.loginUser.reset()
           this.router.navigate(['captain-service'])
         },
         error: (err) => {
+          this.isLoading = false
           this.toastr.error('كلمة المرور او اسم المستخدم غير صحيح', ' خطاء في تسجيل الدخول', {
             timeOut: 5000,
           });
@@ -57,21 +61,26 @@ export class LoginComponent implements OnInit {
         }
       })
     } else {
+      this.isLoading = true
       // login restaurant service
       let username: string = this.loginUser.value.username as string;
       let password: string = this.loginUser.value.password as string
       this.RegistrationUsers.PostLoginRestaurant(username, password).subscribe({
-        next:(data)=>{
-        console.log(data);
-        this.TokenStorageService.saveToken(data.token)
-        this.TokenStorageService.saveUser(data.restaurant)
-        this.TokenStorageService.saveIdRest(data.restaurant._id)
-        this.RegistrationUsers.isRestaurantAdmin$.next(true)
-        this.RegistrationUsers.isLogin$.next(true)
-        this.loginUser.reset()
-        this.router.navigate(['restaurant-dashboard'])
+        next: (data) => {
+          this.isLoading = false
+          console.log(data);
+          this.TokenStorageService.saveToken(data.token)
+          this.TokenStorageService.saveUser(data.restaurant)
+          this.TokenStorageService.saveIdRest(data.restaurant._id)
+          this.RegistrationUsers.isRestaurantAdmin$.next(true)
+          this.RegistrationUsers.saveIsRestaurantAdmin('true')
+          this.RegistrationUsers.isLogin$.next(true)
+          this.RegistrationUsers.saveIsLogin('true')
+          this.loginUser.reset()
+          this.router.navigate(['restaurant-dashboard'])
         },
-        error:(err)=>{
+        error: (err) => {
+          this.isLoading = false
           this.toastr.error('كلمة المرور او اسم المستخدم غير صحيح', ' خطاء في تسجيل الدخول', {
             timeOut: 5000,
           });

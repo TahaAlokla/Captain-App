@@ -70,6 +70,10 @@
                     *ngIf="getError('price')">
                 <span class="text-xs"
                       *ngIf="AddMeal.get('price')?.errors?.['required']">هذا الحقل مطلوب</span>
+                      <span class="text-xs"
+                      *ngIf="AddMeal.get('price')?.errors?.['numeric']">
+                      ارقام فقط وموجبة
+                    </span>
 
               </span>
             </label>
@@ -123,12 +127,16 @@
               </div>
               <div class="col-12 col-sm-12 col-md-6">
                 <div class="">
+
                   <div class="image-preview"
                        *ngIf="
                       imagePreview !== '' &&
                       imagePreview &&
                       AddMeal.get('image').valid
                     ">
+                    <button mat-icon-button 
+                    (click)="cancelImage()"
+                    class="text-red-700"><mat-icon>cancel</mat-icon> </button>
                     <img [src]="imagePreview"
                          width="200px"
                          height="200px"

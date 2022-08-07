@@ -138,6 +138,11 @@ export class RestaurantDashboardService {
     let apiDeleteMae=`${baseUrl}/api/restaurants/${this.IdRest}/meals/${idMale}/delete`
     return this.http.delete(apiDeleteMae)
   }
+  // 
+  editMale(maleData:FormData, idMale:string){
+    let apiEditMale=`${baseUrl}/api/restaurants/${this.IdRest}/meals/${idMale}/edit`
+    return this.http.put(apiEditMale,maleData)
+  }
 
 
 

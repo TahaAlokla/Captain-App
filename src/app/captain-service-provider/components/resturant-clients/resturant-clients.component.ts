@@ -73,7 +73,11 @@ export class ResturantClientsComponent implements OnInit {
 
   }
   ngOnDestroy(): void {
-    this.restaurantList.unsubscribe()
+    if (this.restaurantList) {
+      this.restaurantList.unsubscribe()
+    }
+    
+
   }
 
 }

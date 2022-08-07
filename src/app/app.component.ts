@@ -21,6 +21,7 @@ export class AppComponent {
     this.RegistrationUsersService.VisitRestHome.subscribe(val=>{
       this.hidingNavbarVisitHomeRest= val
     })
+    this.RegistrationUsersService.refreshData()
     this.cdr.detectChanges();
   }
   ngOnInit(): void {

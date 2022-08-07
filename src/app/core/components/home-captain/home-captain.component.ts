@@ -16,6 +16,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 })
 export class HomeCaptainComponent implements OnInit {
   getPublicRestaurants!: Subscription
+  postSubscribedUser:Subscription
   featuresListOutRestaurant = [
     "تقديم صفحة عامة لمطعمك تستطيع تقديم نفسك عليها",
     "طلبات للحجز يمكن للمستخدمين ارسال حجوزاتهم أليك",
@@ -162,6 +163,9 @@ export class HomeCaptainComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.getPublicRestaurants.unsubscribe()
+    if(this.postSubscribedUser){
+      this.postSubscribedUser.unsubscribe()
+    }
 
   }
 

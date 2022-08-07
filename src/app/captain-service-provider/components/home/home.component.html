@@ -1,100 +1,91 @@
 <div class="container-fluid">
   <div class="row flex-nowrap">
-    <!-- px-sm-2 -->
-    <div class="col-auto col-md-3 col-lg-3 col-xl-2  px-0 bg-orange">
-      <div class="d-flex flex-column align-items-center align-items-sm-start  pt-2 text-white min-vh-100">
-          <a href="/" class="d-flex align-items-center pb-3 mb-md-0 text-white text-decoration-none">
-              <span class="fs-5 d-none d-sm-inline">Menu</span>
-          </a>
-          <!--  -->
-          <div class="dropdown pb-1 pt-3 text-lg-start align-items-end  w-100 d-flex flex-column ">
-            <a class="d-flex text-lg-start  fw-normal primary-color text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 
-                <span class="d-none d-sm-inline mx-1">User</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+    <div class="col-auto col-md-3 col-lg-3 col-xl-3  px-0  w-56">
+      <div class="d-flex flex-column align-items-center align-items-sm-start   text-white min-vh-100 h-full pt-5 w-56 ">
+
+        <aside class="w-56 h-full "
+               aria-label="Sidebar">
+          <div class="overflow-y-auto h-full pt-1 m-0 px-3 bg-gray-50 rounded-none dark:bg-gray-700 dark:border dark:border-l-2 dark:border-gray-200 flex items-stretch ">
+            <ul class="space-y-5 self-center">
+              <li>
+                <a [routerLink]="['./']"
+                   [routerLinkActiveOptions]="{ exact: true }"
+                   routerLinkActive="bg-gray-900"
+                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900">
+                  <svg class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                       fill="currentColor"
+                       viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                  </svg>
+                  <span class="me-1 d-none d-sm-inline">تسجيل مطعم جديد</span>
+                </a>
+              </li>
+
+
+              <li>
+                <a [routerLink]="['./subscribe-rest']"
+                routerLinkActive="bg-gray-900"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900">
+                  <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                       fill="currentColor"
+                       viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path
+                          d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                    </path>
+                  </svg>
+                  <span class="flex-1 mr-3 whitespace-nowrap">
+                    <span class="me-2 d-none d-sm-inline">طلبات الأشتراك</span>
+                  </span>
+
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['./restaurant-clients']"
+                routerLinkActive="bg-gray-900"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900">
+                  <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                       fill="currentColor"
+                       viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+                          clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="flex-1 mr-3 whitespace-nowrap">المطاعم المشتركة</span>
+                </a>
+              </li>
+             
+             
+             
+             
+              
+              <!-- <li>
+                <a (click)="logout()"
+                routerLinkActive="bg-gray-900"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900">
+                  <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                       fill="currentColor"
+                       viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+                          clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="flex-1 mr-3 whitespace-nowrap">تسجيل الخروج</span>
+                </a>
+              </li> -->
+
             </ul>
-        </div>
-          <ul class="nav  flex-column mb-sm-auto mb-0 mx-0 px-0
-          align-items-center align-items-sm-start fs-6" id="menu">
-
-              <li class="nav-item ">
-                <!-- align-middle -->
-                  <a  class="nav-link  px-4 mx-0 w-100   primary-color" [routerLink]="['./']" routerLinkActive="linkActiveDashBoard" [routerLinkActiveOptions]="{ exact: true }">
-                      <i class="fs-4 bi-house"></i>
-                      <span class="me-1 d-none d-sm-inline">تسجيل مطعم جديد</span>
-                  </a>
-              </li>
-              <!-- <li>
-                  <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                      <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                  <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                      <li class="w-100">
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-                      </li>
-                      <li>
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                      </li>
-                  </ul>
-              </li> -->
-              <li class="divder-list nav-item w-100 mx-0" >
-                  <a [routerLink]="['./subscribe-rest']" routerLinkActive="linkActiveDashBoard" class="nav-link px-2 mx-0 w-100   primary-color my-0">
-                      <i class="fs-4 bi-table"></i> <span class="me-2 d-none d-sm-inline">طلبات الأشتراك</span></a>
-              </li>
-              <li class="divder-list nav-item w-100 mx-0" >
-                <a [routerLink]="['./restaurant-clients']" routerLinkActive="linkActiveDashBoard" class="nav-link px-2 mx-0 w-100   primary-color my-0">
-                     <span class="me-2 d-none d-sm-inline w-100">المطاعم المشتركة</span></a>
-            </li>
-            <li class="divder-list nav-item w-100 mx-0" >
-              <a [routerLink]="['./admin-board']" routerLinkActive="linkActiveDashBoard" class="nav-link px-2 mx-0 w-100   primary-color my-0">
-                   <span class="me-2 d-none d-sm-inline w-100">عمليات المشرفين</span></a>
-          </li>
-              <!-- <li>
-                  <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                      <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                  <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                      <li class="w-100">
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                      </li>
-                      <li>
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                      </li>
-                  </ul>
-              </li> -->
-              <!-- <li>
-                  <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                      <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline"></span> </a>
-                      <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                      <li class="w-100">
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                      </li>
-                      <li>
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                      </li>
-                      <li>
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                      </li>
-                      <li>
-                          <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                      </li>
-                  </ul>
-              </li> -->
-              <!-- <li>
-                  <a href="#" class="nav-link px-0 align-middle">
-                      <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-              </li> -->
-          </ul>
-          <hr>
-
+          </div>
+        </aside>
       </div>
-  </div>
-      <div class="col py-3 content-sidenav">
-       <router-outlet></router-outlet>
-      </div>
+    </div>
+    <div class="col py-3 content-sidenav">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

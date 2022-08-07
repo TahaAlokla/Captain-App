@@ -2,18 +2,18 @@
   <div class="container d-flex justify-content-center align-items-center ">
     <!-- d-flex justify-content-center align-items-center w-100 -->
     <div class="row d-flex justify-content-center align-items-center w-100">
-      <div class="col-12 col-sm-12 col-md-6 col-lg-4  card bg-orange mb-4 mt-0 pb-2">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 dark:bg-gray-900 dark:text-white card dark:border-gray-200 mb-4 mt-0 pb-2 h-96 d-flex align-baseline">
         <div class="">
-          <p class="lead text-center fw-bold primary-color mt-3 fs-4">تسجيل الدخول</p>
+          <p class="lead text-center fw-bold text-white mt-3 mb-2 fs-4">تسجيل الدخول</p>
           <hr>
         </div>
         <form  [formGroup]="loginUser" (ngSubmit)="loginUserSubmit()">
-        <div class="my-2 py-2">
+        <div class="my-2 py-2 h-20 ">
           <input type="text" formControlName="username" class=" form-control d-block" placeholder="أدخل اسم المستخدم" [class.is-invalid]="loginUser.get('username')?.invalid&&loginUser.get('username')?.touched">
           <mat-error *ngIf="loginUser.get('username')?.invalid&&loginUser.get('username')?.touched">هذا الحقل مطلوب </mat-error>
 
         </div>
-        <div class="my-2 py-2">
+        <div class="my-2 py-2 h-20">
           <input type="password" class=" form-control d-block"
            placeholder="أدخل كلمة المرور" formControlName="password">
            <!--  -->
@@ -26,14 +26,14 @@
 
             <mat-button-toggle-group formControlName="choiceType" >
               <mat-button-toggle value="sysAdmin">مدير النظام</mat-button-toggle>
-              <mat-button-toggle value="sysRestaurant">مدير مطعم</mat-button-toggle>
+              <mat-button-toggle value="sysRestaurant" class="">مدير مطعم</mat-button-toggle>
             </mat-button-toggle-group>
             <!-- <p>Chosen value is {{fontStyleControl.value}}</p> -->
             <!-- <mat-error class="error-msg d-block" *ngIf="loginUser.invalid">هذا الحقل مطلوب </mat-error> -->
           </section>
         </div>
         <div class="my-2 d-flex justify-content-center mt-4">
-          <button class="btn bg-dark text-light fw-bold py-2 px-3" type="submit" mat-stroked-button [disabled]="loginUser.invalid">تسجيل الدخول </button>
+          <button class="btn bg-dark text-light fw-bold py-2 px-3" type="submit" mat-stroked-button [disabled]="loginUser.invalid||isLoading">تسجيل الدخول </button>
         </div>
       </form>
       <p class="lead" *ngIf="msgErrorLogin">{{msgErrorLogin}}</p>

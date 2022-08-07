@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-subscribe-to-resturant.component.scss']
 })
 export class AddSubscribeToResturantComponent implements OnInit {
+  SubmitStatus:boolean=false
 postSubscribe!:Subscription
   constructor(private fb:FormBuilder, private toastr: ToastrService,private AdminDashboardService:AdminDashboardService,public dialogRef: MatDialogRef<any>,@Inject(MAT_DIALOG_DATA) public data: { id: string}) { }
   minDate = new Date(new Date().setDate(new Date().getDate()));
@@ -20,6 +21,11 @@ postSubscribe!:Subscription
   }
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  ngOnDestroy(): void {
+    if(this.postSubscribe){
+      this.postSubscribe.unsubscribe()
+    } 
   }
 
   registerSubscribe = this.fb.group({
@@ -32,6 +38,7 @@ postSubscribe!:Subscription
   }
 
   subscribeForm(id:string){
+    this.SubmitStatus=true
     if(this.registerSubscribe.invalid){
       return;
     }else{
@@ -44,11 +51,13 @@ postSubscribe!:Subscription
       this.postSubscribe = this.AdminDashboardService.postAcceptRestaurant(subscribeData).subscribe({
         next:(data)=>{
           console.log(data);
+          this.SubmitStatus=false
           this.dialogRef.close();
           this.toastr.success(data.msg, "", {
             timeOut: 3000,
           })
         }, error:(err)=>{
+          this.SubmitStatus=false
           console.log(err);
           this.toastr.error("", err.err, {
             timeOut: 3000,

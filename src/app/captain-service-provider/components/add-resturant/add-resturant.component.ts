@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { AdminDashboardService } from './../../services/admin-dashboard.service';
 import { AddRestaurant } from './../../interfaces/add-restaurant';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -11,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddResturantComponent implements OnInit {
   hide: boolean = true
+  isRestaurantSubmit = false
+  PostRegisterRestaurant:Subscription
   // return date for  day
   minDate = new Date(new Date().setDate(new Date().getDate()));
   maxDate = new Date(new Date().setDate(new Date().getDate() + 365))
@@ -29,6 +32,13 @@ export class AddResturantComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  ngOnDestroy(): void {
+    if(this.PostRegisterRestaurant){
+      this.PostRegisterRestaurant.unsubscribe()
+    }
+    
+  }
   get email() {
     return this.registerRestaurant.get('email');
   }
@@ -40,6 +50,7 @@ export class AddResturantComponent implements OnInit {
   }
 
   registerSubmitRestaurant() {
+    this.isRestaurantSubmit = true
     if (this.registerRestaurant.invalid) {
       return
     }
@@ -56,14 +67,16 @@ export class AddResturantComponent implements OnInit {
       }
       console.log(Restaurant);
 
-      this.AdminService.PostRegisterRestaurant(Restaurant).subscribe({
+   this.PostRegisterRestaurant= this.AdminService.PostRegisterRestaurant(Restaurant).subscribe({
         next: (data) => {
+          this.isRestaurantSubmit = false
           this.registerRestaurant.reset()
           this.toastr.success("", "تم تسجيل المطعم بنجاح", {
             timeOut: 3000,
           })
           console.log(data);
         }, error: (err) => {
+          this.isRestaurantSubmit = false
           console.log(err);
           this.toastr.error(err.error.msg, "هناك خطاء ما في التسجل", {
             timeOut: 3000,

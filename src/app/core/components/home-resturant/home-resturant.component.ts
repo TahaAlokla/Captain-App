@@ -21,6 +21,7 @@ export class HomeResturantComponent implements OnInit {
   name_rest: string = '';
   infoRestaurant: Subscription;
   infoRestaurant$: any;
+  postReservations_restaurants:Subscription
 
   minDate = new Date(new Date().setDate(new Date().getDate()));
   // max date after 4 month
@@ -75,8 +76,7 @@ export class HomeResturantComponent implements OnInit {
     this.RegistrationUsersService.VisitRestHome.next(true);
     window.location.hash = '';
 
-    //  TODO when refresh browser change value | so be should save that local storage and check if existing dot need return value restaurant
-    // todo : i think generation uuid when using postSend data not ngonit
+   
     // console.log(" uuid.get()", id);
     this.activeRouter.paramMap.subscribe((param) => {
       this.rest_id = param.get('id');
@@ -95,6 +95,8 @@ export class HomeResturantComponent implements OnInit {
       });
     });
   }
+
+  
   registerReservationSubmit() {
     let checkSpam: string = '';
     if (this.RestaurantHomePageService.getUUID()) {
@@ -121,7 +123,7 @@ export class HomeResturantComponent implements OnInit {
     };
     // console.log(registerReservationData);
 
-    this.RestaurantHomePageService.postReservations_restaurants(
+   this.postReservations_restaurants= this.RestaurantHomePageService.postReservations_restaurants(
       registerReservationData,
       this.rest_id
     ).subscribe({
@@ -164,5 +166,11 @@ export class HomeResturantComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.RegistrationUsersService.VisitRestHome.next(false);
+    if(this.postReservations_restaurants){
+      this.postReservations_restaurants.unsubscribe()
+    }
+    if(this.infoRestaurant){
+      this.infoRestaurant.unsubscribe()
+    }
   }
 }
