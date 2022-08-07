@@ -15,10 +15,13 @@ import { RestaurantDashboardService } from '../../services/restaurant-dashboard.
 })
 export class TaxesComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
+  submit=false
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   listTaxes!: Subscription;
+  deleteTaxSub!:Subscription;
   allTaxes = []
+  deleteTaxBtn=false
   displayedColumns: string[] = [
     '_id',
     'name',
@@ -30,14 +33,17 @@ export class TaxesComponent implements OnInit {
     private toastr: ToastrService, public dialog: MatDialog,) { }
 
   loadAllTaxes() {
+   
     this.listTaxes = this.RestaurantService.getAllTaxes().subscribe({
       next: (data) => {
+        
         console.log(data);
         this.allTaxes = data.taxes
         this.dataSource = new MatTableDataSource(this.allTaxes);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }, error: (err) => {
+       
         console.log(err);
 
       }
@@ -75,12 +81,15 @@ export class TaxesComponent implements OnInit {
   }
 
   deleteTax(idTax:string){
-    this.RestaurantService.deleteTax(idTax).subscribe({
+    this.deleteTaxBtn= true
+   this.deleteTaxSub= this.RestaurantService.deleteTax(idTax).subscribe({
       next:(data)=>{
+        this.deleteTaxBtn= false
         console.log(data);
         this.toastr.success("تم حذف الضريبة",data.msg)
         this.loadAllTaxes()
       },error:(err)=>{
+        this.deleteTaxBtn= false
         console.log(err);
         this.toastr.error("هنك مشكلة في حذف الضريبة",err.error.msg)
         
@@ -91,6 +100,9 @@ export class TaxesComponent implements OnInit {
 
   ngOnDestroy(): void {
    this.listTaxes.unsubscribe()
+   if(this.deleteTaxSub){
+    this.deleteTaxSub.unsubscribe()
+   }
   }
 
 }

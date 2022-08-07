@@ -26,7 +26,10 @@ export class RestaurantMenuComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   // listCategory!: Subscription;
   listAllMealsForCategory!: Subscription;
-
+  DeleteMale:Subscription
+  DeleteMaleSubmit=false
+  getListCategory:Subscription
+//  listCategory
   allCategory: Observable<any>;
   displayedColumns: string[] = [
     '_id',
@@ -146,13 +149,16 @@ export class RestaurantMenuComponent implements OnInit {
     window.location.hash = section;
   }
   deleteMeal(idMeal: string, idCategory: string) {
-    this.RestaurantService.DeleteMale(idMeal).subscribe({
+    this.DeleteMaleSubmit= true
+   this.DeleteMale= this.RestaurantService.DeleteMale(idMeal).subscribe({
       next: (data) => {
+        this.DeleteMaleSubmit= false
         console.log(data);
         this.toastr.success('تم حذف الوجبة بنجاح', data.msg);
         this.loadAllMeas(idCategory);
       },
       error: (err) => {
+        this.DeleteMaleSubmit= false
         console.log(err);
         this.toastr.error('هناك خطاء ما', err.error.msg);
       },
@@ -180,6 +186,14 @@ export class RestaurantMenuComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // this.listCategory.unsubscribe();
+   if(this.listAllMealsForCategory){
+    this.listAllMealsForCategory.unsubscribe()
+   }
+   if(this.DeleteMale){
+    this.DeleteMale.unsubscribe()
+   }
+   if(this.listCategory){
+    // this.listCategory
+   }
   }
 }

@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ReservationsClientsComponent implements OnInit {
   moment: any = moment;
+  ReservationSubmit=false
   getListReservations!: Subscription;
   rejectReservation!: Subscription;
   displayedColumns: string[] = [
@@ -35,6 +36,7 @@ export class ReservationsClientsComponent implements OnInit {
     private RestaurantService: RestaurantDashboardService,
     private toastr: ToastrService
   ) {}
+  
 
   loadListReservations() {
     this.getListReservations =
@@ -50,31 +52,37 @@ export class ReservationsClientsComponent implements OnInit {
       });
   }
   cancelReservation(ReservationId: string) {
+    this.ReservationSubmit=true
     this.rejectReservation = this.RestaurantService.rejectReservation(
       ReservationId
     ).subscribe({
       next: (data) => {
+        this.ReservationSubmit=false
         console.log(data);
         this.toastr.success('تم حذف الطلب بنجاح', data.msg);
         this.loadListReservations();
       },
       error: (err) => {
+        this.ReservationSubmit=false
         console.log(err);
         this.toastr.error('هناك مشكلة في حذف الطلب', err.error.msg);
       },
     });
   }
   acceptReservation(ReservationId: string ,status:string) {
+    this.ReservationSubmit=true
 
     this.rejectReservation = this.RestaurantService.acceptReservation(
       ReservationId
     ).subscribe({
       next: (data) => {
+        this.ReservationSubmit=false
         console.log(data.msg);
         this.toastr.success('تم قبول الحجز بنجاح', data.msg);
         this.loadListReservations();
       },
       error: (err) => {
+        this.ReservationSubmit=false
         console.log(err);
         this.toastr.error('هناك مشكلة في قبول الطلب', err.error.msg);
       },
@@ -94,7 +102,12 @@ export class ReservationsClientsComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.getListReservations.unsubscribe();
-    // this.rejectReservation.unsubscribe();
+   
+    if(this.getListReservations){
+      this.getListReservations.unsubscribe()
+    }
+    // if(this.rejectReservation){
+    //   this.rejectReservation.unsubscribe()
+    // }
   }
 }

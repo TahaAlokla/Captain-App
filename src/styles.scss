@@ -16,12 +16,12 @@ html {
   background: #FF7700;
 }
 .swiper-button-next, .swiper-rtl .swiper-button-prev{
-  color: #19283f;
+  color: hsl(216, 100%, 61%);
   font-weight: bold;
 }
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal{
-  color: #19283f !important;
-  bottom: -10px;
+  color: #166beb !important;
+  bottom: -20px;
 }
 
 
@@ -190,7 +190,12 @@ position: relative;
 }
 
 .swiper-pagination-bullet-active{
-  background-color: #19283f !important;
+  background-color: #eee !important;
+  opacity: 1;
+  margin-top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 mat-card{
   font-family: 'Tajawal', sans-serif !important;

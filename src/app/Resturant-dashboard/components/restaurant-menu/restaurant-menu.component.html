@@ -218,6 +218,7 @@
                       <button
                         class="btn btn-sm m-1 bg-red-900 text-white"
                         mat-icon-button
+                        [disabled]="DeleteMaleSubmit"
                         (click)="
                           deleteMeal(element._id, element?.categories[0])
                         "

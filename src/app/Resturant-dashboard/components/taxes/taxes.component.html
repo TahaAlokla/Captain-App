@@ -114,7 +114,7 @@
                   </mat-icon>
                  
                 </button>
-                <button class="btn btn-sm m-1 bg-red-900 text-white" mat-icon-button (click)="deleteTax(element._id)">
+                <button class="btn btn-sm m-1 bg-red-900 text-white" mat-icon-button (click)="deleteTax(element._id)" [disabled]="deleteTaxBtn">
                   <mat-icon  class=" ">
                     <span class="material-symbols-outlined  ">
                       delete

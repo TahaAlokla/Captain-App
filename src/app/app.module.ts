@@ -34,6 +34,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ConvertTime12HoursPipe } from './shared/pipes/convert-time12-hours.pipe';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -81,6 +82,7 @@ const services=[
    ReactiveFormsModule,
    RxReactiveFormsModule,
    SwiperModule,
+   MatTabsModule,
    ...timePicker,
     ToastrModule.forRoot({
       positionClass: 'toast-top-left',

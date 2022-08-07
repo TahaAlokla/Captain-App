@@ -28,14 +28,37 @@
 
         </div>
         <div class="row px-2 my-2">
-          <h2 class="text-center">وظائف التطبيق</h2>
-          <!-- slider -->
+          <h2 class="text-center fw-bold fs-4 mt-4 mb-2">وظائف التطبيق</h2>
+          <p class="text-center text-teal-200 fs-6 my-2">شاشات بعض الاقسام في لوحة تحكم مدير المطعم</p>
+          <swiper class="swiper-container px-4 py-3"
+          [config]="config1"
+          [slidesPerView]="2"
+          [spaceBetween]="50"
+         
+        >
+          <ng-template swiperSlide>
+            <div class="img-box">
+              <img src="../../../../assets/imgs/home/1.png" alt="" srcset=""width="400px" height="400px">
+            </div>
+          </ng-template>
+          <ng-template swiperSlide>  
+            <div class="img-box">
+            <img src="../../../../assets/imgs/home/2.png" alt="" srcset=""width="400px" height="400px">
+          </div>
+        </ng-template>
+          <ng-template swiperSlide><div class="img-box">
+            <img src="../../../../assets/imgs/home/3.png" alt="" srcset=""width="400px" height="700px">
+          </div></ng-template>
+          <ng-template swiperSlide><div class="img-box">
+            <img src="../../../../assets/imgs/home/4.png" alt="" srcset="" width="400px" height="400px">
+          </div></ng-template>
+        </swiper>
         </div>
 
 
         <div class="row  px-2 my-2 d-flex  justify-content-center">
           <div class="row text-center">
-            <h3 class="fw-bold my-2">تقديم طلب اشتراك</h3>
+            <h3 class="fw-bold my-2 fs-4">تقديم طلب اشتراك</h3>
             <span class="my-2">بعد تقديم طلبك سوف نتواصل معك لتقديم المعلومات الازمة والمساعدة في تدريب العاملين على
               التطبيق والمنصة </span>
           </div>
@@ -48,7 +71,7 @@
                 <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">
                   <input type="text"
                          formControlName="restaurantName"
-                         placeholder="أدخل أسم معطعمك"
+                         placeholder="أدخل اسم مطعمك"
                          class="w-100 form-control">
                 </div>
                 <div class="col-sm-12 col-md-4 col-12 my-2 my-sm-2 my-md-1">

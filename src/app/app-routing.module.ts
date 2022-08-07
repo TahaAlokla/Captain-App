@@ -18,12 +18,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'captain-service',
-    // canLoad: [LoadAdminDashboardGuard],
+    canLoad: [LoadAdminDashboardGuard],
     loadChildren: () => import('./captain-service-provider/captain.module').then(m => m.CaptainModule)
   },
   {
     path: 'restaurant-dashboard',
-    // canLoad: [LoadRestaurantDashboardGuard],
+    canLoad: [LoadRestaurantDashboardGuard],
     loadChildren: () => import('./Resturant-dashboard/resturant-dashboard.module').then(m => m.ResturantDashboardModule)
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

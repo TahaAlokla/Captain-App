@@ -57,7 +57,9 @@ export class RestaurantTablesComponent implements OnInit {
 
   }
   ngOnDestroy(): void {
-    // this.getAllTables.unsubscribe()
+    if(this.getAllTables){
+      this.getAllTables.unsubscribe()
+    }
 
   }
 

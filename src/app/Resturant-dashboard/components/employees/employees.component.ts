@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EmployeesComponent implements OnInit {
   idRest: string = '';
+ 
   displayedColumns: string[] = [
     '_id',
     'name',
@@ -119,6 +120,9 @@ export class EmployeesComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.restaurantList.unsubscribe();
-    // this.staffDelete.unsubscribe();
+  
+    if(this.staffDelete){
+      this.staffDelete.unsubscribe()
+    }
   }
 }

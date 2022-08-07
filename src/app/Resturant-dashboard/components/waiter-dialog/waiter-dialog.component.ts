@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -11,6 +12,8 @@ import { RestaurantDashboardService } from '../../services/restaurant-dashboard.
 })
 export class WaiterDialogComponent implements OnInit {
   hide: boolean = true
+  postCreateWaiter:Subscription
+  submit=false
   constructor(private RestaurantService: RestaurantDashboardService,
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -33,6 +36,7 @@ export class WaiterDialogComponent implements OnInit {
   }
 
   registerWaiterSubmit() {
+    this.submit=true
     let idRest = this.data.idRest;
     let registerWaiterData = {
       name: this.registerWaiter.value.name as string,
@@ -47,13 +51,15 @@ export class WaiterDialogComponent implements OnInit {
     }
     console.log(registerWaiterData, idRest );
 
-    this.RestaurantService.postCreateWaiter(registerWaiterData, idRest).subscribe({
+  this.postCreateWaiter=  this.RestaurantService.postCreateWaiter(registerWaiterData, idRest).subscribe({
       next:(data)=>{
+        this.submit=false
         console.log(data);
         this.toastr.success('تم أضافة الموظف بنجاح')
         this.registerWaiter.reset()
         this.dialogRef.close();
       },error:(err)=>{
+        this.submit=false
         console.log(err);
         this.toastr.error('هناك خطاء في اضافة بيانات الموظف',err.error)
       }
@@ -63,14 +69,14 @@ export class WaiterDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  ngOnDestroy(): void {
+   if(this.postCreateWaiter){
+    this.postCreateWaiter.unsubscribe()
+   }
+    
+  }
   /*
-   "username" : "waiter2",
-    "name" : "waiter 2",
-    "email" : "waiter2@gmail.com",
-    "address" : "waiter2 address",
-    "phone" : "0909090909",
-    "confirmationPassword" : "12345",
-    "password" : "12345"
+   
   */
 
 }

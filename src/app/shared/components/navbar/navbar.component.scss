@@ -96,9 +96,10 @@ $yellow-color:#ffc400;
 
 
 .activeLink {
-  color: #ff3150;
+  color: #35537f;
   transform: scale(1.1);
   position: relative;
+  font-weight: bold;
 
   &::after {
     content: '';

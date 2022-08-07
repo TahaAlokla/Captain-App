@@ -139,6 +139,16 @@ input[type=text] , input[type=email],textarea{
   font-weight: bold;
 
 }
+.img-box{
+max-width: 400px;
+max-height: 400px;
+img{
+  height: 100%;
+  width: 100%;
+  max-width: 400 !important;
+  max-height: 400px !important;
+}
+}
 
 // ***********************************
 .button-animation{

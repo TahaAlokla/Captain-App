@@ -29,6 +29,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 // import {MatDividerModule} from '@angular/material/divider';
 import { AddSubscribeToResturantComponent } from './components/add-subscribe-to-resturant/add-subscribe-to-resturant.component';
+import {MatTabsModule} from '@angular/material/tabs';
 // const materialComponent = [
 //   MatSidenavModule,
 //   MatMomentDateModule,

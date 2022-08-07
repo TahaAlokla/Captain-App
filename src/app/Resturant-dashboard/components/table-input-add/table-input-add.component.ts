@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -15,6 +16,8 @@ import { RestaurantDashboardService } from '../../services/restaurant-dashboard.
   styleUrls: ['./table-input-add.component.scss'],
 })
 export class TableInputAddComponent implements OnInit {
+  creteNewTable:Subscription
+  submit=false
   constructor(private RestaurantService: RestaurantDashboardService,private fb: FormBuilder,private toastr: ToastrService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: { tablesNumber:string  }) {}
@@ -41,15 +44,18 @@ export class TableInputAddComponent implements OnInit {
     this.dialogRef.close();
   }
   Submit(){
+    this.submit= true
     let number = this.addTableNumber.value.tableNumber as string
     console.log(number);
 
-    this.RestaurantService.creteNewTable(number).subscribe({
+  this.creteNewTable=  this.RestaurantService.creteNewTable(number).subscribe({
       next:(data)=>{
+        this.submit= false
         console.log(data);
         this.toastr.success("تم إضافة الطلب بنجاح",data.msg)
         this.addTableNumber.reset()
       },error:(err)=>{
+        this.submit= false
         console.log(err);
         this.toastr.error("هناك مشكلة في الطلب ",err.error)
       },complete:()=>{
@@ -60,11 +66,13 @@ export class TableInputAddComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    ReactiveFormConfig.set({
-      "validationMessage": {
-          "numeric": "أدخل اعداد صحيحة وموجبة",
+  
+  }
 
-      }
-  });
+  ngOnDestroy(): void {
+    if(this.creteNewTable){
+      this.creteNewTable.unsubscribe()
+    }
+    
   }
 }

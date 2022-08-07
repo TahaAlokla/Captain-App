@@ -2,7 +2,7 @@
   <div class="row">
     <mat-card class="shadow">
       <div class="col-12">
-        <p class="primary-color fw-bold lead my-2">قائمة طلبات الحجز</p>
+        <p class="primary-color fw-bold fs-4 my-2">قائمة طلبات الحجز</p>
       </div>
 
       <div class="col-12">
@@ -129,6 +129,7 @@
               </th>
               <td mat-cell *matCellDef="let element">
                 <button
+                [disabled]="ReservationSubmit"
                   mat-button
                   *ngIf="
                     element.status === 'reject' || element.status === 'pending'
@@ -139,6 +140,7 @@
                   قبول الحجز
                 </button>
                 <button
+                [disabled]="ReservationSubmit"
                   mat-button
                   *ngIf="
                     element.status === 'accept' || element.status === 'pending'
@@ -178,6 +180,4 @@
     </mat-card>
   </div>
 </div>
-<!--
-[ngClass]="{'bg-green-600': element.status === 'accept','bg-gray-600': element.status === 'pending', 'bg-red-600': element.status === 'reject' }"
- -->
+
