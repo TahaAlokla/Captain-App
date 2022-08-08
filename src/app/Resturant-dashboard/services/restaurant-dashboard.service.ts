@@ -28,7 +28,7 @@ export class RestaurantDashboardService {
   }
 
   getListCategory(): Observable<Array<any>> {
-    let apiListCategory=`${baseUrl}/api/restaurants/${this.IdRest}/categories/list` 
+    let apiListCategory=`${baseUrl}/api/restaurants/${this.IdRest}/categories/list`
     return this.http.get<Array<any>>(apiListCategory)
   }
   postCreateCategory(nameCategory: string): Observable<any> {
@@ -37,7 +37,7 @@ export class RestaurantDashboardService {
   }
   EditCategory(nameCategory: string, idCategory: string): Observable<any> {
     console.log("idCategory",idCategory);
-    
+
     let apiEditCategory = `${baseUrl}/api/restaurants/${this.IdRest}/categories/${idCategory}/edit`
     return this.http.put(apiEditCategory, { name: nameCategory })
   }
@@ -47,7 +47,7 @@ export class RestaurantDashboardService {
     return this.http.put(ApiAddKitchen, kitchenData)
   }
 
- 
+
 
   // * done
   postCreateWaiter(WaiterRegisterData: any, idRest: string): Observable<any> {
@@ -138,10 +138,20 @@ export class RestaurantDashboardService {
     let apiDeleteMae=`${baseUrl}/api/restaurants/${this.IdRest}/meals/${idMale}/delete`
     return this.http.delete(apiDeleteMae)
   }
-  // 
+  //
   editMale(maleData:FormData, idMale:string){
     let apiEditMale=`${baseUrl}/api/restaurants/${this.IdRest}/meals/${idMale}/edit`
     return this.http.put(apiEditMale,maleData)
+  }
+
+  // bill list
+  getBillList(pageNumber?:number):Observable<any>{
+    let apiBillList =`${baseUrl}/api/restaurants/${this.IdRest}/bill/list`
+    return this.http.post(apiBillList,{pageNumber:pageNumber})
+  }
+  getBillDetails(idBill:string):Observable<any>{
+    let apiGetBillDetails=`${baseUrl}/api/restaurants/${this.IdRest}/bill/${idBill}/details`
+    return this.http.get(apiGetBillDetails)
   }
 
 

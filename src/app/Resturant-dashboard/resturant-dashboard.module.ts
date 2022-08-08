@@ -25,7 +25,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import {MatSelectModule} from '@angular/material/select';
-import { CategoryListEditComponent } from './components/category-list-edit/category-list-edit.component';
+import { BillDetailsComponent } from './components/bill-details/bill-details.component';
+
 // import {MatAutocompleteModule} from '@angular/material/autocomplete';
 const service=[
   RestaurantDashboardService
@@ -48,7 +49,8 @@ const service=[
     AddTaxComponent,
     AddMealComponent,
     AddCategoryComponent,
-    CategoryListEditComponent
+    BillDetailsComponent,
+
   ],
   imports: [
     CommonModule,

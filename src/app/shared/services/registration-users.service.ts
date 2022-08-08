@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 const { baseUrl } = environment;
@@ -22,10 +22,10 @@ export class RegistrationUsersService {
   saveIsLogin(token: string) {
     window.localStorage.setItem("isLogin", token)
   }
-  saveVisitRestHome(token:string){
+  saveVisitRestHome(token: string) {
     window.localStorage.setItem("VisitRestHome", token)
   }
-  saveIsRestaurantAdmin(token:string){
+  saveIsRestaurantAdmin(token: string) {
     window.localStorage.setItem("IsRestaurantAdmin", token)
   }
   refreshData() {
@@ -56,6 +56,8 @@ export class RegistrationUsersService {
       this.isRestaurantAdmin$.next(false)
     }
   }
+
+
 
 
 
