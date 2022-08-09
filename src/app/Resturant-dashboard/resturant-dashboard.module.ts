@@ -26,7 +26,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import {MatSelectModule} from '@angular/material/select';
 import { BillDetailsComponent } from './components/bill-details/bill-details.component';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 // import {MatAutocompleteModule} from '@angular/material/autocomplete';
 const service=[
   RestaurantDashboardService
@@ -60,7 +60,8 @@ const service=[
     ToastrModule,
     MatChipsModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressBarModule
   ],
   providers:[
     ...service

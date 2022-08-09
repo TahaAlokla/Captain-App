@@ -40,8 +40,7 @@ export class RestaurantBillsComponent implements OnInit {
     console.log({ event });
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
-    console.log("change page " ,this.currentPage);
-
+    console.log("change page " ,this.currentPage)
     this.loadData();
   }
   loadData(){

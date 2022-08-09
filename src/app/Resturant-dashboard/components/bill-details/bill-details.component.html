@@ -3,3 +3,99 @@
   تفاصيل الفاتورة
 </h1>
 <mat-divider></mat-divider>
+<div mat-dialog-content
+     class=" h-80"
+     *ngIf="msg">
+  <div class="container">
+    <div class="row my-2 text-center text-orange-500">
+      <div class="col-sm-12 co-md-6"> يتم تحميل البيانات</div>
+      <div class="col-sm-12 co-md-6">
+        <mat-progress-bar mode="buffer" class="my-2"></mat-progress-bar>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div mat-dialog-content
+class=" h-96"
+     *ngIf="msg===false">
+  <div class="container">
+    <div class="row my-2">
+      <div class="col-12 col-sm-12 col-md-6">
+        اسم النادل : {{BillDetails?.waiterName}}
+      </div>
+      <div class="col-12 col-sm-12 col-md-6">
+        رقم الطاولة : {{BillDetails?.tableNumber}}
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+    <div class="row my-2">
+      <div class="col-12 col-sm-12 col-md-6">
+        قيمة الفاتورة الكلي: {{BillDetails?.total}}
+      </div>
+      <div class="col-12 col-sm-12 col-md-6">
+        حسومات: {{BillDetails?.discount}}
+      </div>
+      <mat-divider class="my-1"></mat-divider>
+    </div>
+    <div class="row">
+      <div class="col-12 fw-bold fs-5 text-gray-900">الطلب</div>
+      <table class="my-2">
+        <thead>
+          <tr>
+            <th>اسم المادة</th>
+            <th>السعر</th>
+            <th>الكمية</th>
+            <th>السعر الكلي</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+          <tr *ngFor="let item of dishes">
+            <td>{{item?.mealName}}</td>
+            <td>{{item?.mealPrice}}</td>
+            <td>{{item?.quantity}}</td>
+            <td>{{item?.total}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+      <mat-divider class="my-1"></mat-divider>
+      <div class="col-12 fw-bold fs-5 text-gray-900">
+        الضرائب
+
+      </div>
+      <table class="my-2">
+        <thead>
+          <tr>
+            <th>اسم الضريبة</th>
+            <th>قيمة الضريبة</th>
+
+          </tr>
+        </thead>
+
+
+        <tbody>
+          <tr *ngFor="let item of taxes">
+            <td>{{item?.name}}</td>
+            <td>{{item?.value}}</td>
+
+
+          </tr>
+        </tbody>
+      </table>
+      <mat-divider class="my-1"></mat-divider>
+    </div>
+
+  </div>
+</div>
+<div mat-dialog-actions>
+  <!-- [mat-dialog-close]="true" -->
+  <button mat-button
+          class="btn-danger"
+          (click)="onNoClick()">اغلاق</button>
+
+  <!-- [disabled]="!documentEditForm.form.valid" -->
+</div>

@@ -29,7 +29,7 @@ export class TokenStorageService {
     return window.localStorage.getItem('Id_Rest');
   }
   public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+    return window.localStorage.getItem(TOKEN_KEY);
   }
 
 
@@ -49,6 +49,7 @@ export class TokenStorageService {
   public getUser(): any {
     const user = window.localStorage.getItem(USER_KEY);
     if (user) {
+      JSON.parse(window.localStorage.getItem(USER_KEY));
       return JSON.parse(user);
     }
     return {};

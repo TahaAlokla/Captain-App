@@ -30,7 +30,9 @@ const materialComponent = [
   MatIconModule,
   MatInputModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+
+
 ]
 @NgModule({
   declarations: [],
