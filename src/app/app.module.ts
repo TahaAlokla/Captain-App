@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Page404Component } from './core/components/page404/page404.component';
@@ -35,6 +35,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ConvertTime12HoursPipe } from './shared/pipes/convert-time12-hours.pipe';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AuthInterceptor } from './_helper/auth.interceptor';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -56,7 +57,7 @@ const timePicker=[
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    
+
 ]
 
 const services=[
@@ -101,7 +102,11 @@ const services=[
 
   BrowserAnimationsModule
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ar' }],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ar' }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

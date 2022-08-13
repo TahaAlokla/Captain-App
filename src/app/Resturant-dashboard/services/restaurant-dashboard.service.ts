@@ -59,7 +59,7 @@ export class RestaurantDashboardService {
   }
   // * done
   getListAllEmployers(): Observable<any> {
-
+// /api/restaurants/:id/staff/allEmployers
     let apiListEmployees = `${baseUrl}/api/restaurants/${this.IdRest}/staff/allEmployers`
     return this.http.get(apiListEmployees)
   }
